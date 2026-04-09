@@ -1,0 +1,2468 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bilişim Hukuku — AÖF Final Hazırlık</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0f14;
+  --bg2: #13161e;
+  --bg3: #1a1e2a;
+  --card: #1e2330;
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.15);
+  --text: #e8eaf0;
+  --text2: #8b91a8;
+  --text3: #5a6070;
+  --accent: #6c8fff;
+  --accent2: #4a6de8;
+  --green: #3ecf8e;
+  --red: #f87171;
+  --amber: #fbbf24;
+  --purple: #a78bfa;
+  --teal: #2dd4bf;
+  --font: 'Sora', sans-serif;
+  --mono: 'Space Mono', monospace;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+.light {
+  --bg: #f5f6fa;
+  --bg2: #eceef5;
+  --bg3: #e2e4ef;
+  --card: #ffffff;
+  --border: rgba(0,0,0,0.08);
+  --border2: rgba(0,0,0,0.15);
+  --text: #1a1e2a;
+  --text2: #4a5168;
+  --text3: #8b91a8;
+  --accent: #3a5ce8;
+  --accent2: #2a4cd0;
+  --green: #059669;
+  --red: #dc2626;
+  --amber: #d97706;
+  --purple: #7c3aed;
+  --teal: #0d9488;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;transition:background 0.3s,color 0.3s;}
+a{text-decoration:none;color:inherit;}
+
+/* LAYOUT */
+.shell{display:flex;min-height:100vh;}
+.sidebar{width:260px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100;transition:transform 0.3s;}
+.main{margin-left:260px;flex:1;min-height:100vh;}
+
+/* SIDEBAR */
+.sidebar-logo{padding:24px 20px 16px;border-bottom:1px solid var(--border);}
+.logo-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:0.05em;color:var(--accent);background:rgba(108,143,255,0.1);border:1px solid rgba(108,143,255,0.25);padding:5px 10px;border-radius:20px;margin-bottom:10px;}
+.logo-title{font-size:15px;font-weight:700;color:var(--text);line-height:1.3;}
+.logo-sub{font-size:11px;color:var(--text3);margin-top:3px;font-family:var(--mono);}
+.nav-section{padding:16px 12px 8px;}
+.nav-label{font-size:10px;font-weight:600;letter-spacing:0.1em;color:var(--text3);text-transform:uppercase;padding:0 8px;margin-bottom:6px;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius-sm);cursor:pointer;font-size:13px;color:var(--text2);transition:all 0.15s;margin-bottom:2px;}
+.nav-item:hover{background:var(--bg3);color:var(--text);}
+.nav-item.active{background:rgba(108,143,255,0.12);color:var(--accent);font-weight:600;}
+.nav-icon{width:16px;height:16px;flex-shrink:0;opacity:0.7;}
+.nav-item.active .nav-icon{opacity:1;}
+.sidebar-footer{margin-top:auto;padding:16px;border-top:1px solid var(--border);}
+.theme-toggle{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;font-size:12px;color:var(--text2);width:100%;}
+.theme-toggle:hover{border-color:var(--border2);color:var(--text);}
+
+/* HEADER */
+.page-header{padding:32px 32px 24px;border-bottom:1px solid var(--border);}
+.page-title{font-size:26px;font-weight:700;margin-bottom:4px;}
+.page-desc{font-size:13px;color:var(--text2);}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:border-color 0.15s;}
+.card:hover{border-color:var(--border2);}
+.grid{display:grid;gap:16px;}
+.g2{grid-template-columns:repeat(2,1fr);}
+.g3{grid-template-columns:repeat(3,1fr);}
+.g4{grid-template-columns:repeat(4,1fr);}
+
+/* STAT CARDS */
+.stat{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;}
+.stat-val{font-size:28px;font-weight:700;font-family:var(--mono);}
+.stat-label{font-size:11px;color:var(--text3);margin-top:2px;text-transform:uppercase;letter-spacing:0.05em;}
+.stat-sub{font-size:12px;color:var(--text2);margin-top:4px;}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;font-family:var(--mono);}
+.badge-blue{background:rgba(108,143,255,0.12);color:var(--accent);border:1px solid rgba(108,143,255,0.2);}
+.badge-green{background:rgba(62,207,142,0.12);color:var(--green);border:1px solid rgba(62,207,142,0.2);}
+.badge-red{background:rgba(248,113,113,0.12);color:var(--red);border:1px solid rgba(248,113,113,0.2);}
+.badge-amber{background:rgba(251,191,36,0.12);color:var(--amber);border:1px solid rgba(251,191,36,0.2);}
+.badge-purple{background:rgba(167,139,250,0.12);color:var(--purple);border:1px solid rgba(167,139,250,0.2);}
+.badge-teal{background:rgba(45,212,191,0.12);color:var(--teal);border:1px solid rgba(45,212,191,0.2);}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all 0.15s;font-family:var(--font);}
+.btn-primary{background:var(--accent);color:#fff;}
+.btn-primary:hover{background:var(--accent2);}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border2);}
+.btn-ghost:hover{background:var(--bg3);color:var(--text);}
+.btn-green{background:var(--green);color:#fff;}
+.btn-red{background:var(--red);color:#fff;}
+.btn-sm{padding:7px 14px;font-size:12px;}
+
+/* PAGES */
+.page{display:none;padding:32px;}
+.page.active{display:block;}
+
+/* PROGRESS BAR */
+.progress-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 0.4s;}
+.progress-fill.green{background:var(--green);}
+.progress-fill.red{background:var(--red);}
+
+/* QUIZ QUESTION */
+.question-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:16px;}
+.q-num{font-size:11px;font-family:var(--mono);color:var(--text3);margin-bottom:8px;}
+.q-text{font-size:15px;line-height:1.7;color:var(--text);font-weight:500;margin-bottom:20px;}
+.q-options{display:flex;flex-direction:column;gap:8px;}
+.q-option{padding:12px 16px;border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;font-size:13px;color:var(--text2);transition:all 0.15s;display:flex;align-items:center;gap:12px;}
+.q-option:hover{border-color:var(--accent);color:var(--text);background:rgba(108,143,255,0.05);}
+.q-option.selected{border-color:var(--accent);background:rgba(108,143,255,0.1);color:var(--text);}
+.q-option.correct{border-color:var(--green);background:rgba(62,207,142,0.1);color:var(--green);}
+.q-option.wrong{border-color:var(--red);background:rgba(248,113,113,0.1);color:var(--red);}
+.opt-letter{width:24px;height:24px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:var(--mono);flex-shrink:0;}
+.explanation-box{background:rgba(62,207,142,0.05);border:1px solid rgba(62,207,142,0.2);border-radius:var(--radius-sm);padding:16px;margin-top:12px;font-size:13px;color:var(--text2);line-height:1.7;}
+.explanation-box.wrong{background:rgba(248,113,113,0.05);border-color:rgba(248,113,113,0.2);}
+.exp-title{font-weight:700;color:var(--green);margin-bottom:6px;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;}
+.exp-title.wrong{color:var(--red);}
+
+/* UNIT SUMMARY */
+.unit-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.unit-number{width:40px;height:40px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:16px;color:#fff;flex-shrink:0;}
+.topic-card{background:var(--bg3);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:14px 16px;margin-bottom:10px;}
+.topic-title{font-size:13px;font-weight:600;margin-bottom:6px;color:var(--text);}
+.topic-items{list-style:none;padding:0;}
+.topic-items li{font-size:12px;color:var(--text2);padding:3px 0;line-height:1.6;display:flex;align-items:flex-start;gap:6px;}
+.topic-items li::before{content:"→";color:var(--accent);flex-shrink:0;margin-top:1px;}
+.sinav-notu{background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);border-radius:var(--radius-sm);padding:10px 14px;margin-top:8px;font-size:11px;color:var(--amber);display:flex;align-items:flex-start;gap:8px;}
+.sinav-notu::before{content:"★";flex-shrink:0;}
+
+/* TABS */
+.tabs{display:flex;gap:4px;background:var(--bg3);padding:4px;border-radius:var(--radius-sm);margin-bottom:24px;flex-wrap:wrap;}
+.tab{padding:8px 16px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;color:var(--text3);transition:all 0.15s;}
+.tab.active{background:var(--card);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,0.2);}
+.tab:hover:not(.active){color:var(--text2);}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+/* TIMER */
+.timer-display{font-family:var(--mono);font-size:24px;font-weight:700;color:var(--accent);background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 20px;display:inline-block;}
+.timer-display.warning{color:var(--amber);}
+.timer-display.danger{color:var(--red);}
+
+/* RESULT */
+.result-score{font-size:72px;font-weight:700;font-family:var(--mono);text-align:center;line-height:1;}
+.result-grade{font-size:20px;font-weight:600;text-align:center;margin-top:8px;}
+.result-bar-wrap{margin:24px 0;}
+.result-item{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);}
+.result-topic{font-size:13px;flex:1;}
+.result-score-mini{font-family:var(--mono);font-size:12px;color:var(--text2);}
+
+/* CHART */
+.mini-chart{display:flex;align-items:flex-end;gap:4px;height:80px;}
+.bar{flex:1;border-radius:3px 3px 0 0;min-width:20px;transition:height 0.5s;}
+
+/* FLASH CARD */
+.flashcard{perspective:600px;height:180px;cursor:pointer;margin-bottom:16px;}
+.flashcard-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.5s;}
+.flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
+.flashcard-front,.flashcard-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:var(--radius);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;}
+.flashcard-front{background:var(--card);}
+.flashcard-back{background:var(--bg3);transform:rotateY(180deg);}
+.fc-hint{font-size:10px;color:var(--text3);position:absolute;bottom:12px;right:14px;}
+
+/* MOBILE */
+.mob-nav-btn{display:none;position:fixed;top:16px;left:16px;z-index:200;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;cursor:pointer;}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99;}
+
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .mob-nav-btn{display:flex;}
+  .sidebar-overlay.show{display:block;}
+  .g4{grid-template-columns:repeat(2,1fr);}
+  .g3{grid-template-columns:1fr;}
+  .g2{grid-template-columns:1fr;}
+  .page{padding:24px 16px;}
+  .page-header{padding:64px 20px 20px;}
+}
+
+/* ANALYSIS HEAT */
+.heat-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.heat-bar{flex:1;height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;}
+.heat-fill{height:100%;border-radius:4px;}
+.heat-count{font-family:var(--mono);font-size:12px;color:var(--text2);min-width:30px;text-align:right;}
+
+/* SCROLL */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:var(--border2);}
+
+/* DIVIDER */
+.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
+
+/* TAG */
+.tag{display:inline-flex;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;font-family:var(--mono);background:var(--bg3);color:var(--text3);border:1px solid var(--border);margin-right:4px;}
+
+/* EMPTY */
+.empty-state{text-align:center;padding:60px 20px;color:var(--text3);}
+.empty-icon{font-size:48px;margin-bottom:12px;}
+</style>
+</head>
+<body>
+
+<button class="mob-nav-btn" onclick="toggleSidebar()" aria-label="Menü">
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+    <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+</button>
+<div class="sidebar-overlay" onclick="toggleSidebar()" id="overlay"></div>
+
+<div class="shell">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-badge">AÖF · BAHAR 2025</div>
+    <div class="logo-title">Bilişim Hukuku</div>
+    <div class="logo-sub">Final Sınav Hazırlık Sistemi</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Ana Menü</div>
+    <div class="nav-item active" onclick="showPage('dashboard')">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h5v5H2V2zm7 0h5v5H9V2zm-7 7h5v5H2V9zm7 0h5v5H9V9z"/></svg>
+      Genel Bakış
+    </div>
+    <div class="nav-item" onclick="showPage('analiz')">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M1 12h2V6H1v6zm3 0h2V2H4v10zm3 0h2V9H7v3zm3 0h2V4h-2v8zm3 0h2V7h-2v5z"/></svg>
+      Soru Analizi
+    </div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Konu Özetleri</div>
+    <div class="nav-item" onclick="showPage('unite5')">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M3 2h10a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V3a1 1 0 011-1zm1 3v1h8V5H4zm0 3v1h8V8H4zm0 3v1h5v-1H4z"/></svg>
+      Ünite 5 — Suç Hukuku
+    </div>
+    <div class="nav-item" onclick="showPage('unite6')">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M3 2h10a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V3a1 1 0 011-1zm1 3v1h8V5H4zm0 3v1h8V8H4zm0 3v1h5v-1H4z"/></svg>
+      Ünite 6 — İnternet Hukuku
+    </div>
+    <div class="nav-item" onclick="showPage('unite7')">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M3 2h10a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V3a1 1 0 011-1zm1 3v1h8V5H4zm0 3v1h8V8H4zm0 3v1h5v-1H4z"/></svg>
+      Ünite 7 — E-Ticaret
+    </div>
+    <div class="nav-item" onclick="showPage('unite8')">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M3 2h10a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V3a1 1 0 011-1zm1 3v1h8V5H4zm0 3v1h8V8H4zm0 3v1h5v-1H4z"/></svg>
+      Ünite 8 — Temel Haklar
+    </div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Pratik Çalışma</div>
+    <div class="nav-item" onclick="showPage('quiz')">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg>
+      Soru Çöz
+    </div>
+    <div class="nav-item" onclick="showPage('sinav')">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1L10 6h5l-4 3 1.5 5L8 11.5 3.5 14 5 9 1 6h5L8 1z"/></svg>
+      Sınav Modu
+    </div>
+    <div class="nav-item" onclick="showPage('flashcard')">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="3" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 8h6M8 5v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Hızlı Tekrar
+    </div>
+    <div class="nav-item" onclick="showPage('tahmini')">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M13 2H3a1 1 0 00-1 1v10a1 1 0 001 1h10a1 1 0 001-1V3a1 1 0 00-1-1zM8 5a1 1 0 110 2 1 1 0 010-2zm0 4v3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+      Tahmini Sorular
+    </div>
+    <div class="nav-item" onclick="showPage('gelisim')">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2 13L6 8l3 3 3-5 3 2" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Gelişim Takibi
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM8 12V4a4 4 0 010 8z"/></svg>
+      Tema Değiştir
+    </button>
+  </div>
+</aside>
+
+<main class="main">
+
+<!-- DASHBOARD -->
+<div class="page active" id="page-dashboard">
+  <div class="page-header">
+    <div class="page-title">Genel Bakış</div>
+    <div class="page-desc">2024–2025 Bahar Dönemi · Bilişim Hukuku Final Hazırlık Paneli</div>
+  </div>
+  <div style="padding:28px;">
+    <div class="grid g4" style="margin-bottom:24px;">
+      <div class="stat">
+        <div class="stat-val" style="color:var(--accent);">60</div>
+        <div class="stat-label">Toplam Soru</div>
+        <div class="stat-sub">3 yıl çıkmış soru</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val" style="color:var(--green);" id="stat-dogru">0</div>
+        <div class="stat-label">Doğru Cevap</div>
+        <div class="stat-sub" id="stat-dogru-oran">—</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val" style="color:var(--red);" id="stat-yanlis">0</div>
+        <div class="stat-label">Yanlış Cevap</div>
+        <div class="stat-sub" id="stat-yanlis-oran">—</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val" style="color:var(--amber);" id="stat-sinav">0</div>
+        <div class="stat-label">Tamamlanan Sınav</div>
+        <div class="stat-sub">sınav modu</div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-bottom:24px;">
+      <div class="card">
+        <div style="font-size:13px;font-weight:600;margin-bottom:16px;color:var(--text);">🔥 En Çok Çıkan Konular</div>
+        <div class="heat-item">
+          <span style="font-size:12px;color:var(--text2);min-width:160px;">Unutulma Hakkı / Kuşaklar</span>
+          <div class="heat-bar"><div class="heat-fill" style="width:90%;background:var(--red);"></div></div>
+          <span class="heat-count">9x</span>
+        </div>
+        <div class="heat-item">
+          <span style="font-size:12px;color:var(--text2);min-width:160px;">Backbone / İnternet Yapısı</span>
+          <div class="heat-bar"><div class="heat-fill" style="width:80%;background:var(--amber);"></div></div>
+          <span class="heat-count">7x</span>
+        </div>
+        <div class="heat-item">
+          <span style="font-size:12px;color:var(--text2);min-width:160px;">Kişisel Veri / TCK 135-136</span>
+          <div class="heat-bar"><div class="heat-fill" style="width:75%;background:var(--amber);"></div></div>
+          <span class="heat-count">6x</span>
+        </div>
+        <div class="heat-item">
+          <span style="font-size:12px;color:var(--text2);min-width:160px;">5651 Sayılı Kanun</span>
+          <div class="heat-bar"><div class="heat-fill" style="width:65%;background:var(--accent);"></div></div>
+          <span class="heat-count">5x</span>
+        </div>
+        <div class="heat-item">
+          <span style="font-size:12px;color:var(--text2);min-width:160px;">Link Türleri (Deep/Frame)</span>
+          <div class="heat-bar"><div class="heat-fill" style="width:55%;background:var(--accent);"></div></div>
+          <span class="heat-count">4x</span>
+        </div>
+        <div class="heat-item">
+          <span style="font-size:12px;color:var(--text2);min-width:160px;">Mesafeli Sözleşme</span>
+          <div class="heat-bar"><div class="heat-fill" style="width:45%;background:var(--purple);"></div></div>
+          <span class="heat-count">3x</span>
+        </div>
+        <div class="heat-item" style="border:none;">
+          <span style="font-size:12px;color:var(--text2);min-width:160px;">Warren & Brandeis</span>
+          <div class="heat-bar"><div class="heat-fill" style="width:35%;background:var(--teal);"></div></div>
+          <span class="heat-count">3x</span>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:600;margin-bottom:16px;color:var(--text);">⚡ Hızlı Başlat</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <button class="btn btn-primary" onclick="showPage('quiz')" style="width:100%;justify-content:center;">
+            Soru Çöz (Rastgele)
+          </button>
+          <button class="btn btn-ghost" onclick="startExam()" style="width:100%;justify-content:center;">
+            Sınav Modu Başlat (20 Soru)
+          </button>
+          <button class="btn btn-ghost" onclick="showPage('flashcard')" style="width:100%;justify-content:center;">
+            Hızlı Tekrar Kartları
+          </button>
+          <button class="btn btn-ghost" onclick="showPage('tahmini')" style="width:100%;justify-content:center;">
+            Tahmini Sorular Çöz
+          </button>
+        </div>
+        <hr class="divider">
+        <div style="font-size:12px;color:var(--text3);line-height:1.7;">
+          <div style="margin-bottom:6px;"><span style="color:var(--green);">●</span> Ünite 5-6: Suç ve İnternet Hukuku</div>
+          <div style="margin-bottom:6px;"><span style="color:var(--amber);">●</span> Ünite 7: E-Ticaret ve Sözleşmeler</div>
+          <div><span style="color:var(--purple);">●</span> Ünite 8: Temel Haklar ve Kişisel Veriler</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:13px;font-weight:600;margin-bottom:12px;">📋 Kritik Formüller — Ezber Gerektiren Sayısal Bilgiler</div>
+      <div class="grid g3">
+        <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:12px;border-left:3px solid var(--red);">
+          <div style="font-size:10px;color:var(--text3);text-transform:uppercase;margin-bottom:4px;">TCK 135</div>
+          <div style="font-size:14px;font-weight:600;color:var(--text);font-family:var(--mono);">1–3 yıl hapis</div>
+          <div style="font-size:11px;color:var(--text2);margin-top:3px;">Kişisel veri kaydetme</div>
+        </div>
+        <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:12px;border-left:3px solid var(--red);">
+          <div style="font-size:10px;color:var(--text3);text-transform:uppercase;margin-bottom:4px;">TCK 136</div>
+          <div style="font-size:14px;font-weight:600;color:var(--text);font-family:var(--mono);">2–4 yıl hapis</div>
+          <div style="font-size:11px;color:var(--text2);margin-top:3px;">Kişisel veri yayma/verme</div>
+        </div>
+        <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:12px;border-left:3px solid var(--amber);">
+          <div style="font-size:10px;color:var(--text3);text-transform:uppercase;margin-bottom:4px;">Mesafeli Satış</div>
+          <div style="font-size:14px;font-weight:600;color:var(--text);font-family:var(--mono);">30 gün</div>
+          <div style="font-size:11px;color:var(--text2);margin-top:3px;">Azami teslimat süresi</div>
+        </div>
+        <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:12px;border-left:3px solid var(--accent);">
+          <div style="font-size:10px;color:var(--text3);text-transform:uppercase;margin-bottom:4px;">Cayma Hakkı</div>
+          <div style="font-size:14px;font-weight:600;color:var(--text);font-family:var(--mono);">14 gün + 1 yıl</div>
+          <div style="font-size:11px;color:var(--text2);margin-top:3px;">Bilgilendirme yapılmamışsa</div>
+        </div>
+        <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:12px;border-left:3px solid var(--green);">
+          <div style="font-size:10px;color:var(--text3);text-transform:uppercase;margin-bottom:4px;">TCK 243/2</div>
+          <div style="font-size:14px;font-weight:600;color:var(--text);font-family:var(--mono);">Yarı oranda indirim</div>
+          <div style="font-size:11px;color:var(--text2);margin-top:3px;">Ücretli sisteme giriş</div>
+        </div>
+        <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:12px;border-left:3px solid var(--teal);">
+          <div style="font-size:10px;color:var(--text3);text-transform:uppercase;margin-bottom:4px;">5651 Başvuru</div>
+          <div style="font-size:14px;font-weight:600;color:var(--text);font-family:var(--mono);">24 saat</div>
+          <div style="font-size:11px;color:var(--text2);margin-top:3px;">Hâkim karar süresi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ANALİZ -->
+<div class="page" id="page-analiz">
+  <div class="page-header">
+    <div class="page-title">Soru Frekans Analizi</div>
+    <div class="page-desc">2021–2022, 2023–2024, 2024–2025 sınavlarından çıkarılan konu dağılımı</div>
+  </div>
+  <div style="padding:28px;">
+    <div class="grid g2" style="margin-bottom:24px;">
+      <div class="card">
+        <div style="font-size:13px;font-weight:600;margin-bottom:16px;">Konu Bazlı Frekans (3 Yıl Toplam)</div>
+        <div id="analiz-list"></div>
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:600;margin-bottom:16px;">Soru Tipi Dağılımı</div>
+        <div id="tip-list"></div>
+        <hr class="divider">
+        <div style="font-size:13px;font-weight:600;margin-bottom:12px;">Ünite Başına Soru Sayısı</div>
+        <div id="unite-dist"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">⚠️ Çıkmamış ama Çıkma Riski Yüksek Konular</div>
+      <div style="font-size:12px;color:var(--text3);margin-bottom:16px;">Kitap içeriğine göre analiz edildi</div>
+      <div class="grid g3">
+        <div style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);border-radius:var(--radius-sm);padding:14px;">
+          <div class="badge badge-red" style="margin-bottom:8px;">YÜK­SEK RİSK</div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Veri İhlali Bildirimi</div>
+          <div style="font-size:12px;color:var(--text2);">KVKK m.12 — 72 saat kural, Kurul'a bildirim zorunluluğu</div>
+        </div>
+        <div style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);border-radius:var(--radius-sm);padding:14px;">
+          <div class="badge badge-red" style="margin-bottom:8px;">YÜK­SEK RİSK</div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Hacking Türleri</div>
+          <div style="font-size:12px;color:var(--text2);">Truva atı, salam tekniği, tavşanlar, bukalemunlar tanımları</div>
+        </div>
+        <div style="background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);border-radius:var(--radius-sm);padding:14px;">
+          <div class="badge badge-amber" style="margin-bottom:8px;">ORTA RİSK</div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Elektronik İmza Çeşitleri</div>
+          <div style="font-size:12px;color:var(--text2);">Güvenli / nitelikli elektronik imza, bono-poliçe sınırı</div>
+        </div>
+        <div style="background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);border-radius:var(--radius-sm);padding:14px;">
+          <div class="badge badge-amber" style="margin-bottom:8px;">ORTA RİSK</div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Alan Adı Sistemi</div>
+          <div style="font-size:12px;color:var(--text2);">ccTLD, gTLD, ICANN yapısı, cybersquatting detayları</div>
+        </div>
+        <div style="background:rgba(108,143,255,0.08);border:1px solid rgba(108,143,255,0.2);border-radius:var(--radius-sm);padding:14px;">
+          <div class="badge badge-blue" style="margin-bottom:8px;">DÜ­ŞÜK RİSK</div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:6px;">RIR Bölgeleri</div>
+          <div style="font-size:12px;color:var(--text2);">5 adet: ARIN, RIPE NCC, APNIC, LACNIC, AFRINIC</div>
+        </div>
+        <div style="background:rgba(108,143,255,0.08);border:1px solid rgba(108,143,255,0.2);border-radius:var(--radius-sm);padding:14px;">
+          <div class="badge badge-blue" style="margin-bottom:8px;">DÜ­ŞÜK RİSK</div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:6px;">KVKK Veri Kategorileri</div>
+          <div style="font-size:12px;color:var(--text2);">Özel nitelikli veriler: sağlık, dini, etnik köken, biometrik</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ÜNİTE 5 -->
+<div class="page" id="page-unite5">
+  <div class="page-header">
+    <div class="page-title">Ünite 5 — Bilişim Suç Hukuku</div>
+    <div class="page-desc">TCK m. 243-246 · Ceza Hukuku · Sistemlere Yönelik Suçlar</div>
+  </div>
+  <div style="padding:28px;">
+    <div class="grid g2">
+      <div>
+        <div class="unit-header">
+          <div class="unit-number">5</div>
+          <div>
+            <div style="font-size:15px;font-weight:700;">Bilişim Sistemine Girme Suçu</div>
+            <div style="font-size:12px;color:var(--text3);">TCK m. 243</div>
+          </div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">TCK 243 — Temel Bilgiler <span class="badge badge-red">Sınavda Çıktı</span></div>
+          <ul class="topic-items">
+            <li>Fail: Tipik eylemleri gerçekleştiren herhangi bir kişi olabilir (özgü suç DEĞİLDİR)</li>
+            <li>Konu: Bilişim sistemi (bilgisayar, CD, disket, USB — uydu alıcısı da dahil)</li>
+            <li>Korunan hukuki değer: <strong>Dijital Özel Alan</strong></li>
+            <li>Manevi unsur: Kasıt zorunludur — kasıtsız girişte ceza DOĞMAZ</li>
+          </ul>
+          <div class="sinav-notu">Uydu alıcısı (dekoder) konu olur; sınavda "olamaz mı?" sorusu çıkmıştı → Doğru cevap: olur.</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--amber);">
+          <div class="topic-title">TCK 243 Ceza Miktarları</div>
+          <ul class="topic-items">
+            <li>Temel suç: 1 yıla kadar hapis veya adli para cezası</li>
+            <li>Sistemde kalmaya devam: 6 aya kadar hapis</li>
+            <li><strong>Bedelli sistemler (TK 243/2):</strong> Ceza yarı oranda indirilir</li>
+            <li>Şikayet aranmaz — re'sen kovuşturma</li>
+          </ul>
+          <div class="sinav-notu">243/2 indirim oranı → "YARI" — 1/3 değil, 1/5 değil!</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">TCK 244 — Sistemi Engelleme / Bozma</div>
+          <ul class="topic-items">
+            <li>Sistemi engelleme, bozma, verileri yok etme veya değiştirme</li>
+            <li>1–5 yıl hapis</li>
+            <li>Kamu kurumuna karşı: 2 kat artırım</li>
+          </ul>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">Saldırı Türleri (Kavram Sorusu Gelir)</div>
+          <ul class="topic-items">
+            <li><strong>Hacking:</strong> Yetkisiz erişim genel adı</li>
+            <li><strong>Truva Atı:</strong> Zararlı kodu faydalı program gibi gizleme</li>
+            <li><strong>Tavşanlar:</strong> Sisteme anlamsız komutlar → sistem çöküşü</li>
+            <li><strong>Salam Tekniği:</strong> Küçük miktarları yavaşça çalma</li>
+            <li><strong>Bukalemunlar:</strong> Şekil değiştiren virüsler</li>
+          </ul>
+          <div class="sinav-notu">Tavşanlar = işlemciyi boğan anlamsız komutlar (2022 sınavında çıktı)</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">TCK 243/2 ve 243/3 — Nitelikli Haller</div>
+          <ul class="topic-items">
+            <li><strong>m.243/2 (Bedelli Sistem):</strong> Ücret karşılığı sisteme izinsiz giriş → ceza yarıya kadar İNDİRİLİR</li>
+            <li><strong>m.243/3 (Veri Kaybı):</strong> Girme sonucu veriler yok olur/değişirse → 6 aydan 2 yıla kadar hapis</li>
+            <li><strong>m.243/4 (Veri Nakli İzleme):</strong> Sisteme girmeksizin veri naklini teknik araçlarla izleme → 1-3 yıl hapis</li>
+            <li>243 suçu şekli suçtur: Sonuç aranmaz, fiil yeterlidir</li>
+            <li>Suç kesintisiz (mütemadi) suçtur: Sistemde kaldıkça devam eder</li>
+          </ul>
+          <div class="sinav-notu">243/4 veri nakli izleme: sisteme GİRMEKSİZİN teknik araçla → ayrı suç. 1-3 yıl hapis. Sisteme girerse 243/1 uygulanır.</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--purple);">
+          <div class="topic-title">TCK 244 — Sistemi Engelleme/Bozma Detayları</div>
+          <ul class="topic-items">
+            <li><strong>m.244/1:</strong> Sistemi engelleme veya bozma → 1-5 yıl hapis</li>
+            <li><strong>m.244/2:</strong> Veri yok etme veya değiştirme → 6 ay-3 yıl hapis</li>
+            <li><strong>m.244/3:</strong> Bu suçun kamu kurumu/kuruluşlarına karşı işlenmesi → 2 kat artırım</li>
+            <li><strong>m.244/4:</strong> Fail haksız çıkar sağlarsa → 2-6 yıl hapis ve adli para cezası</li>
+          </ul>
+          <div class="sinav-notu">244/3: Kamu kurumuna karşı = 2 KAT artırım (diğer artırımlarla karıştırma!)</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">TCK 245 — Banka/Kredi Kartı Suçu</div>
+          <ul class="topic-items">
+            <li><strong>m.245/1:</strong> Başkasına ait kart bilgilerini ele geçirip yarar sağlama → 3-6 yıl hapis + adli para</li>
+            <li><strong>m.245/2:</strong> Sahte kart oluşturma → 3-7 yıl hapis + adli para</li>
+            <li><strong>m.245/3:</strong> Sahte kart kullanma → 4-8 yıl hapis + adli para</li>
+            <li>Şahsi cezasızlık: Aynı konutta yaşayan aile (altsoy-üstsoy, eş, kardeş, evlatlık)</li>
+            <li><strong>Boşandığı eş → kapsam DIŞI</strong> (ceza doğar)</li>
+          </ul>
+          <div class="sinav-notu">245/1=3-6, 245/2=3-7, 245/3=4-8. Boşandığı eş artık cezasızlık kapsamında DEĞİL!</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--amber);">
+          <div class="topic-title">CMK m.135 — Bilgisayarlarda Arama/Kopyalama/Elkoyma</div>
+          <ul class="topic-items">
+            <li>Bu tedbir arama-kopyalama-elkoyma şeklinde 3 aşamalıdır</li>
+            <li>Karar mercii: Hakim (soruşturmada), Mahkeme (kovuşturmada)</li>
+            <li>Gecikmesinde sakınca olan hallerde: Cumhuriyet Savcısı karar verebilir</li>
+            <li>Bilgisayardaki veriler kopyalanarak asıl sisteme dokunulmadan inceleme yapılabilir</li>
+            <li>Bu tedbir "bilişim sistemleri" ve "programlar" ile "kütükler" için uygulanır</li>
+          </ul>
+          <div class="sinav-notu">CMK 135 tedbiri = arama + kopyalama + elkoyma. Sınavda "sadece arama" veya "sadece elkoyma" seçeneği yanlıştır.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="unit-header" style="margin-top:56px;">
+          <div class="unit-number" style="background:var(--red);">5</div>
+          <div>
+            <div style="font-size:15px;font-weight:700;">Kişisel Veri Suçları</div>
+            <div style="font-size:12px;color:var(--text3);">TCK m. 135–138</div>
+          </div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">TCK 135–136 — Ezber Tablosu <span class="badge badge-red">Çok Çıkıyor</span></div>
+          <ul class="topic-items">
+            <li><strong>m. 135</strong> — Kişisel veri KAYDETME → <strong>1–3 yıl hapis</strong></li>
+            <li><strong>m. 136</strong> — Veri VERME / YAYMA / ELE GEÇİRME → <strong>2–4 yıl hapis</strong></li>
+            <li><strong>m. 138</strong> — Verileri yok etmeme → 1–2 yıl hapis</li>
+            <li>Kamu görevlisi nitelikli hal: artırım uygulanır</li>
+          </ul>
+          <div class="sinav-notu">135 = 1-3 yıl, 136 = 2-4 yıl. Birbirine karıştırma! Yayma DAHA AĞIR.</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--purple);">
+          <div class="topic-title">Şahsi Cezasızlık Sebebi (Banka Kartı Suçu)</div>
+          <ul class="topic-items">
+            <li>Aynı konutta yaşayan aile bireyleri arasında şahsi cezasızlık sebebi</li>
+            <li>Altsoy–üstsoy, eş, kardeş, evlatlık — şahsi cezasızlık var</li>
+            <li><strong>Boşandığı eş:</strong> Artık bu kapsam dışı → ceza doğar</li>
+            <li>Kayın valide–damat ilişkisi: aynı konutsa cezasızlık var</li>
+          </ul>
+          <div class="sinav-notu">Boşandığı eş → kapsam DIŞI. 2023-24 sınavında çıktı.</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">TCK 245/A — Yasak Cihaz ve Programlar <span class="badge badge-amber">2016'da Eklendi</span></div>
+          <ul class="topic-items">
+            <li>Bilişim suçu işlemek için özel yapılmış cihaz/program/şifre/güvenlik kodu → imal, ithal, satış, nakil, depolama, bulundurma → suç</li>
+            <li>Ceza: <strong>1-3 yıl hapis + 5.000 güne kadar adli para cezası</strong></li>
+            <li>Suç seçimlik hareketlidir: Sayılan eylemlerden birini yapmak yeterli</li>
+            <li>Şekli suç (sırf hareket): Fiil tamamlandığında suç oluşur, zarar aranmaz</li>
+            <li>Özgü suç DEĞİLDİR: Herkes fail olabilir</li>
+            <li><strong>İstisna:</strong> Güvenlik testleri (zafiyet testleri) için yapılan programlar → suç oluşturmaz (amaç farklı)</li>
+          </ul>
+          <div class="sinav-notu">245/A = Bilişim suçu amacıyla yapılan araçları bulundurmak bile suçtur! Virüsü kullanmasan da almak yeterli. Güvenlik testi yazılımları istisna.</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">Program ve Veri Tanımları <span class="badge badge-amber">Boşluk Sorusu</span></div>
+          <ul class="topic-items">
+            <li><strong>Program:</strong> Bir seri bilginin, sistemin belli bir yönde çalışmasını sağlamak için bir araya gelmiş şekli</li>
+            <li><strong>Veri:</strong> Bilgilerin soyut halde belirli bir formata dönüştürülmüş hali</li>
+            <li>Veri = Bilgisayar tarafından üzerinde işlem yapılabilen her türlü değer (5651 m.2/k)</li>
+            <li>Veri ≠ Program (soru bu farkı sorar)</li>
+            <li><strong>Bilişim Sistemi:</strong> Verileri toplayıp yerleştirdikten sonra otomatik işlemlere tabi tutma olanağı veren manyetik sistemler</li>
+          </ul>
+          <div class="sinav-notu">Boşluk sorusu: "Program bir seri bilginin sistemi belli bir yönde çalıştırmak için bir araya gelmiş şeklidir." — 2022 sınavında çıktı. Veri ≠ Program farkını bil!</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:20px;">
+      <button class="btn btn-primary" onclick="showQuizByUnit(5)">Ünite 5 Sorularını Çöz</button>
+    </div>
+  </div>
+  <!-- EKSİK KONULAR — PDF'DEN EKLENDİ -->
+  <div style="padding:0 28px 28px;">
+    <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+      <span style="background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.3);padding:3px 10px;border-radius:20px;font-size:11px;font-family:var(--mono);">PDF'DEN EKLENDİ</span>
+      5651 Kanunu — Eksik Detaylar ve 5. Ünite Ek İçerik
+    </div>
+    <div class="grid g2">
+      <div>
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">Katalog Suçlar — TAM LİSTE (TCK Maddeleri ile) <span class="badge badge-red">Sınavda Çıkıyor</span></div>
+          <ul class="topic-items">
+            <li><strong>TCK m.84:</strong> İntihara yönlendirme</li>
+            <li><strong>TCK m.103/1:</strong> Çocukların cinsel istismarı</li>
+            <li><strong>TCK m.190:</strong> Uyuşturucu veya uyarıcı madde kullanımını kolaylaştırma</li>
+            <li><strong>TCK m.194:</strong> Sağlık için tehlikeli madde temini</li>
+            <li><strong>TCK m.226:</strong> Müstehcenlik</li>
+            <li><strong>TCK m.227:</strong> Fuhuş</li>
+            <li><strong>TCK m.228:</strong> Kumar oynanması için yer ve imkân sağlama</li>
+            <li><strong>5816 sayılı Kanun:</strong> Atatürk aleyhine işlenen suçlar</li>
+          </ul>
+          <div class="sinav-notu">Katalog suçlar = bu 7+1 madde. Kıyas yoluyla genişletilemez (Anayasa m.13). Hakaret ve tehdit kapsam DIŞI!</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--amber);">
+          <div class="topic-title">Tedbirin Uygulanması ve Süresi</div>
+          <ul class="topic-items">
+            <li>Karar derhal ve en geç bildirimi anından itibaren <strong>4 saat içinde</strong> yerine getirilir</li>
+            <li>İçeriğin yayından çıkarılması halinde erişim engeli kararı <strong>kendiliğinden hükümsüz</strong> kalır (yeni karar gerekmez)</li>
+            <li>Beraat veya KYOK kararında: erişim engeli kendiliğinden hükümsüz kalır</li>
+            <li>Kararın yerine getirilmemesi: <strong>500 günden 3.000 güne adli para cezası</strong></li>
+          </ul>
+          <div class="sinav-notu">İçerik kaldırılınca hakim/savcı AYRICA karar vermez → tedbir otomatik düşer. Bu sınavda çıkar!</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">Başkan Kararının Yerine Getirilmemesinin Yaptırımı</div>
+          <ul class="topic-items">
+            <li>Başkan kararına uyulmazsa: <strong>10.000 TL – 100.000 TL idari para cezası</strong></li>
+            <li>İdari para cezasının verildiği andan itibaren <strong>24 saat içinde</strong> hâlâ uyulmazsa → Kurum tarafından <strong>yetkilendirmenin iptali</strong></li>
+            <li>Bu idari para cezasına karşı: İYUK hükümlerine göre kanun yolu</li>
+            <li>Önleme amaçlı tedbire uymayan yer/erişim sağlayıcıya: <strong>50.000 TL – 500.000 TL idari para cezası</strong></li>
+          </ul>
+          <div class="sinav-notu">Başkan cezası = idari. Yargı kararına uymayan = adli para (500-3000 gün). İkisini karıştırma!</div>
+        </div>
+      </div>
+      <div>
+        <div class="topic-card" style="border-color:var(--purple);">
+          <div class="topic-title">m.8/A — Önleme Amaçlı Tedbir <span class="badge badge-amber">Sınavda Çıkar</span></div>
+          <ul class="topic-items">
+            <li><strong>Amaç:</strong> Suç işlenmeden önce önleyici nitelikte — klasik koruma tedbiri değil</li>
+            <li><strong>Koşullar:</strong> Yaşam hakkı, can ve mal güvenliği, millî güvenlik, kamu düzeni, suç önleme veya genel sağlık</li>
+            <li><strong>Yetkili merci kural:</strong> Hakim</li>
+            <li><strong>Gecikmesinde sakınca olan hallerde:</strong> Başkan — ancak re'sen karar veremez</li>
+            <li><strong>Talep şartı:</strong> Cumhurbaşkanlığı tüm sebeplerle; ilgili Bakanlıklar sadece millî güvenlik/kamu düzeni/suç/sağlık sebepleriyle talep edebilir</li>
+            <li>Başkanın kararı → <strong>24 saat içinde sulh ceza hakimine</strong> sunulur → hakim <strong>48 saat içinde</strong> karar verir → aksi halde karar kendiliğinden kalkar</li>
+          </ul>
+          <div class="sinav-notu">8/A = Önleme. 8 = Koruma tedbiri. Fark: 8/A henüz suç işlenmeden uygulanabilir!</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">m.9 — Kişilik Hakkı İhlali: Uyarı Yöntemi</div>
+          <ul class="topic-items">
+            <li>Hak ihlal edilen kişi → önce <strong>içerik sağlayıcıya</strong> uyarı yöntemiyle başvurur</li>
+            <li>İçerik sağlayıcıya ulaşamazsa → <strong>yer sağlayıcıya</strong> bildirim</li>
+            <li>İçerik/yer sağlayıcı → en geç <strong>24 saat içinde</strong> cevap vermek zorundadır</li>
+            <li>Kişi ayrıca sulh ceza hakimine de başvurabilir → hakim <strong>24 saat içinde duruşmasız</strong> karar verir</li>
+            <li>Karar Birliğe gönderilir → erişim sağlayıcıya iletilir → en geç <strong>4 saat içinde</strong> uygulanır</li>
+            <li>Kararı uygulamayanlar: <strong>500 günden 3.000 güne adli para cezası</strong></li>
+          </ul>
+          <div class="sinav-notu">m.9 zinciri: Kişi → içerik/yer sağlayıcı (24 saat) → hakim (24 saat, duruşmasız) → Birlik → erişim sağlayıcı (4 saat)</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">m.9/A — Özel Hayat Gizliliği İhlali <span class="badge badge-red">Sınavda Çıkar</span></div>
+          <ul class="topic-items">
+            <li>Özel hayat gizliliği ihlalinde kişi → doğrudan <strong>Kuruma başvurur</strong> (hakim değil!)</li>
+            <li>Birlik → erişimi <strong>4 saat içinde</strong> engeller</li>
+            <li>Başvurucu → talepten itibaren <strong>24 saat içinde</strong> sulh ceza hakimine sunar</li>
+            <li>Hakim → <strong>48 saat içinde</strong> kararını açıklar → aksi halde tedbir kendiliğinden kalkar</li>
+            <li>Engelleme: URL bazında (içeriğe özgü) — zorunluysa tüm siteye</li>
+          </ul>
+          <div class="sinav-notu">m.9/A = Özel hayat → BTK'ya doğrudan → 4 saat uygulama → 24 saat hakime → hakim 48 saat. m.9 = Kişilik hakkı → önce içerik/yer sağlayıcıya!</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">Erişim Sağlayıcılar Birliği (ESB) — Tam Detaylar <span class="badge badge-amber">Sınavda Çıkar</span></div>
+          <ul class="topic-items">
+            <li><strong>Kuruluş amacı:</strong> 5651 m.8 DIŞINDAKI erişim engeli kararlarını uygulamak</li>
+            <li><strong>Hukuki kişilik:</strong> Özel hukuk tüzel kişisi (kamu değil!)</li>
+            <li><strong>Merkezi:</strong> Ankara</li>
+            <li><strong>Üyelik:</strong> Elektronik Haberleşme Kanunu kapsamında yetkilendirilen TÜM internet servis sağlayıcıları + internet erişim hizmeti veren diğer işletmeciler</li>
+            <li><strong>Üye olmayan:</strong> Faaliyette bulunamaz</li>
+            <li><strong>Gelirler:</strong> Üyelerin ödeyeceği ücretlerden oluşur; bir üyenin ücreti = üyelerin net satışı toplamı içindeki o üyenin net satışı oranında</li>
+            <li>Kendisine gönderilen mevzuata AYKIRI gördüğü kararlara itiraz edebilir</li>
+            <li>Süresinde ödenmeyen ücretler kanuni faizi ile birlikte tahsil edilir</li>
+          </ul>
+          <div class="sinav-notu">ESB = ÖZEL hukuk tüzel kişisi, Ankara merkezli. Üye ücretleri net satış oranında hesaplanır. Üye olmayan ISP faaliyette bulunamaz!</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">İçerik Sağlayıcının Bağlantı Sağladığı İçerikten Sorumluluğu <span class="badge badge-amber">Kavram Sorusu</span></div>
+          <ul class="topic-items">
+            <li>Kural: İçerik sağlayıcı bağlantı sağladığı <strong>başkasına ait içerikten SORUMLU DEĞİLDİR</strong> (5651 m.4/2)</li>
+            <li>İstisna: İçerik sağlayıcı bağlantı sağladığı içeriği <strong>benimsediyse</strong> ve kullanıcıların ulaşmasını <strong>amaçladıysa</strong> → bağlantı sunuş biçiminden açıkça belliyse → genel hükümlere göre SORUMLU OLUR</li>
+            <li>Ayrıca: İçerik sağlayıcı, Kurumun talep ettiği bilgileri talep edilen şekilde kuruma teslim etmekle yükümlüdür</li>
+          </ul>
+          <div class="sinav-notu">Bağlantı = Kural sorumlu değil. Bağlantıyı benimseyip kullanıcılara ulaştırmayı amaçladıysa = SORUMLU. Bu istisna soru olarak gelebilir!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ÜNİTE 6 -->
+<div class="page" id="page-unite6">
+  <div class="page-header">
+    <div class="page-title">Ünite 6 — İnternet Hukuku</div>
+    <div class="page-desc">5651 Sayılı Kanun · Erişim Engeli · Alan Adı · İnternet Yapısı</div>
+  </div>
+  <div style="padding:28px;">
+    <div class="grid g2">
+      <div>
+        <div class="unit-header">
+          <div class="unit-number" style="background:var(--teal);">6</div>
+          <div>
+            <div style="font-size:15px;font-weight:700;">İnternet Yapısı ve Temel Kavramlar</div>
+            <div style="font-size:12px;color:var(--text3);">Her yıl 1–2 soru</div>
+          </div>
+        </div>
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">Backbone ve İnternet Yapısı <span class="badge badge-amber">Kesin Çıkar</span></div>
+          <ul class="topic-items">
+            <li><strong>Backbone:</strong> İnternet üzerindeki ana iletişim hatları</li>
+            <li>Ana hattan çıkan hatlar → merkezler → bireysel bilgisayarlar</li>
+            <li>RIR (Regional Internet Registry): Bölgesel IP yönetim kuruluşu</li>
+            <li><strong>RIR sayısı: 5</strong> (ARIN, RIPE NCC, APNIC, LACNIC, AFRINIC)</li>
+          </ul>
+          <div class="sinav-notu">RIR sayısı sorusu: 5. 2024-25 sınavında çıktı. ARIN=Kuzey Amerika, RIPE=Avrupa.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">Alan Adı Sistemi (DNS)</div>
+          <ul class="topic-items">
+            <li>Türkiye'de ilk alan adı tahsisi: ODTÜ tarafından yapıldı</li>
+            <li>Daha sonra: <strong>nic.tr</strong> isimli kuruluşa devredildi</li>
+            <li>ICANN: Uluslararası alan adı yönetim kuruluşu</li>
+            <li>ccTLD: Ülke kodu (.tr, .de, .uk)</li>
+            <li>gTLD: Genel (.com, .org, .net)</li>
+          </ul>
+          <div class="sinav-notu">nic.tr sorusu — nib/nik/nin/nim değil, doğrusu NIC.TR</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--amber);">
+          <div class="topic-title">Link Türleri <span class="badge badge-red">Sınavda Çıktı</span></div>
+          <ul class="topic-items">
+            <li><strong>Surface Link:</strong> Normal link, yeni sayfa açılır</li>
+            <li><strong>Deeplink:</strong> Diğer sitenin iç sayfasına giriş yapmadan ulaşma</li>
+            <li><strong>Frame:</strong> Aynı ekranda birden fazla bağımsız doküman gösterme</li>
+            <li><strong>Cybersquatting:</strong> Alan adı stoklama (başkasına ait marka alan adını ele geçirme)</li>
+          </ul>
+          <div class="sinav-notu">Deeplink = "giriş sayfası kullanmaksızın" iç sayfaya erişim → 2023 ve 2024 sınavlarında çıktı!</div>
+        </div>
+      </div>
+      <div>
+        <div class="unit-header" style="margin-top:56px;">
+          <div class="unit-number" style="background:var(--red);">6</div>
+          <div>
+            <div style="font-size:15px;font-weight:700;">5651 Sayılı Kanun</div>
+            <div style="font-size:12px;color:var(--text3);">En çok soru gelen kanun</div>
+          </div>
+        </div>
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">Aktör Tanımları <span class="badge badge-amber">Tanım Sorusu</span></div>
+          <ul class="topic-items">
+            <li><strong>İçerik Sağlayıcı:</strong> İnternette içerik üreten kişi</li>
+            <li><strong>Yer Sağlayıcı:</strong> İçerik barındıran hosting firması</li>
+            <li><strong>Erişim Sağlayıcı:</strong> İnternet bağlantısı sağlayan ISP</li>
+            <li><strong>Toplu Kullanım Sağlayıcı:</strong> Belirli yerde ve süre internet imkânı sağlayan kişi (internet kafe)</li>
+          </ul>
+          <div class="sinav-notu">"Belli bir yerde ve belli bir süre" = Toplu Kullanım Sağlayıcı. Her yıl çıkıyor!</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">Toplu Kullanım Sağlayıcı — İzin ve Yükümlülükler <span class="badge badge-red">Sınavda Çıktı</span></div>
+          <ul class="topic-items">
+            <li>Ticari amaçlı toplu kullanım sağlayıcılar (internet kafe) → <strong>mahalli mülki amirden izin</strong> alması zorunlu</li>
+            <li><strong>İl merkezinde → Validen</strong> izin alınır</li>
+            <li><strong>İlçede → Kaymakamdan</strong> izin alınır</li>
+            <li>İzne ilişkin bilgiler <strong>30 gün içinde</strong> Kuruma bildirilir</li>
+            <li>Denetim → mahalli mülki amirler tarafından yapılır</li>
+            <li>Tüm toplu kullanım sağlayıcılar (ticari/ticari olmayan): erişim kaydı tutmak ve suç içerikli erişimi engellemekle yükümlü</li>
+            <li>Yaptırım: uyarı, 1.000-15.000 TL idari para cezası veya 3 güne kadar faaliyet durdurma</li>
+          </ul>
+          <div class="sinav-notu">İzin mercii: İl = Vali, İlçe = Kaymakam. BTK değil! Bu ayrım sınavda çıkmıştır. 30 gün içinde kuruma bildirim.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--amber);">
+          <div class="topic-title">Erişim Engeli — Kim Karar Verir?</div>
+          <ul class="topic-items">
+            <li><strong>Mahkeme:</strong> Genel kural — engel kararı</li>
+            <li><strong>BTK Başkanı:</strong> Özel suçlarda idari karar verebilir (kumar, intihara yönlendirme, müstehcenlik, uyuşturucu)</li>
+            <li><strong>Cumhuriyet Savcısı:</strong> Gecikmesinde sakınca olan hallerde → 24 saat içinde hâkim onayına sunar</li>
+            <li><strong>Hâkim:</strong> 5651 m.9 başvurusunu en geç 24 saat içinde karara bağlar</li>
+          </ul>
+          <div class="sinav-notu">Savcı → 24 saat. Hâkim → 24 saat. BTK Başkanı'nın kararı özel suçlar için. 2022'de çıktı.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">Erişim Engeli Suçları (Katalog Suçlar)</div>
+          <ul class="topic-items">
+            <li>İntihara yönlendirme ✓</li>
+            <li>Müstehcenlik ✓</li>
+            <li>Kumar oynanması ✓</li>
+            <li>Uyuşturucu kullanımını kolaylaştırma ✓</li>
+            <li>Atatürk aleyhine işlenen suçlar ✓</li>
+            <li>Hakaret ✗ (bu suç KAPSAM DIŞI)</li>
+          </ul>
+          <div class="sinav-notu">Hakaret ve Tehdit → kapsam dışı! 2024-25 sınavında çıktı.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--purple);">
+          <div class="topic-title">İzleme ve Trafik Bilgisi</div>
+          <ul class="topic-items">
+            <li><strong>İzleme:</strong> Verilere etki etmeksizin bilgi ve verilerin takip edilmesi</li>
+            <li><strong>Trafik Bilgisi:</strong> Bağlantıya ait log kayıtları (IP, zaman, vb.)</li>
+          </ul>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">Sağlayıcı Yükümlülükleri — Trafik Saklama Süreleri <span class="badge badge-red">Sınavda Çıkar</span></div>
+          <ul class="topic-items">
+            <li><strong>Yer Sağlayıcı:</strong> Trafik bilgisini <strong>1 yıldan az, 2 yıldan fazla olmamak</strong> üzere saklar</li>
+            <li><strong>Erişim Sağlayıcı:</strong> Trafik bilgisini <strong>6 aydan az, 2 yıldan fazla olmamak</strong> üzere saklar</li>
+            <li>İçerik sağlayıcı → sunduğu içerikten <strong>hukuki sorumluluk</strong> taşır (cezai değil)</li>
+            <li>Yer sağlayıcı → haberdar edilince içeriği çıkarma yükümlülüğü vardır</li>
+            <li>Erişim sağlayıcı → haberdar edilince erişimi engelleme yükümlülüğü vardır</li>
+            <li>Her iki sağlayıcı da içeriklerin denetlenmesinden sorumlu DEĞİLDİR</li>
+          </ul>
+          <div class="sinav-notu">Yer sağlayıcı = 1-2 yıl saklar. Erişim sağlayıcı = 6 ay-2 yıl saklar. Süre farkını ezberle!</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--amber);">
+          <div class="topic-title">İdari Para Cezaları (Başkan Tarafından)</div>
+          <ul class="topic-items">
+            <li>Bilgilendirme yükümlülüğünü ihlal eden → <strong>2.000-50.000 TL</strong></li>
+            <li>Yer sağlayıcı yükümlülük ihlali → <strong>10.000-100.000 TL</strong></li>
+            <li>Erişim sağlayıcı yükümlülük ihlali → <strong>10.000-50.000 TL</strong></li>
+            <li>Başkan kararını yerine getirmeyen → <strong>10.000-100.000 TL</strong></li>
+            <li>Koruma tedbirini yerine getirmeyen yer/erişim sağlayıcı → <strong>500-3000 GÜN</strong> adli para cezası</li>
+          </ul>
+          <div class="sinav-notu">İdari para = Başkan verir. Adli para = Yargı verir. Hangisinin ceza aldığı soru olur!</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">5 Farklı Erişim Engeli Türü — PDF'den Tam Liste</div>
+          <ul class="topic-items">
+            <li><strong>1. Koruma Tedbiri Olarak (m.8):</strong> Hakim/Mahkeme veya Savcı → katalog suçlar</li>
+            <li><strong>2. Başkan İdari Kararı (m.8/4):</strong> Yurt dışı sağlayıcı veya çocuk istismarı/müstehcenlik/fuhuş</li>
+            <li><strong>3. Önleme Amaçlı (m.8/A):</strong> Hakim veya Başkan (CB/Bakanlık talebiyle) → can-mal güvenliği, milli güvenlik</li>
+            <li><strong>4. Kişilik Hakkı İhlali (m.9):</strong> Sulh Ceza Hakimi → ilgili kişinin başvurusu → 24 saat karar</li>
+            <li><strong>5. Özel Hayat Gizliliği (m.9/A):</strong> Kurum'a doğrudan başvuru → Birlik → 4 saat uygulama</li>
+          </ul>
+          <div class="sinav-notu">m.9/A = Özel hayat → BTK'ya DOĞRUDAN başvuru → 4 saat uygulama → 24 saat içinde hakime sunulur → hakim 48 saatte karar verir.</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:20px;">
+      <button class="btn btn-primary" onclick="showQuizByUnit(6)">Ünite 6 Sorularını Çöz</button>
+    </div>
+  </div>
+  <!-- EKSİK KONULAR — PDF'DEN EKLENDİ -->
+  <div style="padding:0 28px 28px;">
+    <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+      <span style="background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.3);padding:3px 10px;border-radius:20px;font-size:11px;font-family:var(--mono);">PDF'DEN EKLENDİ</span>
+      E-Ticaret Sözleşmeleri — Eksik Detaylar
+    </div>
+    <div class="grid g2">
+      <div>
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">E-İrade Açıklaması Türleri <span class="badge badge-amber">Boşluk Sorusu</span></div>
+          <ul class="topic-items">
+            <li><strong>1. Tür — Elektronik ortam sadece araçtır:</strong> Kişi bilinçli olarak chat, e-posta, skype üzerinden irade beyanında bulunur. İnsan iradesi her adımda aktiftir.</li>
+            <li><strong>2. Tür — Bilgisayar yazılımı tarafından oluşturulur:</strong> Uçak biletinde otomatik sistem fiyatı hesaplar, ödemeyi alır. İnsan müdahalesi yoktur. "Elektronik ajan" veya "otomatik irade açıklaması" da denir.</li>
+            <li>Her iki türde de geçerli irade beyanı kabul edilir — aslında bir insan iradesine dayanır</li>
+          </ul>
+          <div class="sinav-notu">Otomatik sistemin irade açıklaması → bilgisayarı programlayanın iradesine dayanır → geçerlidir.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">Web Sitesi İlanı: Öneri mi, Öneriye Davet mi? <span class="badge badge-amber">Sınavda Çıkar</span></div>
+          <ul class="topic-items">
+            <li>Web sitesinde mal/hizmet teşhiri kural olarak <strong>"herkese açık öneri"</strong> sayılır (icap değil)</li>
+            <li>Sadece bilgi veren, sipariş fonksiyonu olmayan siteler → <strong>öneriye davet</strong></li>
+            <li>Ayrıntılı bilgi mevcut değilse → somut icap kabul edilemez</li>
+            <li>Sipariş fonksiyonu olan siteler → herkese açık öneri (BK m.8)</li>
+            <li>Dijital ürünler (yazılım, müzik): Sınırsız alıcıya teslim mümkün → "herkese yapılan öneri" korumasına ihtiyaç yok</li>
+          </ul>
+          <div class="sinav-notu">Kural: Web ilanı = herkese açık öneri. İstisna: Sadece bilgi veren sayfa = öneriye davet.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">E-Posta ile İrade Beyanı — Etki Anı</div>
+          <ul class="topic-items">
+            <li>E-posta hazır olmayanlar arası sayılır → <strong>alıcının kutusuna girdiğinde</strong> tesir eder (okuyup okumadığı önemli değil)</li>
+            <li>Ticari işletmeciye gönderilen e-posta → <strong>takip eden ilk mesai günü</strong> ulaşmış sayılır</li>
+            <li>Birkaç saniyelik gecikme (ses/görüntü) → kanun koyucu dikkate almaz → hazır olanlar arasındaki kurala göre değerlendirilir</li>
+          </ul>
+          <div class="sinav-notu">E-posta → hazır OLMAYANLAR (kutusuna girince tesir). Ticari işletmeci → ilk mesai günü. Bu ayrım sınavda çıkar!</div>
+        </div>
+      </div>
+      <div>
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">Elektronik Ortamda Sözleşmenin Kurulması — Yasal Çerçeve Özeti</div>
+          <ul class="topic-items">
+            <li><strong>Borçlar Kanunu:</strong> Sözleşmenin kurulması, irade açıklamaları, dönme, sakat irade</li>
+            <li><strong>Elektronik İmza Kanunu:</strong> Adi yazılı şekil şartı için güvenli elektronik imza yeterli</li>
+            <li><strong>TKHK + Yönetmelikler:</strong> Cayma hakkı (14 gün), teslimat (30 gün)</li>
+            <li><strong>ETK (Elektronik Ticaret Kanunu):</strong> E-ticarete özgü kurallar, aydınlatma yükümlülüğü</li>
+            <li>Resmi yazılı şekil → güvenli e-imza YETERSİZ → noter zorunlu</li>
+            <li>Bono, poliçe, çek → e-imza ile şekil şartı tamamlanamaz</li>
+          </ul>
+          <div class="sinav-notu">Adi yazılı = e-imza ile tamam. Resmi yazılı = noter şart. Bono/poliçe/çek = e-imza asla!</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--purple);">
+          <div class="topic-title">Multimedya Kullanım Tablosu <span class="badge badge-amber">Şema Sorusu Gelir</span></div>
+          <ul class="topic-items">
+            <li><strong>Çevrimiçi Senkron:</strong> Radyo/TV yayını — eş zamanlı tüketim zorunlu, kullanıcı zamanı seçemez</li>
+            <li><strong>Çevrimiçi Asenkron:</strong> Web sayfası çağırma — kullanıcı istediği zaman erişir</li>
+            <li><strong>Çevrimdışı (Offline):</strong> CD, DVD — veri taşıyıcı ile kullanım</li>
+            <li>Senkron ≠ Asenkron farkı FSEK m.25 (yeniden yayınlama hakkı) açısından önemlidir</li>
+            <li>İnternet radyo/TV: Senkron özellikler taşır</li>
+          </ul>
+          <div class="sinav-notu">Soru: "Radyo yayını hangi kullanım türü?" → Çevrimiçi Senkron. "Web sayfası?" → Çevrimiçi Asenkron. "CD?" → Çevrimdışı.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--amber);">
+          <div class="topic-title">BTK Görevleri — Kanunla Verilmiş Yetkiler</div>
+          <ul class="topic-items">
+            <li>İlgili kurumlar arası koordinasyon ve internet güvenli kullanım çalışmaları</li>
+            <li>Katalog suç içeriği tespit → erişim engelleme tedbirlerini almak</li>
+            <li>Filtreleme/blokeleme sistemlerine ilişkin esas ve usulleri belirlemek</li>
+            <li>Siber saldırıların tespiti/önlenmesi konusunda koordinasyon</li>
+            <li>Araştırma ve geliştirme merkezleri kurabilir</li>
+            <li>İnternet Geliştirme Kurulu (Bakanlık bünyesinde) → BTK'nın üstünde değil, ayrı organ</li>
+          </ul>
+          <div class="sinav-notu">İnternet Geliştirme Kurulu → Ulaştırma Bakanlığı bünyesinde, BTK'dan ayrı. Sınavda "BTK bünyesinde mi?" sorusu çıkabilir → HAYIR.</div>
+        </div>
+        <!-- EKSTRA: ETK, İspat, Reklam, Haksız Rekabet Sorumluluk -->
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">ETK — Hizmet Sağlayıcının Bilgi Verme Yükümlülüğü (m.3) <span class="badge badge-amber">Boşluk Sorusu</span></div>
+          <ul class="topic-items">
+            <li>Sözleşme yapılmadan önce hizmet sağlayıcı alıcıya şunları sunmak zorundadır:</li>
+            <li><strong>Tanıtıcı bilgiler</strong> (ad, unvan, iletişim bilgileri) — kolayca ulaşılabilir ve güncel</li>
+            <li><strong>Teknik adımlar:</strong> Sözleşmenin kurulması için izlenecek teknik adımlar</li>
+            <li><strong>Saklama ve erişim:</strong> Sözleşme metninin saklanıp saklanmayacağı ve erişim süresi</li>
+            <li><strong>Hata düzeltme:</strong> Veri girişindeki hataların belirlenmesi ve düzeltilmesi için teknik araçlar</li>
+            <li><strong>Gizlilik kuralları</strong> ve varsa alternatif uyuşmazlık çözüm mekanizmaları</li>
+            <li>Varsa mensup olunan <strong>meslek odası</strong> ve davranış kuralları</li>
+            <li>Yaptırım: İdari para cezası (m.12)</li>
+          </ul>
+          <div class="sinav-notu">ETK m.3 = Sözleşme öncesi bilgilendirme. m.4 = Sipariş aşaması bilgilendirme (toplam bedel, veri hatası düzeltme). m.5 = Ticari iletişim açıklamaları.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">ETK — Sipariş Aşaması ve Ticari İletişim (m.4, m.5)</div>
+          <ul class="topic-items">
+            <li><strong>m.4 — Sipariş:</strong> Ödeme bilgisi girilmeden önce → toplam bedeli ve sözleşme şartlarını görebilme imkânı + sipariş teyidi + veri hatası belirleme/düzeltme imkânı</li>
+            <li><strong>m.5 — Ticari iletişim:</strong> Kimin adına yapıldığı başta belirtilmeli; indirim/promosyon/yarışma varsa açıkça ve anlaşılır şekilde belirtilmeli</li>
+            <li><strong>Opt-in sistemi (kural):</strong> Esnaf ve tacirler hariç, önceden onay alınmaksızın ticari ileti gönderilemez</li>
+            <li><strong>Esnaf/tacire ilk ileti:</strong> Önceden izin alınmasına gerek YOK — ancak sonraki iletileri istemeyebilirler</li>
+            <li>Karma sistem: Esnaf/tacir → opt-out; Diğerleri → opt-in (m.6)</li>
+          </ul>
+          <div class="sinav-notu">Esnaf/tacire ilk ticari ileti izinsiz gönderilebilir (opt-out). Diğer kişilere önceden izin şart (opt-in). Bu fark sınavda çıkar!</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">Elektronik Dokümanların İspat Değeri — HMK <span class="badge badge-red">Sınavda Çıkar</span></div>
+          <ul class="topic-items">
+            <li><strong>HMK m.199:</strong> Uyuşmazlık konusu vakıaları ispata elverişli elektronik ortamdaki veriler = <strong>belge</strong> sayılır</li>
+            <li><strong>HMK m.200:</strong> Değeri 2.500 TL'yi geçen haklar → senetle ispat zorunlu; senetsiz ispat mümkün değil</li>
+            <li><strong>Elektronik dokümanlar kural olarak:</strong> Yazılı form + imza taşımadığından senet niteliği taşımaz → takdiri delil sayılır</li>
+            <li><strong>HMK m.205/2:</strong> Güvenli elektronik imzayla oluşturulan veriler → <strong>senet hükmünde</strong></li>
+            <li><strong>HMK m.205/3:</strong> Mahkeme, belgenin güvenli e-imzayla imzalanıp imzalanmadığını re'sen incelemek zorunda</li>
+            <li>Taraflar anlaşarak elektronik dokümanın senet sayılacağını kararlaştırabilir (HMK m.193) — ancak hâkim için bağlayıcı değil</li>
+          </ul>
+          <div class="sinav-notu">Güvenli e-imzasız elektronik belge = takdiri delil. Güvenli e-imzalı = senet hükmünde. 2.500 TL sınırı = senetle ispat zorunluluğu.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--purple);">
+          <div class="topic-title">Web-Hosting Sözleşmesi — Atipik Sözleşme <span class="badge badge-amber">Kavram Sorusu</span></div>
+          <ul class="topic-items">
+            <li>Web sayfaların kesintisiz sunulmasını ve ulaşılabilirliğini sağlayan bilgisayarlar → <strong>Web host</strong></li>
+            <li>Web-Hosting sözleşmesi = hem <strong>kira</strong> hem <strong>hizmet</strong> sözleşmesine ait nitelikler içerir → atipik sözleşme</li>
+            <li>Webhost sunucusunun müşterisi: Kendi bilgilerini sunan özel şahıs VEYA ürünlerini pazarlamak isteyen işletmeci</li>
+            <li>İçerik sunucu (content-provider) = webhost ortağı</li>
+          </ul>
+          <div class="sinav-notu">Web-Hosting = atipik sözleşme. Hem kira hem hizmet nitelikleri taşır. Sınavda "hangi sözleşme türüdür?" → atipik.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--amber);">
+          <div class="topic-title">Mesafeli Sözleşmede Cayma Hakkının İstisnaları <span class="badge badge-red">Sınavda Çıkar</span></div>
+          <ul class="topic-items">
+            <li>Cayma hakkı kullanılamayan sözleşmeler (Mesafeli Sözleşmeler Yönetmeliği m.15):</li>
+            <li>Fiyatı finansal piyasa dalgalanmalarına bağlı mallar</li>
+            <li>Tüketici isteğine göre hazırlanan <strong>kişiye özel ürünler</strong></li>
+            <li>Çabuk bozulabilecek veya son kullanma tarihi geçecek mallar</li>
+            <li>Ambalajı açılan <strong>hijyen ürünleri</strong></li>
+            <li>Teslim sonrası başka ürünlerle karışabilen mallar</li>
+            <li><strong>Dijital ürünler</strong> (elektronik ortamda teslim edilen)</li>
+            <li>Gazete, dergi gibi <strong>süreli yayınlar</strong></li>
+            <li>Cayma hakkı süresi dolmadan tüketici talebiyle ifa başlanmış hizmetler</li>
+          </ul>
+          <div class="sinav-notu">Dijital ürün + kişiye özel + hijyen ürünü → cayma hakkı yok. Bunlar sınavda "hangisinde cayma hakkı kullanılamaz?" sorusuyla gelir.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">Haksız Rekabette Sorumluluk — Aktörler <span class="badge badge-amber">Kavram Sorusu</span></div>
+          <ul class="topic-items">
+            <li><strong>İçerik sağlayıcı (content provider):</strong> Bilişim ortamında içeriği hazırlayan, haksız rekabet eylemini yapan kişi</li>
+            <li><strong>Misafir eden (hosting) sağlayıcı:</strong> Başkasının hazırladığı içeriği tutan kişi</li>
+            <li><strong>Aracı hizmet sağlayıcı:</strong> Başkalarına ait faaliyetlerin yapılmasına elektronik ticaret ortamı sağlayan gerçek veya tüzel kişi</li>
+            <li><strong>İnternet servis sağlayıcısı:</strong> Bilişim sisteminin altyapısını hazırlayan kişi/kurum</li>
+            <li>Bir ISP, kendi sayfasında içerik hazırlarsa → <strong>o fonksiyon bakımından içerik sağlayıcı</strong> sayılır</li>
+            <li>Haksız rekabet davası kural olarak <strong>yalnızca eylemi gerçekleştirenler aleyhine</strong> açılır</li>
+            <li>İstisna: İhlalin kapsamlı/zararı büyük olduğu durumlarda → hizmet sağlayıcı aleyhine tedbir kararı verilebilir (TTK m.58/4)</li>
+          </ul>
+          <div class="sinav-notu">TTK m.58/4: Hizmet sağlayıcı fiili başlatmamış/alıcı seçmemişse dava açılamaz. İstisna: Zararın büyüklüğü → tedbir kararı verilebilir. Sıfatlar somut eyleme göre değişir.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">Elektronik Ortamda Reklamlara İlişkin Genel İlkeler <span class="badge badge-amber">Liste Sorusu</span></div>
+          <ul class="topic-items">
+            <li><strong>a.</strong> Reklamlar aldatıcı, yanıltıcı ve haksız rekabete yol açar nitelikte olmamalı</li>
+            <li><strong>b.</strong> Karşılaştırmalı reklamda: Aynı nitelikte ürünler, ölçülebilir hususlar, müşteriye yarar karşılaştırması</li>
+            <li><strong>c.</strong> Toplam bedel hakkında yanıltıcı bilgi verilmemeli</li>
+            <li><strong>d.</strong> Sayısal verilere dayanan unsurlar → bilimsel test/raporlara dayanmalı</li>
+            <li><strong>e.</strong> Rakipler kötülenmemeli, karalanmamalı</li>
+            <li><strong>f.</strong> Rakiplerin itibarından haksız yararlanılmamalı</li>
+            <li><strong>g.</strong> Örtülü reklamlar ve bilinçaltı reklamlar yapılmamalı</li>
+            <li><strong>h.</strong> Çocuklara yönelik reklamda: Zihinsel durumlarını sömürecek, gerçek dışı beklentilere veya şiddete itecek içerik olmamalı</li>
+            <li><strong>i.</strong> Kişisel hesaplara istenmeyen reklam gönderilmemeli</li>
+            <li><strong>j.</strong> Kişisel verilere dayanan reklamlarda ilgiliden izin alınmalı</li>
+            <li><strong>k.</strong> Başkasının fikri/sınai hakkına riayet edilmeli</li>
+            <li><strong>l.</strong> Ayrımcı, aşağılayıcı veya saldırgan ifadelere yer verilmemeli</li>
+          </ul>
+          <div class="sinav-notu">Elektronik ortamda reklam serbesttir ama bu ilkelere uyulmalı. Reklam yapabilmek için özel izin gerekmez.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">Reklam Yasağı — Meslek Grupları ve Ürünler <span class="badge badge-red">Sınavda Çıktı</span></div>
+          <ul class="topic-items">
+            <li><strong>Reklam yasağına tabi meslekler:</strong> Avukat, Doktor, Eczacı, Mali Müşavir</li>
+            <li><strong>Öğretmen:</strong> Yasak kapsamında DEĞİL</li>
+            <li>Web sayfaları bu meslek grupları için tamamen reklam aracı sayılmamalı → bilgiye erişim unsuru olarak değerlendirilebilir</li>
+            <li><strong>Reçeteli ilaçlar:</strong> Genel reklam yasağı var; sadece tıpla ilgili dergilerde reklama izin verilmiştir</li>
+            <li><strong>Reçetesiz ilaçlar:</strong> 6112 sayılı Kanun ile radyo ve TV'de reklam yapılabilir → elektronik ortamda da yapılabilir</li>
+            <li><strong>Alkollü içecekler:</strong> Reklam yasağı + tanıtım/kampanya/promosyon da yasak</li>
+            <li><strong>Tütün ürünleri:</strong> Her ne suretle olursa olsun reklam ve tanıtım yasağı; aynı zamanda destekleme (sponsorluk) yasağı</li>
+          </ul>
+          <div class="sinav-notu">Reklam yasağı: Avukat + Doktor + Eczacı + Mali Müşavir. Öğretmen KAPSAM DIŞI! Reçeteli ilaç = genel yasak. Alkol + Tütün = tam yasak.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ÜNİTE 7 -->
+<div class="page" id="page-unite7">
+  <div class="page-header">
+    <div class="page-title">Ünite 7 — E-Ticaret Hukuku</div>
+    <div class="page-desc">Mesafeli Sözleşmeler · Elektronik İmza · Haksız Rekabet · FSEK</div>
+  </div>
+  <div style="padding:28px;">
+    <div class="grid g2">
+      <div>
+        <div class="unit-header">
+          <div class="unit-number" style="background:var(--amber);">7</div>
+          <div>
+            <div style="font-size:15px;font-weight:700;">Mesafeli Sözleşmeler</div>
+            <div style="font-size:12px;color:var(--text3);">Tüketicinin Korunması Hakkında Kanun</div>
+          </div>
+        </div>
+        <div class="topic-card" style="border-color:var(--amber);">
+          <div class="topic-title">Temel Kavramlar <span class="badge badge-amber">Sınavda Çıktı</span></div>
+          <ul class="topic-items">
+            <li>TKHK'nın tercih ettiği kavram: <strong>Mesafeli Sözleşme</strong></li>
+            <li>Azami teslimat süresi: Siparişten itibaren <strong>30 gün</strong></li>
+            <li>Cayma hakkı: <strong>14 gün</strong> (gerekçesiz)</li>
+            <li>Bilgilendirme yapılmazsa cayma süresi uzar: <strong>+1 yıl</strong></li>
+          </ul>
+          <div class="sinav-notu">30 gün teslimat. 14 gün cayma. Bilgilendirme yoksa 14 gün + 1 yıl = toplam ~12 ay 14 gün.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">Elektronik İmza</div>
+          <ul class="topic-items">
+            <li><strong>Güvenli elektronik imza:</strong> Adi yazılı şekil şartına tabii sözleşmelerde geçerli</li>
+            <li>Resmi yazılı şekil şartı için: HAYIR (noter gerekli)</li>
+            <li>Bono, poliçe, çek: Elektronik imza ile şekil şartı tamamlanamaz</li>
+          </ul>
+          <div class="sinav-notu">Bono/poliçe/çek = elektronik imza OLMAZ. Sınavda "hangileri doğru" sorusu gelir.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">Haksız Rekabet Türleri</div>
+          <ul class="topic-items">
+            <li><strong>Meta-Tag:</strong> Rakip markayı HTML başlığına gizlice yazma → arama motorunda çıkma</li>
+            <li><strong>Alan Adı Kullanımı:</strong> Rakip markayla benzer alan adı</li>
+            <li><strong>Cybersquatting:</strong> Alan adı stoklama</li>
+            <li><strong>Dialer:</strong> İnternet bağlantısını koparıp pahalı hatta aktaran yazılım</li>
+          </ul>
+          <div class="sinav-notu">Meta-tag: arama motoruna "XYZ" yazınca rakibin sitesi çıkıyor → meta-tag sorusu. 2024'te çıktı.</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">Elektronik Sözleşme — Öneri ve Kabul <span class="badge badge-amber">Boşluk Sorusu</span></div>
+          <ul class="topic-items">
+            <li><strong>Web sitesi ilanı:</strong> Kural olarak "herkese açık öneri" sayılır (icap değil)</li>
+            <li><strong>Hazır olanlar arasında:</strong> Chat, MSN, IRC, telefon gibi anlık iletişim → aynı anda görülür</li>
+            <li><strong>Hazır olmayanlar arasında:</strong> E-posta → kutusuna ulaşıncaya kadar tesir etmez</li>
+            <li>BK m.4/2: Telefon/bilgisayarla DOĞRUDAN iletişim → hazır olanlar arası sayılır</li>
+            <li>E-posta ticari iş adamına → takip eden ilk mesai günü ulaşmış sayılır</li>
+            <li><strong>Örtülü kabul:</strong> Bilişim sistemlerinde KABUL EDİLMEZ (sessiz kalma = kabul sayılmaz)</li>
+          </ul>
+          <div class="sinav-notu">E-posta = Hazır OLMAYANLAR arası. MSN/Chat = Hazır OLANLAR arası. Bu ayrım sınav sorusu olur!</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">E-Sözleşme Yasal Çerçevesi</div>
+          <ul class="topic-items">
+            <li><strong>Borçlar Kanunu:</strong> Sözleşme kurulması, irade açıklamaları, sözleşmeden dönme</li>
+            <li><strong>Elektronik İmza Kanunu:</strong> Adi yazılı şekil şartı için güvenli e-imza</li>
+            <li><strong>TKHK ve Yönetmelikleri:</strong> Tüketici olan taraf için cayma, teslimat</li>
+            <li><strong>Elektronik Ticaretin Düzenlenmesi Hakkında Kanun:</strong> E-ticaret spesifik</li>
+            <li><strong>Resmi yazılı şekil şartı:</strong> Elektronik imzayla tamamlanamaz → noter gerekli</li>
+            <li><strong>Bono/poliçe/çek:</strong> Elektronik imzayla şekil şartı tamamlanamaz</li>
+          </ul>
+          <div class="sinav-notu">Adi yazılı = güvenli e-imza ile tamamlanabilir. Resmi yazılı = noter gerekli, e-imza YETERSİZ.</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--purple);">
+          <div class="topic-title">Spam ve Elektronik İletişim</div>
+          <ul class="topic-items">
+            <li><strong>Spam:</strong> Alıcının isteği olmaksızın toplu olarak gönderilen reklam/ticari nitelikteki elektronik posta</li>
+            <li>Ticari elektronik ileti için <strong>önceden izin (opt-in)</strong> şarttır</li>
+            <li><strong>Opt-out:</strong> Alıcının sonradan vazgeçme hakkı korunmalıdır</li>
+          </ul>
+          <div class="sinav-notu">Spam = izinsiz toplu e-posta. Ticari ileti göndermek için önceden ONAy (opt-in) zorunlu.</div>
+        </div>
+      </div>
+      <div>
+        <div class="unit-header" style="margin-top:56px;">
+          <div class="unit-number" style="background:var(--purple);">7</div>
+          <div>
+            <div style="font-size:15px;font-weight:700;">Fikri Mülkiyet ve Reklam</div>
+            <div style="font-size:12px;color:var(--text3);">FSEK m.25 · Reklam Hukuku</div>
+          </div>
+        </div>
+        <div class="topic-card" style="border-color:var(--purple);">
+          <div class="topic-title">FSEK m.25 — Umuma İletim Hakkı <span class="badge badge-amber">Çıktı</span></div>
+          <ul class="topic-items">
+            <li>Eserin radyo, TV veya herhangi teknik usulle umumun yararlanmasına sunulması</li>
+            <li>Bu hakkın adı: <strong>Umuma İletim Hakkı</strong></li>
+            <li>Eser sahibinin mali haklarından biridir</li>
+          </ul>
+          <div class="sinav-notu">Soru: "Radyo/TV yoluyla sunulmasına ne denir?" → Umuma İletim Hakkı</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">Multimedya ve Eser Türleri <span class="badge badge-amber">Kavram Sorusu</span></div>
+          <ul class="topic-items">
+            <li><strong>Multimedya eser:</strong> Film, müzik, resim gibi değişik medya ürünlerinin bir arada sunulması</li>
+            <li><strong>Senkron kullanım:</strong> Radyo/TV gibi eş zamanlı tüketim (kullanıcı zamanı seçemez)</li>
+            <li><strong>Asenkron kullanım:</strong> İnternet ortamı gibi — eş zamanlı tüketim şart değildir</li>
+            <li>Çevrimiçi senkron: Radyo/TV yayını | Asenkron: Web sayfası çağırma</li>
+            <li>Çevrimdışı: CD, DVD gibi veri taşıyıcılarla kullanım</li>
+          </ul>
+          <div class="sinav-notu">Senkron = aynı anda izlemek zorunda (TV gibi). Asenkron = istediğinde izleyebilir (internet). Bu ikisi sınavda karşılaştırılır!</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">Link ve Frame — Fikri Hukuk</div>
+          <ul class="topic-items">
+            <li><strong>Surface Link (Harici):</strong> Diğer siteyi bağımsız sayfa olarak açar → genelde serbesttir</li>
+            <li><strong>Deeplink (Dahili):</strong> Giriş sayfası kullanmaksızın iç sayfaya → eser sahibi rızası gerekebilir</li>
+            <li><strong>Frame:</strong> Başkasının sayfasını kendi sayfası içine monte etme → eser sahibinin adı ihlal riski</li>
+            <li>Harici link verme = atıf hakkına benzer, kural olarak yasaklanamaz</li>
+            <li>Frame/dahili link = eser sahibinin <strong>adının belirtilmesi hakkını</strong> ihlal edebilir (FSEK m.15)</li>
+          </ul>
+          <div class="sinav-notu">Surface link = bağımsız sayfa açılır. Deeplink = giriş atlayıp iç sayfa. Frame = tek ekranda iki sayfa. Frame eser sahibinin manevi haklarını ihlal eder!</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">Eser Sahibinin Hakları Özeti</div>
+          <ul class="topic-items">
+            <li><strong>Manevi Haklar:</strong> Adının belirtilmesi (m.15), değişiklik yasaklama, kamuya sunma zamanını belirleme</li>
+            <li><strong>Mali Haklar:</strong> İşleme, çoğaltma, yayma, temsil, umuma iletim (m.25), dijital iletim</li>
+            <li>Dijitalleşme: Eserin sayısal hale getirilmesi → haklar değişmez, aynı FSEK kuralları uygulanır</li>
+            <li>RAM'e geçici kayıt bile "çoğaltma" sayılır (FSEK m.22)</li>
+          </ul>
+          <div class="sinav-notu">Manevi haklar devredilemez, mirasçıya intikal eder ama üçüncü kişiye devir yapılamaz. Mali haklar devredilebilir.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">Reklam Yasağı</div>
+          <ul class="topic-items">
+            <li>Reklam yasağına tabi meslekler: Avukat, doktor, eczacı, mali müşavir</li>
+            <li><strong>Öğretmen:</strong> Reklam yasağına tabi DEĞİL</li>
+            <li><strong>Banner:</strong> Web siteleri/gazetelerde başlık veya alt kısımda reklam öğesi</li>
+          </ul>
+          <div class="sinav-notu">Öğretmen reklam yasağı kapsamında DEĞİL. Sınavda "değildir" sorusu gelir.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">Arama Motorları ve Frame</div>
+          <ul class="topic-items">
+            <li>Arama motoru: Web'de yayınlanan bilgiyi aramak için kullanılan yazılım paketi</li>
+            <li><strong>Frame:</strong> Tek web sayfasında birbirinden bağımsız bölümlerde birden fazla doküman gösterilmesi</li>
+            <li>Widget Programları: Sıkça ziyaret edilen sayfaları hızlı açan programlar</li>
+          </ul>
+          <div class="sinav-notu">Arama motoru tanımı boşluk sorusu geldi. Widget değil, arama motoru dikkat.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--amber);">
+          <div class="topic-title">Erişim Sağlayıcıları Birliği <span class="badge badge-red">⚠ Sık Hata!</span></div>
+          <ul class="topic-items">
+            <li><strong>ÖZEL</strong> hukuk tüzel kişiliğine haizdir (Kamu değil!)</li>
+            <li>Merkezi: Ankara</li>
+            <li>Gelirleri: Üyeleri tarafından ödenecek ücretler</li>
+            <li>Kuruluş amacı: 5651 m.8 kapsamı DIŞINDAKI erişim engeli kararlarını uygulamak</li>
+            <li>Üye olmayan internet servis sağlayıcıları faaliyette bulunamaz</li>
+          </ul>
+          <div class="sinav-notu">⚠ HATA TUZAĞI: "Kamu hukuku tüzel kişisi" DEĞİL → ÖZEL hukuk tüzel kişisidir! Merkezi Ankara, gelirleri üye ücretleri DOĞRU. Soru "I. Kamu hukuku tüzel kişisi II. Ankara III. Üye ücretleri" → I yanlış, II ve III doğru.</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:20px;">
+      <button class="btn btn-primary" onclick="showQuizByUnit(7)">Ünite 7 Sorularını Çöz</button>
+    </div>
+  </div>
+  <!-- EKSİK KONULAR — PDF'DEN EKLENDİ -->
+  <div style="padding:0 28px 28px;">
+    <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+      <span style="background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.3);padding:3px 10px;border-radius:20px;font-size:11px;font-family:var(--mono);">PDF'DEN EKLENDİ</span>
+      Fikri Haklar — Eksik Detaylar
+    </div>
+    <div class="grid g2">
+      <div>
+        <div class="topic-card" style="border-color:var(--purple);">
+          <div class="topic-title">Link Türleri — Tam Sınıflama <span class="badge badge-red">Sınavda Çıktı</span></div>
+          <ul class="topic-items">
+            <li><strong>Harici (Ekstern) Link / Surface Link:</strong> Link tıklandığında link verilen sayfa <em>bağımsız</em> olarak açılır. Kural olarak serbesttir; eser sahibinin web'e koymasıyla zımni rıza verdiği kabul edilir.</li>
+            <li><strong>Dahili (Intern) Link / Deeplink:</strong> Giriş sayfası kullanılmaksızın iç sayfaya erişim. Eser sahibinin açık rızası gerekir — zımni rıza yeterli değildir.</li>
+            <li><strong>Frame:</strong> Birden fazla bağımsız sayfa tek ekranda gösterilir; yabancı sayfa, link veren sayfanın içine monte edilir. Eser sahibinin adının belirtilmesi hakkını (FSEK m.15) ihlal edebilir.</li>
+            <li>Harici link = atıf hakkına benzer → yasaklanamaz (eser sahibi web'e koyarak rıza vermiştir)</li>
+            <li>Dahili link + Frame = eser sahibinin rızası zorunlu (manevi hak ihlali riski)</li>
+          </ul>
+          <div class="sinav-notu">Soru: "Giriş sayfası kullanmaksızın iç sayfaya erişim" → Deeplink/Dahili Link. Frame ≠ Deeplink: Frame'de TÜM sayfa monte edilir, deeplink'te spesifik iç sayfa.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">Eser Sahibinin Manevi Hakları (FSEK)</div>
+          <ul class="topic-items">
+            <li><strong>Adının belirtilmesi hakkı (m.15):</strong> Eserin kullanıldığı her yer ve durumda eser sahibinin adı açıkça belirtilmeli — frame ve dahili link ihlal edebilir</li>
+            <li><strong>Eserde değişiklik yasaklama:</strong> Onarım, ihtiyaca uygunluk gibi zorunlu haller dışında eserinde değişiklik yapılamaz</li>
+            <li><strong>Kamuya sunma hakkı:</strong> Eserin umuma arz zamanını ve tarzını belirleme hakkı (FSEK m.14)</li>
+            <li><strong>Manevi haklar devredilemez</strong> — mirasçıya intikal eder, üçüncü kişiye devir yapılamaz</li>
+          </ul>
+          <div class="sinav-notu">Manevi hak = devredilmez, feragat edilemez. Mali hak = devredilebilir. Bu ayrım sınavda çıkar!</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">FSEK m.22 — Çoğaltma Hakkı ve RAM</div>
+          <ul class="topic-items">
+            <li>Eserin herhangi bir şekil/yöntemle <em>geçici veya sürekli</em> çoğaltılması → eser sahibinin izni gerekir</li>
+            <li><strong>RAM'e geçici kayıt bile "çoğaltma" sayılır</strong> — bilgisayarda eserin görünmesi anında bile çoğaltma gerçekleşir</li>
+            <li>Dijital kopyalamanın kolaylığı → Serial Copy Management System (SCMS) gibi teknik önlemler geliştirilmiştir</li>
+            <li>Büyüklük/boyut değişikliği (küçültme/büyütme) = çoğaltma (işleme değil)</li>
+          </ul>
+          <div class="sinav-notu">RAM'e geçici yükleme = çoğaltma hakkını ihlal eder. "Geçici olduğu için izin gerekmez" → YANLIŞ!</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--amber);">
+          <div class="topic-title">İşleme Hakkı (FSEK m.21) — Ne Değildir?</div>
+          <ul class="topic-items">
+            <li>İşleme = Eseri dönüştüren + işleyenin de esere katkısının bulunduğu yeni eser</li>
+            <li><strong>İşleme SAYILMAZ:</strong> Kısaltma, genişletme, büyüklük/boyut değişikliği (bunlar çoğaltmadır)</li>
+            <li><strong>İşleme SAYILMAZ:</strong> Müzik eserine yeni güfte yazılması → "eser beraberliği"</li>
+            <li><strong>İşleme SAYILIR:</strong> Dahili link/frame ile yalnızca bazı kısımlar alınıp yeni görünüm oluşturulması</li>
+            <li>İşleme hakkı münhasıran eser sahibine aittir (FSEK m.21)</li>
+          </ul>
+          <div class="sinav-notu">Soru: "Roman kısaltmak işleme midir?" → HAYIR, çoğaltmadır. "Müzik eserine güfte eklemek?" → İşleme değil, eser beraberliğidir.</div>
+        </div>
+      </div>
+      <div>
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">Alan Adı — Hukuki Nitelik ve Sorunlar <span class="badge badge-amber">Kavram Sorusu</span></div>
+          <ul class="topic-items">
+            <li>Alan adı teknik olarak birer sayıdan ibareti (IP); harfe çevrilmiştir</li>
+            <li>Hukuken <strong>isim niteliği</strong> taşır (mahkemeler bu görüştedir)</li>
+            <li>Her alan adından dünyada <strong>sadece bir tane</strong> olabilir — tekelleştirici özellik</li>
+            <li>Gerçek dünyada aynı isim birden fazla kişide olabilir; alan adında <strong>olamaz</strong></li>
+            <li>Marka tescil sistemi ≠ Alan adı tescil sistemi (bağlantısızlık = temel sorun)</li>
+          </ul>
+          <div class="sinav-notu">Alan adının tekelleştirici özelliği marka sisteminden farklıdır. Bu fark = Cybersquatting sorunun kaynağı.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">Marka Hakkına Tecavüz — Alan Adı Kullanımı</div>
+          <ul class="topic-items">
+            <li>Tescilli markanın alan adı olarak başkasınca kullanımı → 556 sayılı KHK m.9 kapsamında yasaklanabilir</li>
+            <li>Koruma şartları: (1) Marka tescilli olmalı, (2) Ticari amaç taşımalı</li>
+            <li>Ticari amaç yoksa (örn. sanat eseri sunumu) → KHK koruması uygulanamaz</li>
+            <li><strong>Meşru menfaat:</strong> Kendi soyadı, işletme adı, ticaret unvanı veya kendi markası kullanımı</li>
+            <li><strong>"bmw-tamircisi.com"</strong> gibi açıklayıcı kullanım → KHK m.12 uyarınca engellenemez</li>
+            <li>Alan adlarındaki üst düzey eklerin farkı (.com vs .org) iltibası ortadan kaldırmaz</li>
+          </ul>
+          <div class="sinav-notu">Meşru menfaat = kendi adı/unvanı. Rakip markayı kötü niyetle almak = Cybersquatting → engellenir.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">Shetland News Davası — Harici Link Emsal Kararı</div>
+          <ul class="topic-items">
+            <li><strong>Taraflar:</strong> Shetland Times (günlük gazete) vs Shetland News (web sitesi)</li>
+            <li><strong>Sorun:</strong> Shetland News, Times'ın haberlerine kendi sayfasından harici link verdi</li>
+            <li><strong>Sonuç:</strong> 1997'de mahkeme dışı uzlaşma — her bağlantıya logo + "A Shetland Times Story" ifadesi eklenecek</li>
+            <li>Bu dava: Harici link vermenin hukuki sorunları açısından ilk emsal karar (1996-1997)</li>
+            <li>Eser sahibi web'e koyarak zımni rıza verse de rakip firmalar arası link ayrı değerlendirilir</li>
+          </ul>
+          <div class="sinav-notu">Shetland davası = harici link + rekabet ilişkisi → özel değerlendirme. "İlk hukuki link problemi 1996 İskoçya'da yaşandı."</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">Dijitalleşmenin Tehlikeleri ve Teknik Önlemler</div>
+          <ul class="topic-items">
+            <li>Dijital eserlerin kalite kaybı olmaksızın kopyalanabilmesi → telif hakkı ihlali riski artar</li>
+            <li><strong>SCMS (Seri Kopya Yönetim Sistemi):</strong> Dijital eserin yalnızca bir defa kopyalanmasına izin veren teknik sistem</li>
+            <li>Eser sahibi FSEK m.13/2 uyarınca online sunumdan bağımsız olarak korunma kapsamında kalır</li>
+            <li>Eser sayısallaştırılsa da FSEK kuralları değişmez — aynı koruma uygulanır</li>
+          </ul>
+          <div class="sinav-notu">SCMS = Seri Kopya Yönetim Sistemi → yalnızca 1 kez kopyalamaya izin verir. Sınavda "teknik önlem" sorusu çıkabilir.</div>
+        </div>
+        <!-- EKSTRA: P2P, Napster/Kazaa, Uyar-Kaldır, MÖHUK, Alan Adı -->
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">Sıkıştırma Teknikleri ve P2P (Filesharing) <span class="badge badge-amber">Kavram Sorusu</span></div>
+          <ul class="topic-items">
+            <li><strong>Mp3:</strong> Alman Frauenhofen Enstitüsü tarafından geliştirildi → eserleri 10-12 kat küçültür → CD'ye 100-150 müzik parçası sığar</li>
+            <li><strong>DivX/DVD:</strong> Film eserleri için benzer sıkıştırma teknolojisi</li>
+            <li><strong>P2P (Peer to Peer) / Filesharing:</strong> Eser ve hak sahiplerinin haklarının en fazla ihlal edildiği alan</li>
+            <li>P2P programlar: Arama motoru + elektronik posta + dosya paylaşım fonksiyonlarının birleşimi</li>
+            <li><strong>Merkezi P2P:</strong> Napster (kapatılmadan önce 70 milyon kullanıcı)</li>
+            <li><strong>Merkezi olmayan P2P:</strong> Kazaa</li>
+            <li>Bu yüklemelerin hukuki niteliği: <strong>Çoğaltma (FSEK m.22)</strong> + <strong>Umuma İletim (FSEK m.25)</strong> → FSEK m.38 şahsi kullanım istisnasına girmez</li>
+          </ul>
+          <div class="sinav-notu">P2P ihlali = Çoğaltma + Umuma İletim. FSEK m.38 (şahsi kullanım) istisnası uygulanmaz çünkü sınırsız kişiyle paylaşım söz konusu.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--purple);">
+          <div class="topic-title">Napster ve Kazaa Davaları <span class="badge badge-amber">Sınavda Çıkabilir</span></div>
+          <ul class="topic-items">
+            <li><strong>Napster davası (ABD):</strong> Mahkeme → Napster'in iki aşamalı sorumluluğu var: (1) müşterek ihlal = korunan eserlerin izinsiz kullanılabileceğini bilerek sistemi kurdu; (2) dolaylı ihlal = kullanıcıları denetlemedi</li>
+            <li>Sonuç: Napster filtre sistemi uyguladı ama tatmin etmedi → paralı platforma dönüştü</li>
+            <li><strong>Kazaa davası (Hollanda):</strong> Merkezi olmayan sistem; ilk derece mahkeme kapatma kararı verdi → temyizde ihtiyati tedbir kaldırıldı + sistem işleticisi kullanıcı ihlallerinden sorumlu değil hükmü</li>
+            <li><strong>Platform işleticisinin sorumluluğu:</strong> Milyonlarca veriyi kontrol edemez → ihbar gelince kaldırma yükümlülüğü doğar</li>
+          </ul>
+          <div class="sinav-notu">Napster = merkezi, kapatıldı. Kazaa = merkezi olmayan. Platform işleticisi = kural olarak sorumlu değil, ihbar sonrası kaldırma yükümlülüğü var.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">FSEK ek-4 — Uyar-Kaldır Sistemi (Türk Hukuku) <span class="badge badge-red">Sınavda Çıkar</span></div>
+          <ul class="topic-items">
+            <li>Eser sahibi/bağlantılı hak sahiplerinin hakları dijital ortamda ihlal edilirse:</li>
+            <li><strong>1. Adım:</strong> Hak sahibi → içerik sağlayıcıya başvurur</li>
+            <li><strong>2. Adım:</strong> Başvurudan itibaren <strong>3 gün içinde</strong> içerikten çıkarma gerçekleştirilmeli</li>
+            <li><strong>3. Adım:</strong> İhlal devam ederse → <strong>Cumhuriyet başsavcısına</strong> başvuru</li>
+            <li><strong>4. Adım:</strong> Savcı <strong>3 gün içinde</strong> servis sağlayıcıdan ihlale devam eden bilgi içerik sağlayıcısına hizmetin durdurulmasını ister</li>
+            <li>İhlalin durdurulması → yeniden servis sağlanır</li>
+            <li>Bu usulün kullanılması → tazminat ve suç duyurusu haklarını ortadan kaldırmaz</li>
+          </ul>
+          <div class="sinav-notu">FSEK ek-4 uyar-kaldır: İçerik sağlayıcı → 3 gün. Savcıya → 3 gün. Bu iki 3 günlük süre sınav sorusu! Usulü kullanmak diğer hakları ortadan kaldırmaz.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">Fikri Hak İhlallerinde Uygulanacak Hukuk — MÖHUK m.23 <span class="badge badge-amber">Kavram Sorusu</span></div>
+          <ul class="topic-items">
+            <li>Bilişim ortamındaki fikri hak ihlallerinde çoğunlukla <strong>yabancılık unsuru</strong> bulunur</li>
+            <li><strong>MÖHUK m.23:</strong> Fikri mülkiyete ilişkin hakların korunmasında → <strong>koruma talep edilen ülke hukuku (lex loci protectionis)</strong> uygulanır</li>
+            <li>Taraflar ihlalden sonra <strong>mahkemenin hukukunun</strong> uygulanmasını da kararlaştırabilir</li>
+            <li>Ülkesellik prensibi temel = koruma her ülkenin kendi hukukuna göre</li>
+            <li>Türk mahkemesinin kararının yurt dışında icrası → ayrı konu: tanıma ve tenfiz rejimine tabi</li>
+          </ul>
+          <div class="sinav-notu">Fikri hak ihlali → hangi ülkede koruma talep ediliyorsa o ülke hukuku. Bu = lex loci protectionis ilkesi. MÖHUK m.23.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">Bir Alan Adı Üzerinde Yarışan Hak Sahipliği <span class="badge badge-amber">Kavram Sorusu</span></div>
+          <ul class="topic-items">
+            <li>Aynı isim → birden fazla kişide olabilir (gerçek dünyada); alan adında sadece bir tane olabilir</li>
+            <li><strong>"İlk gelen ilk alır" prensibi</strong> — her zaman hakkaniyetli değil</li>
+            <li>Çözüm: Önce <strong>yanıltma tehlikesi</strong> irdelenir; sonra <strong>öncelik ilkesi</strong> değerlendirilir</li>
+            <li>Üstün/öncelikli hak varsa → öncelik prensibine göre değil, <strong>üstün hak prensibine</strong> göre tahsis</li>
+            <li>Alan adı alanın iyi niyet kurallarına aykırı davranmaması şart (MK m.2)</li>
+            <li>Uyuşmazlık çözümü: (1) Türk mahkemesi → tanıma-tenfiz, (2) Doğrudan Virjinya'da dava, (3) <strong>WIPO tahkim usulü</strong></li>
+          </ul>
+          <div class="sinav-notu">Alan adı uyuşmazlığında WIPO tahkimi en bilinen çözüm yolu. "İlk gelen ilk alır" = her zaman geçerli değil. Üstün hak sahibi varsa önce o.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--amber);">
+          <div class="topic-title">Ticaret Unvanı ve İşletme Adının Alan Adına Karşı Korunması</div>
+          <ul class="topic-items">
+            <li>TTK: Tacirler ticaret unvanını seçmek ve kullanmak zorundadır</li>
+            <li>Türkiye'de tescil ve ilan edilmiş bir unvanın/işletme adının başkası tarafından alınması mümkün değil</li>
+            <li>Haksız alan adı kullanımı → TTK m.50 (ticaret unvanı inhisar hakkı) + TTK m.52 (terkin + tazminat) kapsamında</li>
+            <li>TTK'da MarKHK m.9 gibi alan adına karşı özel koruma maddesi yok — ancak genel hükümler uygulanır</li>
+            <li>Başkasının aldığı alan adı → marka olarak tescil edilirse → MarKHK m.42 hükümsüzlük davası açılabilir</li>
+          </ul>
+          <div class="sinav-notu">TTK = ticaret unvanı koruma; özel alan adı maddesi yok. MarKHK m.9 = tescilli markalara alan adında koruma. Hükümsüzlük davası = MarKHK m.42.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ÜNİTE 8 -->
+<div class="page" id="page-unite8">
+  <div class="page-header">
+    <div class="page-title">Ünite 8 — Dijital Haklar ve Kişisel Veri</div>
+    <div class="page-desc">KVKK · Yalnız Bırakılma Hakkı · Kuşak Hakları · Unutulma Hakkı</div>
+  </div>
+  <div style="padding:28px;">
+    <div class="grid g2">
+      <div>
+        <div class="unit-header">
+          <div class="unit-number" style="background:var(--purple);">8</div>
+          <div>
+            <div style="font-size:15px;font-weight:700;">Kuşak Hakları — Ezber Tablosu</div>
+            <div style="font-size:12px;color:var(--text3);">Her yıl çıkan konu</div>
+          </div>
+        </div>
+        <div class="topic-card" style="border-color:var(--purple);">
+          <div class="topic-title">Kuşak Sınıflaması <span class="badge badge-red">Her Yıl Çıkıyor!</span></div>
+          <ul class="topic-items">
+            <li><strong>1. Kuşak:</strong> Medeni ve siyasi haklar — devletin karışmama ödevi (yaşam, özgürlük, düşünce, inanç, konut dokunulmazlığı)</li>
+            <li><strong>2. Kuşak:</strong> Sosyal ve ekonomik haklar — devletin hizmet sağlama ödevi (sağlık, eğitim, çalışma, sosyal güvenlik)</li>
+            <li><strong>3. Kuşak:</strong> Dayanışma hakları — tüm toplumu ilgilendirir (çevre, gelişme, barış, tüketici hakları)</li>
+            <li><strong>4. Kuşak:</strong> Bilişim teknolojisinin insan onuruna yönelik tehlikelere karşı haklar</li>
+            <li><strong>Kişisel Verilerin Korunması Hakkı: 4. Kuşak</strong></li>
+            <li><strong>Unutulma Hakkı: 4. Kuşak</strong></li>
+            <li><strong>İnternete Erişim Hakkı: 4. Kuşak</strong> (3. kuşağın gelişme hakkının uzantısı)</li>
+            <li>Üç kuşak haklar teorisinin kurucusu: <strong>Karel Vasak</strong></li>
+          </ul>
+          <div class="sinav-notu">⚠ KRİTİK: Kişisel veriler + Unutulma + İnternet erişimi = 4. KUŞAK! Ders kitabı Bölüm 8'de "dördüncü kuşak haklar" başlığı altında inceleniyor. Karel Vasak üç kuşak teorisini kurdu; 4. kuşak sonradan bilişim çağına özgü eklendi.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">Yalnız Bırakılma Hakkı <span class="badge badge-amber">3 Yılda 3 Kez Çıktı</span></div>
+          <ul class="topic-items">
+            <li>Geliştirenler: <strong>Warren ve Brandeis</strong> (1890)</li>
+            <li>Mahremiyet hakkının temel kaynağı</li>
+            <li>Bireysel özerkliği ve kişisel alana müdahalesizliği vurgular</li>
+          </ul>
+          <div class="sinav-notu">Warren VE Brandeis — Tapscott değil, Prosser değil, Rachels değil!</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">Bilgilerin Geleceğini Belirleme Hakkı</div>
+          <ul class="topic-items">
+            <li>Türeten: <strong>Alman Anayasa Mahkemesi</strong></li>
+            <li>Kişisel verilerin işlenmesine itiraz hakkının temeli</li>
+          </ul>
+          <div class="sinav-notu">Alman Anayasa Mahkemesi türetti. ABD Yüksek Mahkemesi değil!</div>
+        </div>
+      </div>
+      <div>
+        <div class="unit-header" style="margin-top:56px;">
+          <div class="unit-number" style="background:var(--green);">8</div>
+          <div>
+            <div style="font-size:15px;font-weight:700;">KVKK ve Kişisel Veri</div>
+            <div style="font-size:12px;color:var(--text3);">6698 Sayılı Kanun</div>
+          </div>
+        </div>
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">Kişisel Verilerin İşlenmesi Tanımı <span class="badge badge-amber">Boşluk Sorusu</span></div>
+          <ul class="topic-items">
+            <li>Toplama, kaydetme, düzenleme, saklama, uyarlama veya değiştirme, geri alma, danışma, kullanma, ileti ile açığa çıkarma, yayma, sıraya koyma, birleştirme, engelleme, silme, yok etme</li>
+            <li>Bu işlemlerin tamamına: <strong>Kişisel Verilerin İşlenmesi</strong> denir</li>
+          </ul>
+        </div>
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">KVKK — İlk Düzenleme Tarihi</div>
+          <ul class="topic-items">
+            <li>Dünyada ilk kişisel veri koruma kanunu: 1970 — <strong>Almanya</strong> (Hessen eyaleti)</li>
+            <li>Türkiye Anayasası m.20/son fıkra ekleme yılı: <strong>2010</strong></li>
+            <li>BM interneti temel insan hakkı ilan ettiği yıl: <strong>2011</strong></li>
+          </ul>
+          <div class="sinav-notu">1970 Almanya = ilk kişisel veri yasası. Rusya/ABD/İngiltere değil!</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--amber);">
+          <div class="topic-title">Kişisel Verileri Koruma Kurulu — Yapısı <span class="badge badge-amber">Sınavda Çıkıyor</span></div>
+          <ul class="topic-items">
+            <li>Toplam üye sayısı: <strong>9 üye</strong></li>
+            <li>TBMM tarafından seçilen üye sayısı: <strong>5</strong></li>
+            <li>Cumhurbaşkanı tarafından seçilen üye sayısı: <strong>4</strong></li>
+            <li>Kurulun görevleri: Düzenleyici işlem yapmak, yaptırım kararı vermek, şikayetleri incelemek</li>
+            <li>Hiçbir organ/makam/merci Kurula emir ve talimat veremez → bağımsız yapı</li>
+          </ul>
+          <div class="sinav-notu">KVKK Kurulu: 9 toplam → 5 TBMM + 4 Cumhurbaşkanı. Sınavda "TBMM'den kaç üye?" → 5. "Toplam kaç üye?" → 9.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">Unutulma Hakkı Tanımı</div>
+          <ul class="topic-items">
+            <li>Bireyin dijital hafızada yer alan kişisel verilerinin kendi talebi üzerine <strong>bir daha geri getirilemeyecek şekilde</strong> ortadan kaldırılması</li>
+            <li>Üstün kamu yararı olmadıkça dijital bellekteki geçmiş olayların unutulmasını isteme hakkı</li>
+            <li><strong>Pozitif yön:</strong> Bireyin üçüncü şahısları kişisel verilerini silmeye zorlama hakkı</li>
+            <li><strong>Negatif yön:</strong> Rahatsız edici verilerin bir daha geri getirilemeyecek şekilde ortadan kaldırılması</li>
+            <li>İfade özgürlüğü / basın özgürlüğü ile çatışabilir → denge kurulması gerekir</li>
+          </ul>
+          <div class="sinav-notu">Anahtar kelime: "dijital hafıza + kalıcı silme" → Unutulma Hakkı. Pozitif yön = silme talebi hakkı. Negatif yön = geri getirilememesi.</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">Unutulma Hakkı — Normatif Dayanak <span class="badge badge-red">Sınavda Çıkar</span></div>
+          <ul class="topic-items">
+            <li>GDPR (2016/679/EU) m.17 — ilk kez yazılı olarak düzenlendi (25.05.2018'de yürürlük)</li>
+            <li>GDPR öncesi: Normatif dayanağı olmayan yargı içtihatlarıyla tanınan haktı</li>
+            <li>95/46/EC sayılı Direktif kapsamında inceleniyordu</li>
+            <li>Türkiye: 6698 sayılı KVKK, 95/46/EC Direktif esas alınarak hazırlandı</li>
+            <li>Türkiye Anayasası m.20/3 ekleme yılı: 2010</li>
+          </ul>
+          <div class="sinav-notu">GDPR = 2016 tarihli, 2018'de yürürlük. Türkiye KVKK = 6698 sayılı kanun. Normatif dayanak = GDPR m.17.</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">ABAD Kararları — Unutulma Hakkı <span class="badge badge-amber">Çıkması Yüksek</span></div>
+          <ul class="topic-items">
+            <li><strong>Google/Unutulma Hakkı Kararı:</strong> Arama motorlarının bireyin talebi üzerine eski bağlantıları kaldırması gerektiği kabul edildi</li>
+            <li><strong>İrlanda Dijital Haklar Kararı (2014):</strong> 2006/24/EC Veri Saklama Direktifi geçersiz ilan edildi — çünkü makul suç şüphesi olmaksızın veri saklama öngörüyordu</li>
+            <li><strong>Schrems Kararı (2015):</strong> AB-ABD Güvenli Liman Anlaşması geçersiz ilan edildi — NSA gözetimleri nedeniyle ABD yeterli koruma sağlamıyordu</li>
+          </ul>
+          <div class="sinav-notu">3 önemli ABAD kararı: Google/Unutulma, İrlanda Direktif iptali, Schrems/Güvenli Liman iptali. Her biri kişisel veri koruması için dönüm noktası!</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--amber);">
+          <div class="topic-title">Türkiye AYM — N.B.B. Bireysel Başvuru Kararı</div>
+          <ul class="topic-items">
+            <li>Başvurucu: 1998-1999'da uyuşturucu nedeniyle para cezasına ilişkin haberler internet arşivinde kalmış</li>
+            <li>AYM: Anayasa m.17 kapsamında şeref ve itibarın korunması hakkının ihlali kararı verdi</li>
+            <li>Gerekçe: Haber güncelliğini yitirmiş, kamu yararı kalmamış</li>
+            <li>İfade özgürlüğü ile kişilik hakkı arasında denge kurulması zorunlu</li>
+          </ul>
+          <div class="sinav-notu">AYM → Anayasa m.17 (kişi onuru/itibar) ihlali = unutulma hakkı koruması. Haber arşivde kalabilir ama erişimi engelleme istenebilir.</div>
+        </div>
+
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">AB Temel Haklar Şartı m.8</div>
+          <ul class="topic-items">
+            <li>Kişisel verilerin korunması hakkını ayrı bir maddeyle düzenleyen belge</li>
+            <li>"Herkes kendisini ilgilendiren kişisel verilerinin korunması hakkına sahiptir"</li>
+            <li>Bağımsız makam denetimi şartı da içerir</li>
+          </ul>
+          <div class="sinav-notu">Bu hakkı AYRI MADDEYLE düzenleyen = AB Temel Haklar Şartı. AİHS ve BM sözleşmesi değil!</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:20px;">
+      <button class="btn btn-primary" onclick="showQuizByUnit(8)">Ünite 8 Sorularını Çöz</button>
+    </div>
+  </div>
+  <!-- EKSİK KONULAR — PDF'DEN EKLENDİ -->
+  <div style="padding:0 28px 28px;">
+    <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+      <span style="background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.3);padding:3px 10px;border-radius:20px;font-size:11px;font-family:var(--mono);">PDF'DEN EKLENDİ</span>
+      Son Gelişmeler — Eksik Detaylar
+    </div>
+    <div class="grid g2">
+      <div>
+        <div class="topic-card" style="border-color:var(--purple);">
+          <div class="topic-title">Kuşak Haklar — Detaylı Örnekler <span class="badge badge-red">Her Yıl Çıkıyor</span></div>
+          <ul class="topic-items">
+            <li><strong>1. Kuşak — Örnekler:</strong> Yaşam hakkı, kişi dokunulmazlığı, kişi özgürlüğü, düşünceyi açıklama özgürlüğü, inanç ve ibadet özgürlüğü, konut dokunulmazlığı</li>
+            <li><strong>2. Kuşak — Örnekler:</strong> Toplu sözleşme hakkı, dinlenme hakkı, sosyal güvenlik hakkı, sağlık hakkı, yaşlı/engelli/çocukların korunması</li>
+            <li><strong>3. Kuşak — Örnekler:</strong> Çevre hakkı, gelişme hakkı, barış hakkı, insanlığın ortak mal varlığına saygı hakkı, tüketici hakları</li>
+            <li>3. kuşak haklar: "Kim hak sahibi, kim ödev sahibi?" sorusunun cevabı belirsiz → eleştiri konusu</li>
+            <li><strong>İnternete erişim hakkı:</strong> 3. kuşakta (gelişme hakkının uzantısı) kabul edilir, ancak BM 2011 raporu ile ayrı hak olarak da tanınmıştır</li>
+          </ul>
+          <div class="sinav-notu">İnternete erişim = 3. kuşak (gelişme hakkı uzantısı) veya 4. kuşak. BM 2011'de temel insan hakkı ilan etti. Soru: "İnternete erişim hakkını ilan eden?" → BM, 2011.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">Dördüncü Kuşak Hakların Ortaya Çıkış Nedeni</div>
+          <ul class="topic-items">
+            <li>Bilişim teknolojisinin gelişmesiyle kişisel verilerin toplanması/saklanması/paylaşılması kolaylaştı</li>
+            <li>Kişinin faaliyetleri günün her saatinde izlenebilir, alışkanlıkları öğrenilebilir hale geldi</li>
+            <li>Bu tehlikelere karşı <strong>insan onurunu korumak</strong> için yeni haklar gerekti</li>
+            <li>Anayasa m.5 (devletin temel amacı: insanın gelişmesi) ve m.17 (maddi/manevi varlık hakkı) → 4. kuşak hakların anayasal dayanağı</li>
+            <li><strong>2010 Anayasa değişikliği:</strong> m.20/3 eklendi → kişisel verilerin korunması hakkı anayasal güvenceye bağlandı</li>
+          </ul>
+          <div class="sinav-notu">2010 referandumu → Anayasa m.20/3 eklendi → kişisel veri koruması anayasaya girdi. Bu tarih sınavda çıkar!</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">Unutulma Hakkının Pozitif ve Negatif Yönü</div>
+          <ul class="topic-items">
+            <li><strong>Pozitif yön:</strong> Bireyin üçüncü kişileri kişisel verilerini silmeye <em>zorlaması</em> hakkı (aktif talep)</li>
+            <li><strong>Negatif yön:</strong> Rahatsız edici verilerin bir daha geri getirilemeyecek şekilde ortadan kaldırılması (kalıcı silme)</li>
+            <li>İnternetsiz dönemde: Unutmak/unutulmak esas, hatırlamak istisnaydi</li>
+            <li>İnternet: İstisnayı esas yaptı → haber yıllarca arama motorlarında erişilebilir kaldı</li>
+            <li>Hak talebi: Üstün kamu yararı olmadıkça güncelliğini yitirmiş haberler için kullanılabilir</li>
+          </ul>
+          <div class="sinav-notu">Pozitif = silmeye zorlama. Negatif = geri getirilememesi. Bu fark sınavda "pozitif yönü nedir?" şeklinde çıkabilir.</div>
+        </div>
+      </div>
+      <div>
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">ABAD Kararları — 3 Kritik Karar <span class="badge badge-red">Sınavda Çıkar</span></div>
+          <ul class="topic-items">
+            <li><strong>1. Google/Unutulma Hakkı Kararı:</strong> Arama motorları, bireyin talebi üzerine eski bağlantıları kaldırmak zorundadır. Unutulma hakkını ilk kez net biçimde tanıyan karar.</li>
+            <li><strong>2. İrlanda Dijital Haklar Kararı (2014):</strong> 2006/24/EC Veri Saklama Direktifi geçersiz ilan edildi. Gerekçe: Makul suç şüphesi olmaksızın toplu veri saklama öngörüyordu → temel haklara orantısız müdahale.</li>
+            <li><strong>3. Schrems Kararı (2015):</strong> AB-ABD Güvenli Liman Anlaşması geçersiz ilan edildi. Gerekçe: NSA gözetim programları nedeniyle ABD yeterli koruma sağlamıyordu.</li>
+          </ul>
+          <div class="sinav-notu">Soru: "AB-ABD Güvenli Liman Anlaşmasını geçersiz ilan eden karar?" → Schrems, 2015. "Toplu veri saklama direktifini iptal eden?" → İrlanda Dijital Haklar, 2014.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--amber);">
+          <div class="topic-title">Türkiye'de Unutulma Hakkı Kararları</div>
+          <ul class="topic-items">
+            <li><strong>AYM N.B.B. Kararı:</strong> Başvurucu 1998-99'da uyuşturucu nedeniyle para cezası almıştı; haber internet arşivinde kaldı. AYM: Anayasa m.17 (şeref ve itibar) ihlali kararı verdi. Gerekçe: Haber güncelliğini yitirdi, kamu yararı kalmadı.</li>
+            <li><strong>HGK Kararı:</strong> Yargıtay Hukuk Genel Kurulu da unutulma hakkını açıkça tanıdı</li>
+            <li>İfade özgürlüğü ↔ Kişilik hakkı dengesi her olayda ayrıca kurulmalıdır</li>
+            <li>GDPR m.17 = unutulma hakkının ilk yazılı normatif dayanağı (yürürlük: 25.05.2018)</li>
+            <li>Türkiye KVKK (6698 sayılı) = 95/46/EC Direktifini esas alarak hazırlandı</li>
+          </ul>
+          <div class="sinav-notu">AYM → m.17 (şeref/itibar) ihlali. Anayasa m.20/3 değil, m.17! Normatif dayanak = GDPR m.17 (2018 yürürlük).</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">Bilişim Hukukunun Yakın Geleceği — Ek Konular</div>
+          <ul class="topic-items">
+            <li><strong>Bulut Bilişim (Cloud Computing):</strong> Sözleşme kurulması, veri gizliliği, veri mülkiyeti, sorumluluğun tespiti sorunları</li>
+            <li><strong>Nesnelerin İnterneti (IoT):</strong> Benzersiz adreslenebilir nesneler → arama, kopyalama, elkoyma tedbirlerinin yeterliliği sorunu</li>
+            <li><strong>Yapay Zekâ (AI):</strong> Bilişim sistemlerinde yapılan işlemlerden doğan hukuki ve cezai sorumluluk tartışması</li>
+            <li>Bu konular ders kitabında son bölümde "gelecekteki sorunlar" olarak ele alınmış</li>
+          </ul>
+          <div class="sinav-notu">Sınav sorusu: "Nesnelerin interneti nedir?" → Benzersiz adreslenebilir nesnelerin belirli protokolle iletişim kurduğu ağ. IoT tanımı boşluk sorusu olabilir.</div>
+        </div>
+        <!-- EKSTRA: GDPR hedefleri, kişisel veri ilkeleri, Google kararı özet, HGK, 5651 m.9 değişiklik -->
+        <div class="topic-card" style="border-color:var(--purple);">
+          <div class="topic-title">GDPR (2016/679/EU) — Temel Bilgiler <span class="badge badge-red">Sınavda Çıkar</span></div>
+          <ul class="topic-items">
+            <li><strong>Tam adı:</strong> Gerçek Kişilere Dair Kişisel Verilerin İşlenmesine ve 95/46/EC sayılı Direktifin Kaldırılmasına Dair Regülasyon</li>
+            <li><strong>Onay tarihi:</strong> 14.04.2016 (AB Parlamentosu)</li>
+            <li><strong>Yayın tarihi:</strong> 04.05.2016 (AB Resmi Gazetesi)</li>
+            <li><strong>Yürürlük tarihi:</strong> 25.05.2018</li>
+            <li>173 paragraflık resital (başlangıç bölümü) + 99 maddeden oluşur</li>
+            <li><strong>m.17:</strong> Unutulma hakkı (silinme hakkı) — ilk kez yazılı olarak düzenlendi</li>
+            <li>95/46/EC sayılı Direktifi <strong>tamamen kaldırdı</strong> ve ikame etti</li>
+            <li>Türkiye KVKK (6698 s.K.) = 95/46/EC esas alınarak hazırlandı</li>
+          </ul>
+          <div class="sinav-notu">GDPR = 2016/679/EU. Yürürlük: 25.05.2018. 173 resital + 99 madde. m.17 = unutulma hakkı. Bu tarihleri ezberle!</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">GDPR'ın Hedefleri ve ABAD Kararlarının Arka Planı <span class="badge badge-amber">Bilgi Sorusu</span></div>
+          <ul class="topic-items">
+            <li><strong>Hedef 1:</strong> Yeni teknolojiler karşısında kişisel verilerin etkili korunması için AB hukuku iyileştirilmesi</li>
+            <li><strong>Hedef 2:</strong> Bireysel hakların güçlendirilmesi + kişisel verilerin serbest akışı için bürokratik süreçlerin azaltılması</li>
+            <li><strong>Hedef 3:</strong> AB hukuku kurallarına netlik ve tutarlılık kazandırılması</li>
+            <li><strong>Hedef 4:</strong> Tüm AB faaliyet alanında kişisel verilerin etkin korunması</li>
+            <li><strong>Edward Snowden (2013):</strong> NSA gözetim skandalı → Google, Facebook, Apple dahil milyonlarca kullanıcının verisi → GDPR'ı hızlandırdı</li>
+            <li><strong>İrlanda Dijital Haklar Kararı (ABAD 2014):</strong> 2006/24/EC Veri Saklama Direktifini geçersiz ilan etti — makul suç şüphesi olmaksızın veri saklama = temel hak ihlali</li>
+            <li><strong>Schrems Kararı (ABAD 2015):</strong> AB-ABD Güvenli Liman Anlaşması geçersiz — NSA gözetimi nedeniyle ABD yeterli koruma sağlamıyor</li>
+          </ul>
+          <div class="sinav-notu">Snowden 2013 → GDPR süreci hızlandı. İrlanda Kararı = Veri Saklama Direktifi iptal. Schrems = Güvenli Liman iptal. Tarihler: 2014, 2015.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">Kişisel Verilerin İşlenmesi Temel İlkeleri (5 İlke) <span class="badge badge-red">Sınavda Çıkar</span></div>
+          <ul class="topic-items">
+            <li><strong>1. Adil ve Yasal İşleme:</strong> Kişisel veriler adil ve yasalara uygun şekilde işlenir</li>
+            <li><strong>2. Amaç ile Sınırlılık:</strong> Kesin, belirlenmiş ve meşru amaçlarla toplanır; ilk amaç dışında kullanılmaz</li>
+            <li><strong>3. İlgililik ve Orantılılık:</strong> Toplama ve işleme amaçları için yeterli, ilgili ve aşırı olmayan veriler</li>
+            <li><strong>4. Doğruluk ve Güncellik:</strong> Veriler güncel ve doğru tutulur; yanlış/eksik veri silinir veya düzeltilir</li>
+            <li><strong>5. Süreyle Sınırlılık:</strong> Toplama ve işleme amacından daha uzun süre saklanmaz</li>
+          </ul>
+          <div class="sinav-notu">5 ilke: Adil/Yasal → Amaçla Sınırlı → Orantılı → Doğru/Güncel → Süreli. Bu ilkelere aykırılık = veri öznesi silme/düzeltme talep edebilir.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">Kişisel Verilerin İşlenmesinin Şartları (6 Şart) <span class="badge badge-amber">Sınavda Çıkabilir</span></div>
+          <ul class="topic-items">
+            <li><strong>1.</strong> İlgili kişinin <strong>açık rızası</strong></li>
+            <li><strong>2.</strong> Taraf olunan <strong>sözleşmenin ifası</strong> için gerekli olması</li>
+            <li><strong>3.</strong> Veri sorumlusunun <strong>yasal yükümlülüğü</strong> nedeniyle gerekli olması</li>
+            <li><strong>4.</strong> İlgili kişinin <strong>hayati çıkarlarını</strong> korumak için gerekli olması</li>
+            <li><strong>5.</strong> <strong>Kamu yararı</strong> için yapılan faaliyet veya kamu yetkisi kullanımı için gerekli olması</li>
+            <li><strong>6.</strong> Veri sorumlusu veya üçüncü tarafın <strong>meşru menfaatleri</strong> için gerekli olması (ilgili kişinin hakları ağır basmadıkça)</li>
+          </ul>
+          <div class="sinav-notu">6 şartten herhangi birinin varlığı yeterli. Rıza tek yol değildir! "Meşru menfaat" şartı = ifade özgürlüğü/haber verme amacı buraya girer.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">ABAD Google/Unutulma Hakkı Kararı — 7 Temel Sonuç <span class="badge badge-red">Sınavda Çıkar</span></div>
+          <ul class="topic-items">
+            <li><strong>1.</strong> Arama motoru faaliyeti = kişisel verilerin işlenmesi; arama motoru işletmecisi = veri sorumlusu</li>
+            <li><strong>2.</strong> Şirket merkezi AB dışında olsa da, AB'de şube varsa Direktif/GDPR uygulanır</li>
+            <li><strong>3.</strong> Bireyler mahremiyet hakkından tam yararlanmak için arama motoruna <strong>doğrudan başvurabilir</strong> — web sitesi sahibine başvurmak şart değil</li>
+            <li><strong>4.</strong> İlgili kişi, kendi hakkında <strong>gerçek bilgiler içeren</strong> linklerin kaldırılmasını da talep edebilir</li>
+            <li><strong>5.</strong> Kişinin genel olarak <strong>geçmişiyle bağlı kalmama hakkı</strong> mevcuttur — zarar görmek şart değil</li>
+            <li><strong>6.</strong> Kişisel verilerin yayınlanmasının <strong>hukuka aykırı olması gerekmez</strong> — zaman içinde ilgisiz hale gelen veri de kaldırılabilir</li>
+            <li><strong>7.</strong> Kamu hayatında önemli rol veya üstün kamu yararı varsa unutulma hakkı geri planda kalır; aksi halde arama motoru makul tedbirlerle hakkı sağlamalıdır</li>
+          </ul>
+          <div class="sinav-notu">En önemli: Doğru bilgi bile kaldırılabilir (4. sonuç). Web sitesine başvurmak şart değil (3. sonuç). Zarar görmek şart değil (5. sonuç). Bunlar sınav tuzağı sorularıdır!</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--amber);">
+          <div class="topic-title">HGK Unutulma Hakkı Kararı — Ayrıntılar <span class="badge badge-amber">Sınavda Çıkabilir</span></div>
+          <ul class="topic-items">
+            <li><strong>Olay:</strong> 2006'da cinsel saldırı mağduru davacı, 2009'da Yargıtay kararı onanmış; isim rumuzlanmaksızın 2010'da bir ceza hukuku kitabında aynen yayınlandı</li>
+            <li><strong>Yargıtay 4. HD görüşü:</strong> Bilimsel özgürlük kapsamında yayın hukuka uygun → reddet</li>
+            <li><strong>HGK kararı:</strong> Direnme kararını HAKLI buldu → yayın hukuka aykırı</li>
+            <li><strong>Gerekçe:</strong> Mağdurun kimlik bilgilerinin verilmesi bilimsel içeriğe hiçbir katkı sağlamıyor = orantısız müdahale</li>
+            <li><strong>HGK'nın katkısı:</strong> Unutulma hakkı sadece dijital ortamda değil, <strong>kamunun kolayca ulaşabileceği HER TÜRLÜ kişisel veri</strong> için geçerlidir (offline da dahil)</li>
+            <li>Bu = diğer yargı organlarından (ABAD ve AYM) farklı: offline kişisel verilere de hak tanınması</li>
+          </ul>
+          <div class="sinav-notu">HGK'nin farkı: Unutulma hakkı = sadece dijital değil, offline veriler için de geçerli. Kitaptaki isim bile kaldırılabilir. AYM ve ABAD sadece dijital bağlamda inceledi.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--green);">
+          <div class="topic-title">AYM N.B.B. Kararının Değerlendirme Kriterleri <span class="badge badge-amber">Sınavda Çıkabilir</span></div>
+          <ul class="topic-items">
+            <li>Unutulma hakkı bağlamında internet haberinin kaldırılabilmesi için AYM kriterleri:</li>
+            <li><strong>1. Yayının içeriği:</strong> Haberin konusu kamu yararı taşıyor mu?</li>
+            <li><strong>2. Süre:</strong> Haber arşivde ne kadar kaldı, güncelliğini yitirdi mi?</li>
+            <li><strong>3. Tarihsel değer:</strong> Haber tarihi veri/araştırma için değerli mi?</li>
+            <li><strong>4. Kişinin statüsü:</strong> Habere konu kişi siyasi/medyatik figür mü (kamuoyuna mal olmuş kişi)?</li>
+            <li><strong>5. Kamu yararı:</strong> Habere erişimde toplumsal açıdan güncel bir yarar var mı?</li>
+            <li>Bu kriterler her somut olay için ayrıca değerlendirilmeli</li>
+            <li>Tedbir: Haberin tamamı silinemez; <strong>kişisel veri silinmesi, anonim hale getirme, kısmi erişim engeli</strong> gibi ölçülü yöntemler tercih edilmeli</li>
+          </ul>
+          <div class="sinav-notu">AYM ölçülülük ilkesi: Haber tamamen silinemez → kişisel veri sil veya anonim yap. Bu 5 kriter sınavda "AYM hangi kriterleri değerlendirdi?" sorusuna cevap.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--teal);">
+          <div class="topic-title">5651 m.9'da 2014 Değişiklikleri (6518 sayılı Kanun) <span class="badge badge-red">Sınavda Çıkar</span></div>
+          <ul class="topic-items">
+            <li><strong>Değişiklik öncesi sorunlar:</strong> (1) İçerik/yer sağlayıcıya önce başvurma zorunluluğu; (2) Kesinleşmiş mahkeme kararı olmadan içerik kaldırılmıyordu; (3) Aynı haber farklı sitelerde çoğalıyordu</li>
+            <li><strong>6518 ile getirilen yenilikler:</strong></li>
+            <li>→ İçerik/yer sağlayıcıya önce başvurma zorunluluğu <strong>kaldırıldı</strong> — doğrudan sulh ceza hakimine başvurulabilir</li>
+            <li>→ İçerik/yer sağlayıcı taleplere <strong>24 saat içinde</strong> cevap vermek zorunda</li>
+            <li>→ Aynı yayın başka internet adreslerinde de çıkarsa → ESB'ye müracaatla <strong>mevcut karar bu adreslere de uygulanır</strong> (yeni karar almaya gerek yok)</li>
+          </ul>
+          <div class="sinav-notu">2014 değişikliği: Artık önce içerik sağlayıcıya gitme zorunluluğu yok. Aynı haber farklı sitede = ESB'ye bildir → mevcut karar işler. Bu değişiklikler sınavda çıkar!</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--red);">
+          <div class="topic-title">GDPR m.17 — Unutulma Hakkının İçeriği ve İstisnaları <span class="badge badge-red">Sınavda Çıkar</span></div>
+          <ul class="topic-items">
+            <li><strong>Silme talep edilebilecek haller:</strong></li>
+            <li>→ Veriler artık toplanma amacıyla bağlantılı ve gerekli değil</li>
+            <li>→ Veri süjesi rızasını geri çekti ve başka hukuki dayanak yok</li>
+            <li>→ Veri süjesi işlemeye itiraz etti ve üstün meşru sebep yok</li>
+            <li>→ Veriler hukuka aykırı işlendi</li>
+            <li>→ Yasal bir yükümlülük nedeniyle silme zorunlu (mahkeme kararı vb.)</li>
+            <li><strong>Silmeden imtina edilebilecek haller (istisnalar):</strong></li>
+            <li>→ İfade özgürlüğünün korunması</li>
+            <li>→ Kamusal sağlığı ilgilendiren kamu yararı</li>
+            <li>→ Tarihsel, istatistiksel veya bilimsel amaçlar</li>
+            <li>→ AB veya üye devlet mevzuatının gerektirdiği saklama zorunluluğu</li>
+          </ul>
+          <div class="sinav-notu">Bilimsel amaç + ifade özgürlüğü + kamu yararı = unutulma hakkını sınırlar. Bu istisnalar sınavda "hangi halde silinemez?" sorusuyla gelir.</div>
+        </div>
+        <div class="topic-card" style="border-color:var(--accent);">
+          <div class="topic-title">Unutulma Hakkı — Türk Mevzuatındaki Dayanaklar <span class="badge badge-amber">Sınavda Çıkabilir</span></div>
+          <ul class="topic-items">
+            <li>Türkiye'de spesifik bir "unutulma hakkı" kanunu/maddesi yok</li>
+            <li><strong>Anayasal dayanak:</strong> m.2 (hukuk devleti), m.5 (devletin temel amacı), m.17 (manevi varlık), m.20 (özel hayat gizliliği + m.20/3 kişisel veri), m.21, m.22, m.24, m.25</li>
+            <li><strong>Kanuni dayanak (en önemli):</strong> 5651 sayılı Kanun m.9 (kişilik hakkı ihlali → içerik kaldırma + erişim engeli)</li>
+            <li><strong>Diğer kanallar:</strong> 6698 KVKK m.7 (kişisel veri silme), m.11 (düzeltme talebi); TMK m.23-25 (kişiliğin korunması); TBK m.49 vd. (haksız fiil)</li>
+            <li><strong>Sınırlılık:</strong> 5651 m.9 → yalnızca yurt içi içerik/yer sağlayıcılara uygulanır; Facebook/Twitter gibi yurt dışı platformlar için sınırlı</li>
+          </ul>
+          <div class="sinav-notu">En önemli ulusal dayanak = 5651 m.9. KVKK m.7 de destekleyici. Yurt dışı platformlara uygulama sorunu devam ediyor → Türkiye'nin çözüm çağrısı: irtibat bürosu açılması.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ PAGE -->
+<div class="page" id="page-quiz">
+  <div class="page-header">
+    <div class="page-title">Soru Çöz</div>
+    <div class="page-desc">Çıkmış sorular · Yanlış yaptığında açıklama ile öğren</div>
+  </div>
+  <div style="padding:28px;">
+    <div id="quiz-start-screen">
+      <div class="tabs">
+        <div class="tab active" onclick="selectQuizMode('all')">Tüm Sorular</div>
+        <div class="tab" onclick="selectQuizMode(5)">Ünite 5</div>
+        <div class="tab" onclick="selectQuizMode(6)">Ünite 6</div>
+        <div class="tab" onclick="selectQuizMode(7)">Ünite 7</div>
+        <div class="tab" onclick="selectQuizMode(8)">Ünite 8</div>
+      </div>
+      <div class="grid g3" style="margin-bottom:24px;">
+        <div class="card" style="text-align:center;">
+          <div style="font-size:32px;margin-bottom:8px;">📋</div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Çıkmış Sorular</div>
+          <div style="font-size:12px;color:var(--text3);margin-bottom:16px;">3 yılın tüm soruları</div>
+          <button class="btn btn-primary btn-sm" onclick="startQuiz('cikmis')">Başla</button>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:32px;margin-bottom:8px;">🎯</div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Tahmini Sorular</div>
+          <div style="font-size:12px;color:var(--text3);margin-bottom:16px;">Kitap analizine dayalı</div>
+          <button class="btn btn-ghost btn-sm" onclick="startQuiz('tahmini')">Başla</button>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:32px;margin-bottom:8px;">🔀</div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Karışık (60 Soru)</div>
+          <div style="font-size:12px;color:var(--text3);margin-bottom:16px;">Hepsi karışık</div>
+          <button class="btn btn-ghost btn-sm" onclick="startQuiz('all')">Başla</button>
+        </div>
+      </div>
+    </div>
+    <div id="quiz-area" style="display:none;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:gap;">
+        <div>
+          <span id="q-progress-text" style="font-size:12px;color:var(--text3);font-family:var(--mono);"></span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span id="q-score-display" style="font-size:12px;color:var(--text2);"></span>
+          <button class="btn btn-ghost btn-sm" onclick="resetQuiz()">Sıfırla</button>
+        </div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div class="progress-bar"><div class="progress-fill" id="q-progress-fill" style="width:0%"></div></div>
+      </div>
+      <div id="question-container"></div>
+      <div style="display:flex;gap:12px;margin-top:16px;" id="q-buttons">
+        <button class="btn btn-primary" onclick="nextQuestion()" id="btn-next" style="display:none;">Sonraki Soru →</button>
+        <button class="btn btn-ghost" onclick="resetQuiz()">Yeni Set</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SINAV MODU -->
+<div class="page" id="page-sinav">
+  <div class="page-header">
+    <div class="page-title">Sınav Modu</div>
+    <div class="page-desc">Gerçek AÖF formatı · 20 Soru · 40 Dakika</div>
+  </div>
+  <div style="padding:28px;" id="exam-container">
+    <div id="exam-start" class="card" style="text-align:center;padding:48px;">
+      <div style="font-size:48px;margin-bottom:16px;">🎓</div>
+      <div style="font-size:20px;font-weight:700;margin-bottom:8px;">Sınav Modu</div>
+      <div style="font-size:13px;color:var(--text2);max-width:360px;margin:0 auto 24px;line-height:1.7;">
+        20 adet rastgele soru gelecek. 40 dakika süreniz var. Sınav bitiminde detaylı analiz gösterilecek.
+      </div>
+      <div class="grid g3" style="max-width:480px;margin:0 auto 28px;">
+        <div class="stat" style="text-align:center;"><div class="stat-val">20</div><div class="stat-label">Soru</div></div>
+        <div class="stat" style="text-align:center;"><div class="stat-val">40</div><div class="stat-label">Dakika</div></div>
+        <div class="stat" style="text-align:center;"><div class="stat-val">5</div><div class="stat-label">Şık</div></div>
+      </div>
+      <button class="btn btn-primary" onclick="startExam()" style="padding:14px 40px;font-size:15px;">Sınavı Başlat</button>
+    </div>
+    <div id="exam-area" style="display:none;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+        <div>
+          <span class="timer-display" id="exam-timer">40:00</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <span style="font-size:13px;color:var(--text2);">Soru <span id="exam-q-num">1</span> / 20</span>
+          <button class="btn btn-ghost btn-sm" onclick="submitExam()">Sınavı Bitir</button>
+        </div>
+      </div>
+      <div class="progress-bar" style="margin-bottom:20px;">
+        <div class="progress-fill" id="exam-progress" style="width:5%"></div>
+      </div>
+      <div id="exam-q-container"></div>
+      <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="examNext()" id="exam-next-btn">Sonraki →</button>
+        <button class="btn btn-ghost" onclick="submitExam()">Sınavı Tamamla</button>
+      </div>
+    </div>
+    <div id="exam-result" style="display:none;"></div>
+  </div>
+</div>
+
+<!-- FLASH CARD -->
+<div class="page" id="page-flashcard">
+  <div class="page-header">
+    <div class="page-title">Hızlı Tekrar Kartları</div>
+    <div class="page-desc">Kartlara tıkla · Son gün hazırlık · Temel kavramlar</div>
+  </div>
+  <div style="padding:28px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <span id="fc-progress" style="font-size:12px;font-family:var(--mono);color:var(--text3);">1 / 20</span>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-ghost btn-sm" onclick="fcPrev()">← Önceki</button>
+        <button class="btn btn-ghost btn-sm" onclick="fcNext()">Sonraki →</button>
+        <button class="btn btn-ghost btn-sm" onclick="shuffleFC()">Karıştır</button>
+      </div>
+    </div>
+    <div class="flashcard" id="current-fc" onclick="flipCard()">
+      <div class="flashcard-inner" id="fc-inner">
+        <div class="flashcard-front">
+          <div id="fc-question" style="font-size:14px;font-weight:500;line-height:1.6;"></div>
+          <div class="fc-hint">tıkla → cevap</div>
+        </div>
+        <div class="flashcard-back">
+          <div id="fc-answer" style="font-size:13px;font-weight:500;line-height:1.6;color:var(--green);"></div>
+          <div class="fc-hint">tıkla → soru</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;margin-top:16px;">
+      <button class="btn btn-green btn-sm" onclick="fcMark('ok')">✓ Bildim</button>
+      <button class="btn btn-red btn-sm" onclick="fcMark('no')">✗ Bilmedim</button>
+    </div>
+    <div style="margin-top:24px;">
+      <div style="font-size:12px;color:var(--text3);margin-bottom:8px;">Tüm Kartlar</div>
+      <div id="fc-dots" style="display:flex;flex-wrap:wrap;gap:4px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TAHMİNİ SORULAR -->
+<div class="page" id="page-tahmini">
+  <div class="page-header">
+    <div class="page-title">Tahmini Sorular</div>
+    <div class="page-desc">Kitap analizine dayalı · Çıkma ihtimali yüksek · AÖF formatı</div>
+  </div>
+  <div style="padding:28px;" id="tahmini-container">
+  </div>
+</div>
+
+<!-- GELİŞİM -->
+<div class="page" id="page-gelisim">
+  <div class="page-header">
+    <div class="page-title">Gelişim Takibi</div>
+    <div class="page-desc">Doğru/Yanlış analizi · Zayıf konu tespiti</div>
+  </div>
+  <div style="padding:28px;" id="gelisim-container">
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+const QUESTIONS = [
+  // 2024-2025
+  {id:1,year:2025,unit:6,text:"Dünya üzerinde kaç adet RIR bölgesi bulunmaktadır?",opts:["1","2","3","4","5"],ans:4,exp:"RIR (Regional Internet Registry) bölgesi 5 adettir: ARIN (Kuzey Amerika), RIPE NCC (Avrupa), APNIC (Asya-Pasifik), LACNIC (Latin Amerika), AFRINIC (Afrika). Hatırlatma: 5 kıta = 5 RIR."},
+  {id:2,year:2025,unit:6,text:"İnternet üzerindeki veri iletişimi _______ olarak adlandırılan ana iletişim hatları üzerinden sağlanır.",opts:["LIR","HTML","TCP/IP protokolü","Backbone","DNS sunucusu"],ans:3,exp:"Backbone = İnternetteki ana iletişim hatları. Omurga hat gibi düşün — omurga olmadan vücut çalışmaz. Backbone olmadan internet çalışmaz."},
+  {id:3,year:2025,unit:8,text:"'Yalnız bırakılma hakkını' geliştiren yazarlar kimlerdir?",opts:["Warren ve Brandeis","Tapscott ve Rachels","Prosser ve Cavoukian","Prosser ve Rachels","Lee ve Brandeis"],ans:0,exp:"Warren ve Brandeis 1890 yılında 'The Right to Privacy' makalesinde yalnız bırakılma hakkını geliştirdi. Diğerleri karikatür — Tapscott dijital nesil uzmanı, Brandeis Amerikalı hukukçu."},
+  {id:4,year:2025,unit:8,text:"Bilişim ile doğrudan ilgili ilk hukuksal düzenleme 1970 yılında hangi ülkede gerçekleştirilmiştir?",opts:["Rusya","ABD","İngiltere","İspanya","Almanya"],ans:4,exp:"1970 yılında Almanya'nın Hessen eyaletinde dünyanın ilk kişisel veri koruma kanunu çıkarıldı. Almanya'nın veri koruma hassasiyeti tarihiyle açıklanabilir (2. Dünya Savaşı)."},
+  {id:5,year:2025,unit:5,text:"TCK m.136'ya göre kişisel verileri hukuka aykırı olarak bir başkasına veren kişi kaç yıl hapis cezası alır?",opts:["Altı aydan iki yıla kadar","Bir yıldan üç yıla kadar","Bir yıldan dört yıla kadar","İki yıldan dört yıla kadar","İki yıldan beş yıla kadar"],ans:3,exp:"TCK 136 = kişisel veri YAYMA / VERME → 2-4 yıl hapis. Daha ağır bir eylem olduğu için daha yüksek ceza. TCK 135 = kaydetme → 1-3 yıl. '136 = 4' formülü: madde numarasının son rakamı üst sınırı verir!"},
+  {id:6,year:2025,unit:8,text:"Kişisel Verileri Koruma Kurulunun görev ve yetkileri arasında hangileri yer alır? (I. Veri güvenliği düzenleyici işlem, II. Veri sorumlusu düzenleyici işlem, III. İdari yaptırım kararı)",opts:["Yalnız I","Yalnız II","Yalnız III","I ve II","I, II ve III"],ans:4,exp:"KVKK Kurulunun tüm bu görevleri var: düzenleyici işlem yapmak VE yaptırım kararı vermek. Kurul hem düzenleyici hem yaptırım mercii."},
+  {id:7,year:2025,unit:5,text:"Bilişim sistemine izinsiz girme suçu kapsamında korunan hukuki değer nedir?",opts:["Eğitim Hakkı","Dijital Özel Alan","Kamusal Alan","Sağlık Hakkı","Toplantı Özgürlüğü"],ans:1,exp:"Bilişim sistemine izinsiz giriş = kişinin dijital özel alanına tecavüz. Tıpkı eve izinsiz girmek gibi, burada 'dijital ev' korunuyor."},
+  {id:8,year:2025,unit:5,text:"Bilişim sistemine girme suçunun faili ile ilgili yanlış ifade hangisidir? (I. Fail tipik eylemleri gerçekleştiren kişidir, II. Herkes fail olabilir, III. Suç özgü suçtur)",opts:["Yalnız I","Yalnız II","Yalnız III","I ve II","I, II ve III"],ans:2,exp:"III. YANLIŞTIR! Bu suç özgü suç DEĞİLDİR — herhangi bir kişi fail olabilir. Özgü suç belirli sıfata sahip kişiler için öngörülen suçlardır (örneğin yargı görevi kapsamındaki suçlar). I ve II DOĞRUDUR."},
+  {id:9,year:2025,unit:6,text:"5651 sayılı Kanuna göre kişilere belli bir yerde ve belli bir süre internet kullanım olanağı sağlayan kişiye ne denir?",opts:["Yayıncı","Bilgi Teknolojileri ve İletişim Kurumu","Toplu kullanım sağlayıcı","İçerik sağlayıcı","Yer sağlayıcı"],ans:2,exp:"Toplu Kullanım Sağlayıcı = internet kafeler. 'Belli bir YERDE' + 'belli bir SÜRE' iki anahtar kelime. Kafe sahibi bu tanıma girer."},
+  {id:10,year:2025,unit:6,text:"Aşağıdakilerden hangisi erişim engellenmesi kararının verilebilmesini gerektiren suçlardan biridir?",opts:["Hakaret","İntihara yönlendirme","Tehdit","İrtikâp","Zimmet"],ans:1,exp:"5651 sayılı Kanunda katalog suçlar: intihara yönlendirme, müstehcenlik, kumar, uyuşturucu, Atatürk aleyhine suçlar. HAKARET kapsam dışı! Tehdit, irtikap, zimmet de kapsam dışı."},
+  {id:11,year:2025,unit:6,text:"İnternet ortamındaki verilere etki etmeksizin bilgi ve verilerin takip edilmesine ne ad verilir?",opts:["Trafik Bilgisi","İçerik Sağlayıcı","Kişisel Veri","İzleme","Yayın"],ans:3,exp:"İzleme = pasif gözlem. Verilere etki etmeden takip. Trafik bilgisi ise bağlantı loglarıdır. Fark: İzleme eylem, Trafik bilgisi veri kaydı."},
+  {id:12,year:2025,unit:7,text:"Meta-tag kullanılarak yapılan haksız rekabet: 'XYZ ürünleri de iyi ama biz ABC satıyoruz' ibaresi web sayfasında, XYZ yazılınca site çıkıyor.",opts:["Başlık Tekniği (Meta-Tag)","Yanlış ve yanıltıcı beyanlar","Alan Adı Kullanımı","Diğer ürünü kötülemek","Alan Adı Stoklama"],ans:0,exp:"Meta-Tag: Rakip markanın adını HTML başlığına gömmek suretiyle o marka arandığında kendi sitenizin çıkmasını sağlamak. Soru içeriğinin belirleyici kısmı: 'arama motoruna XYZ yazılınca çıkıyor'."},
+  {id:13,year:2025,unit:7,text:"Elektronik ortamda akdedilecek sözleşmelere ilişkin Tüketicinin Korunması Hakkında Kanunun tercih ettiği kavram hangisidir?",opts:["Mesafeli sözleşme","Şarta bağlı sözleşme","Gayrimenkul satış vaadi","Zımni sözleşme","Karşılıksız sözleşme"],ans:0,exp:"TKHK 'mesafeli sözleşme' kavramını tercih eder. Tarafların fiziksel olarak bir arada bulunmadığı, elektronik/uzaktan iletişim aracıyla kurulan sözleşmelere denir."},
+  {id:14,year:2025,unit:7,text:"Mesafeli satışlarda teslimat için öngörülen azami süre kaç gündür?",opts:["5","10","15","20","30"],ans:4,exp:"Mesafeli satışlarda azami teslimat süresi: 30 GÜN. Satıcı sipariş sonrası en geç 30 gün içinde teslim etmeli. 14 gün cayma hakkı ayrı, 30 gün teslimat ayrı!"},
+  {id:15,year:2025,unit:7,text:"Kullanıcının doğrudan ziyaret ettiği sayfa üzerinden başka sitenin bilgilerine giriş yapmaksızın ulaşması nasıl adlandırılır?",opts:["Deeplink","Frame","Surface link","SCMS","Cybersquatting"],ans:0,exp:"Deeplink = derin bağlantı. Bir sitenin ANA sayfasını atlayarak doğrudan iç sayfasına yönlendirme. 'Giriş sayfasını kullanmaksızın' ifadesi DEEPLİNK'in tanımıdır."},
+  {id:16,year:2025,unit:7,text:"FSEK m.25'e göre bir eserin radyo, TV veya teknik usulle umumun yararlanmasına sunulmasına ne denir?",opts:["Eser sahibinin adını belirtme hakkı","Umuma iletim hakkı","Eserde değişiklik yasaklama hakkı","Çoğaltma hakkı","İşleme hakkı"],ans:1,exp:"Umuma iletim hakkı = eseri yayınlama hakkı. Radyo, TV, internet yayını bu hakkın kapsamında. Madde 25'in konusu budur."},
+  {id:17,year:2025,unit:6,text:"Türkiye'de ODTÜ'den alan adı tahsisini devralan kuruluş hangisidir?",opts:["nib.tr","nik.tr","nic.tr","nin.tr","nim.tr"],ans:2,exp:"nic.tr = Network Information Centre. Türkiye'de alan adı yönetimini devir alan kuruluş. NIC = Network Information Centre. 'C' harfine dikkat: nic (c için Center/Centre)."},
+  {id:18,year:2025,unit:8,text:"Kişisel verilerin korunması hakkı kaçıncı kuşak haklardandır?",opts:["1","2","3","4","5"],ans:3,exp:"Kişisel verilerin korunması = 4. kuşak hak. Bilişim teknolojisindeki gelişmelerin insan onuruna yönelik tehlikelerine karşı ortaya çıkan dördüncü kuşak haklardandır. 1.kuşak=medeni/siyasi, 2.kuşak=sosyal/ekonomik, 3.kuşak=dayanışma (çevre, gelişme), 4.kuşak=dijital haklar (kişisel veri, unutulma, internet erişimi)."},
+  {id:19,year:2025,unit:8,text:"Bireyin dijital hafızada yer alan kişisel verilerinin kendi talebi üzerine bir daha geri getirilemeyecek şekilde ortadan kaldırılması hakkı nedir?",opts:["İletişim Özgürlüğü","Unutulma Hakkı","İnternete Erişim Hakkı","Düşünceyi Açıklama Hürriyeti","Kişisel Verilerin Korunması Hakkı"],ans:1,exp:"Unutulma Hakkı: dijital hafızadan kalıcı silme. Anahtar: 'bir daha geri getirilemeyecek şekilde'. Kişisel verilerin korunması daha genel; unutulma hakkı spesifik ve kalıcı silmeye odaklı."},
+  {id:20,year:2025,unit:8,text:"İnternete erişim hakkı kaçıncı kuşak haklardandır?",opts:["1","2","3","4","5"],ans:3,exp:"İnternete erişim hakkı = 4. kuşak hak. Kişisel veri koruması ve unutulma hakkı ile birlikte dördüncü kuşak haklardandır. Bilişim teknolojisinin yarattığı insan onuru tehlikelerine karşı ortaya çıkmıştır. Karel Vasak'ın üç kuşak teorisi bu hakları kapsamamaktaydı; 4. kuşak sonradan dijital çağın getirdiği ihtiyaçla şekillendi."},
+  // 2023-2024
+  {id:21,year:2024,unit:6,text:"Türkiye'de ilk internet bağlantısını gerçekleştiren üniversite hangisidir?",opts:["İstanbul Üniversitesi","Ortadoğu Teknik Üniversitesi","Anadolu Üniversitesi","İstanbul Teknik Üniversitesi","Ankara Üniversitesi"],ans:1,exp:"ODTÜ (Ortadoğu Teknik Üniversitesi) Türkiye'nin ilk internet bağlantısını 1993 yılında gerçekleştirdi. Alan adı tahsisi de başlangıçta ODTÜ tarafından yapılıyordu."},
+  {id:22,year:2024,unit:8,text:"Unutulma hakkı kaçıncı kuşak haklardandır?",opts:["Birinci","İkinci","Üçüncü","Dördüncü","Beşinci"],ans:3,exp:"Unutulma hakkı = 4. kuşak (dijital haklar). Kişisel verilerin korunması ve internete erişim hakkı ile birlikte dördüncü kuşak haklardandır. Bilişim teknolojisindeki gelişmelerin insan onuruna yönelik tehlikelere karşı ortaya çıkmıştır."},
+  {id:23,year:2024,unit:8,text:"'Bilgilerin geleceğini belirleme hakkı' hangi mahkeme tarafından türetilmiştir?",opts:["Türk Yargıtayı","İngiltere Lordlar Kamarası","Alman Anayasa Mahkemesi","Fransız Danıştayı","ABD Yüksek Mahkemesi"],ans:2,exp:"Alman Anayasa Mahkemesi 1983 tarihli 'nüfus sayımı kararında' bu hakkı geliştirdi. Almanya veri korumasında öncü ülke — bu tutarlı."},
+  {id:24,year:2024,unit:8,text:"BM internete erişimi temel insan hakkı olarak hangi yıl tanımıştır?",opts:["2011","2012","2013","2014","2015"],ans:0,exp:"BM, 2011 yılında Frank La Rue raporu ile internete erişimi temel insan hakkı ilan etti. 2011 = Arap Baharı yılı, internetin güçü ortaya çıktı, BM bu kararı aldı."},
+  {id:25,year:2024,unit:8,text:"Kişisel Verileri Koruma Kurulunun kaç üyesi TBMM tarafından seçilir?",opts:["1","2","3","4","5"],ans:4,exp:"KVKK Kurulunda 9 üye var: 5'i TBMM, 4'ü Cumhurbaşkanı tarafından seçilir. TBMM'den seçilen: 5 üye."},
+  {id:26,year:2024,unit:5,text:"Aşağıdakilerden hangisi bilişim sistemine girme suçunun konusunu oluşturamaz?",opts:["Sanal Bellek (USB)","CD","Disket","Uydu alıcısı (Dekoder)","Bilgisayar"],ans:3,exp:"YANLIŞ! Uydu alıcısı (dekoder) da bilişim sistemi sayılır ve suçun konusu olabilir. Hiçbiri kapsam dışı değildir. Bu soru 'oluşturamaz' diye soruyor, yanıt D ama D de konu olabilir — soru tasarımı tartışmalı, doğru cevap D (dekoder dahil)."},
+  {id:27,year:2024,unit:5,text:"Dikkatsizlikle kasıtsız olarak bir bilişim sistemine giren kişinin cezai sorumluluğu nedir?",opts:["Güvenlik tedbirine hükmedilir","Cezai sorumluluğu doğmaz","Üç yıla kadar hapis","Bir yıla kadar hapis","Altı aya kadar hapis"],ans:1,exp:"Bilişim sistemine girme suçu kastı gerektirir. Kastı olmadan (dikkatsizce) girişte cezai sorumluluk DOĞMAZ. Manevi unsur yoksa suç oluşmaz."},
+  {id:28,year:2024,unit:5,text:"Banka kartı suçunda şahsi cezasızlık sebebi hangi durumda söz konusu değildir?",opts:["Aynı evde yaşayan ablasının kartını kullanan kardeş","Boşandığı eşinin kartını kullanan eski eş","Kayın validesinin kartını kullanan damat","Annesinin kartını kullanan çocuk","Evlat edinenin kartını kullanan evlatlık"],ans:1,exp:"Boşandığı eş artık aile bağı kapsamında değil — cezasızlık sebebi yoktur. Diğerleri aile içi ilişki devam ettiği için cezasızlık sebebi var. Boşanma = hukuki bağın kopması."},
+  {id:29,year:2024,unit:6,text:"Erişim Sağlayıcıları Birliği hakkında hangisi doğrudur? (I. Kamu hukuku tüzel kişisi, II. Merkezi Ankara, III. Gelirleri üye ücretleri)",opts:["Yalnız I","Yalnız II","Yalnız III","I ve II","II ve III"],ans:4,exp:"Erişim Sağlayıcıları Birliği: I. YANLIŞ (kamu hukuku tüzel kişisi DEĞİL, özel), II. DOĞRU (Ankara), III. DOĞRU (üye ücretleri). Bu nedenle II ve III doğru, cevap E."},
+  {id:30,year:2024,unit:7,text:"Elektronik imza ile ilgili hangisi doğrudur? (I. Adi yazılı şekil şartını sağlar, II. Resmi yazılı şekil şartını sağlar, III. Bono/poliçe/çek için kullanılamaz)",opts:["Yalnız I","Yalnız II","Yalnız III","I, III","I, II, III"],ans:3,exp:"I. DOĞRU: Güvenli e-imza adi yazılı şekil şartını karşılar. II. YANLIŞ: Resmi şekil için noter gerekli. III. DOĞRU: Bono, poliçe, çek için e-imza kullanılamaz. Cevap: I ve III."},
+  {id:31,year:2024,unit:7,text:"Bilgisayara yüklenen programlar yoluyla normal internet bağlantısını kopararak daha pahalı hatta aktaran yazılıma ne denir?",opts:["Meta-Tag","Web host","Banner","Dialer","ICANN"],ans:3,exp:"Dialer program = telefon çevirici. İnterneti keser, premium numaraya bağlar. 2000'lerde yaygın bir dolandırıcılık yöntemiydi. 'Dial' = aramak."},
+  {id:32,year:2024,unit:7,text:"Mesafeli satışlarda tüketiciye verilen cayma hakkı bilgilendirme yapılmamışsa ne zaman sona erer?",opts:["1","2","3","4","5"],ans:0,exp:"Cayma hakkı normalde 14 gün. Bilgilendirme yapılmazsa bu süre uzar ama en fazla 1 YIL daha devam eder (14 gün + 1 yıl). Soru '1 yıl sonra sona erer' diyor, cevap A."},
+  {id:33,year:2024,unit:7,text:"Link kullanımı ile ilgili yanlış ifade hangisidir? (I. Normal word sayfasında link yapılamaz, II. Linkte işaret ve ulaşma imkânı olmak üzere iki unsur var, III. Surface link'te yeni sayfa açılır)",opts:["Yalnız I","Yalnız II","Yalnız III","I ve II","II ve III"],ans:0,exp:"I. YANLIŞ: Link word sayfasında da yapılabilir. II. DOĞRU: Link = işaret + erişim imkânı. III. DOĞRU: Surface link yeni sayfa açar. Yani sadece I yanlış."},
+  {id:34,year:2024,unit:8,text:"Üstün kamu yararı olmadıkça dijital bellekteki geçmiş olayların silinmesini isteme hakkı nedir?",opts:["Unutulma hakkı","Bilgi edinmeme hakkı","Kişisel verilerin korunması hakkı","İnternete erişim hakkı","Gelişme hakkı"],ans:0,exp:"Unutulma Hakkı'nın tam tanımı budur. 'Üstün kamu yararı olmadıkça' ifadesi sınırlayıcı koşul. Kişisel veri korumasından daha dar ve spesifik."},
+  // 2021-2022
+  {id:35,year:2022,unit:5,text:"Bilişim sisteminin içinde işlemciye anlamsız komutlar vererek çökertilmesine ne ad verilir?",opts:["Hacking","Truva atı","Salam tekniği","Tavşanlar","Bukalemunlar"],ans:3,exp:"Tavşanlar: Sisteme anlamsız komutlar üreterek işlemciyi ve belleği doldurup sistemi çökertiyor. Tavşan gibi hızlı üreyen komutlar. Truva atı ise gizlice sızan zararlı yazılım."},
+  {id:36,year:2022,unit:8,text:"Kişisel verilerin korunması hakkını ayrı bir maddeyle düzenleyen belge hangisidir?",opts:["Avrupa Birliği Temel Haklar Şartı","BM Bireysel ve Siyasal Haklara İlişkin Uluslararası Sözleşmesi","Türkiye Cumhuriyeti 1982 Anayasası","Avrupa İnsan Hakları Sözleşmesi","Almanya Anayasası"],ans:0,exp:"AB Temel Haklar Şartı m.8 kişisel veri korumasını AYRI MADDE olarak düzenleyen tek belgedir. AİHS bu hakkı m.8 (özel hayata saygı) kapsamında ele alır, ayrı madde değil."},
+  {id:37,year:2022,unit:5,text:"Türk Ceza Kanunu m.135'e göre kişisel verileri hukuka aykırı kaydeden kişiye kaç yıl hapis cezası verilir?",opts:["Altı aydan iki yıla kadar","Altı aydan üç yıla kadar","Bir yıldan üç yıla kadar","Bir yıldan beş yıla kadar","İki yıldan beş yıla kadar"],ans:2,exp:"TCK 135 = kişisel veri KAYDETME → 1-3 yıl hapis. TCK 136 = veri YAYMA/VERME → 2-4 yıl. Kural: verme/yayma daha ağır = daha fazla ceza."},
+  {id:38,year:2022,unit:5,text:"TCK 243/2'ye göre bilişim sistemine girme suçu ücretli sistemlerde işlenirse ceza hangi oranda indirilir?",opts:["Yarı oranına kadar","1/3 oranına kadar","1/4 oranına kadar","1/5 oranına kadar","1/6 oranına kadar"],ans:0,exp:"TCK 243/2: Bedeli karşılığı yararlanılabilen sistemlere giriş suçunda ceza YARI ORANDA indirilir. Mantık: Ücretli sistem kullanıcısı zaten sisteme girebilir, yasak daha az ağır."},
+  {id:39,year:2022,unit:5,text:"Bir seri bilginin sistemin belli bir yönde çalışmasını sağlamak için bir araya gelmiş şekline ne denir?",opts:["Çerez","İleti","Program","Ağ","Veri"],ans:2,exp:"Program tanımı bu. Veri = ham bilgi. Program = veriyi işleyen talimatlar kümesi. Bu ayrım hukuki açıdan önemli çünkü program ayrıca fikri mülkiyet korumasına tabidir."},
+  {id:40,year:2022,unit:6,text:"5651 sayılı Kanun m.9 kapsamında hâkim başvuruyu en geç kaç saat içinde karara bağlar?",opts:["12","18","24","36","48"],ans:2,exp:"Hâkim 24 saat içinde duruşma yapmaksızın karar verir. Bu süre kısa tutulmuş çünkü kişilik hakları ihlali durumunda hızlı müdahale şart."},
+  {id:41,year:2022,unit:6,text:"BTK Başkanı tarafından erişim engeli kararı verilebilen suç hangisidir?",opts:["Kumar oynanması için yer/imkân sağlama","Atatürk aleyhine suçlar","İntihara yönlendirme","Müstehcenlik","Uyuşturucu kullanımını kolaylaştırma"],ans:2,exp:"Bu soruda seçeneklerin tamamı katalog suçlardandır. BTK Başkanı m.8/4 kapsamında: yurt dışı sağlayıcılar veya yurt içi sağlayıcı olsa bile çocuk istismarı (m.103/1), müstehcenlik (m.226) ve fuhuş (m.227) suçlarında re'sen karar verebilir. Diğer katalog suçlar için savcı/hâkim yolu izlenir. Soru 'intihara yönlendirme'yi doğru kabul ediyorsa bu da m.8/1'deki yetki kapsamında değerlendirilebilir."},
+  {id:42,year:2022,unit:6,text:"Savcı gecikmesinde sakınca bulunan hallerde erişim engeli kararını kaç saat içinde hâkime sunmalıdır?",opts:["24 saat","48 saat","3 gün","1 hafta","Süre aranmaz"],ans:0,exp:"Cumhuriyet Savcısı erişim engeli kararını 24 saat içinde hâkimin onayına sunar. Süre geçerse karar kendiliğinden kalkar."},
+  {id:43,year:2022,unit:7,text:"Reklam yasağına tabi olan meslek gruplarından olmayan hangisidir?",opts:["Eczacılar","Avukatlar","Mali müşavirler","Doktorlar","Öğretmenler"],ans:4,exp:"Öğretmenler reklam yasağına tabi değil. Serbest meslek gruplarına (avukat, doktor, eczacı, mali müşavir) reklam yasağı uygulanır. Öğretmen devlet memuru veya eğitimci — meslek odası bu kapsamda değil."},
+  {id:44,year:2022,unit:7,text:"Reklam/tanıtım amaçlı, web ve gazetelerde başlık/alt kısımda kullanılan kurumsal iletişim öğesine ne denir?",opts:["Gif","Adwords","Logo","Flash","Banner"],ans:4,exp:"Banner = afiş reklam. 'Web sitelerinde başlık ya da alt kısım' tanımı Banner'ın tam tanımı. Adwords ise Google arama reklamları."},
+  {id:45,year:2022,unit:7,text:"Bir web sayfasında birbirinden bağımsız bölümlerde birden fazla doküman görülmesine ne denir?",opts:["Cybersquatting","Frame","Surface link","Deeplink","SCMS"],ans:1,exp:"Frame = çerçeve. Tek sayfada birden fazla bağımsız bölüm. Ekranda iki ayrı site aynı anda görülüyor gibi. Deeplink ise başka sitenin iç sayfasına doğrudan erişim."},
+  {id:46,year:2022,unit:6,text:"Alan adı etrafında ortaya çıkan hukuki sorunların çözümü için öneri sunan uluslararası kuruluş hangisidir?",opts:["TLD","ASP","MOHUK","IFPI","WIPO"],ans:4,exp:"WIPO (World Intellectual Property Organization) = Dünya Fikri Mülkiyet Örgütü. Alan adı uyuşmazlıklarını UDRP sistemiyle çözer. TLD = üst düzey alan adı uzantısı (teknik kavram)."},
+  {id:47,year:2022,unit:8,text:"'Üç kuşak haklar' teorisinin kurucusu kimdir?",opts:["Edward Snowden","Karel Vasak","Nelson Mandela","Costaja Gonzales","Georg Jellinek"],ans:1,exp:"Karel Vasak = Fransız-Çek hukukçu, 1977'de üç kuşak haklar teorisini geliştirdi. Fransız Devriminin 'özgürlük, eşitlik, kardeşlik' ilkelerinden esinlendi."},
+  {id:48,year:2022,unit:8,text:"1982 Anayasasına kişisel veri koruması ile ilgili düzenleme hangi yıl eklendi?",opts:["2002","2008","2010","2017","2019"],ans:2,exp:"2010 anayasa referandumu ile m.20'ye kişisel veri koruması eklendi. 2010 referandumu birçok değişiklik getirdi."},
+  {id:49,year:2022,unit:8,text:"Unutulma hakkı kaçıncı kuşak haklardandır?",opts:["Birinci","İkinci","Üçüncü","Dördüncü","Beşinci"],ans:3,exp:"Unutulma hakkı = 4. kuşak (dijital haklar). Kişisel veri koruması hakkıyla aynı kuşakta. Her ikisi de 4. kuşak — bilişim teknolojisinin insan onuruna yönelik tehlikelere karşı ortaya çıkan haklar."},
+  {id:50,year:2022,unit:6,text:"Web'de yayınlanan bilgiyi aramak için kullanılan yazılım paketine ne denir?",opts:["Cybersquatting","Frame","Arama motoru","Surface link","Deeplink"],ans:2,exp:"Arama motoru = Google, Bing, Yahoo gibi web içeriği tarayan yazılım. Tanım: 'web'de yayınlanan bilgiyi aramak için kullanılan yazılım paketi'."},
+  {id:51,year:2024,unit:5,text:"Kişisel verilerin işlenmesi kavramı hangi işlemleri kapsar?",opts:["Yalnız kaydetme ve silme","Yalnız toplama ve kullanma","Toplama, kaydetme, düzenleme, saklama, değiştirme, kullanma gibi tüm işlemler","Yalnız elektronik ortamda yapılan işlemler","Yalnız üçüncü kişilere aktarma"],ans:2,exp:"Kişisel veri işleme = toplama, kaydetme, düzenleme, saklama, uyarlama, değiştirme, geri alma, kullanma, yayma, silme, yok etme gibi TÜM işlemler. En geniş tanım."},
+  {id:52,year:2023,unit:7,text:"Deeplink hakkında hangisi doğrudur?",opts:["Ana sayfadan başlar","Giriş sayfasını atlayarak iç sayfaya erişim sağlar","Başka sitenin içeriğini kendi sayfanızda gösterir","İki web sitesini birleştirir","Resmi arama motoru bağlantısıdır"],ans:1,exp:"Deeplink = derin bağlantı. Sitenin ANA SAYFASINI atlayarak doğrudan iç sayfaya gitmek. Örnek: bir haber sitesinin ana sayfasına değil, belirli bir haberin sayfasına link vermek."},
+  {id:53,year:2023,unit:6,text:"İçerik sağlayıcı kimdir?",opts:["İnternet bağlantısı sağlayan kişi","İnternet kafé sahibi","İnternette kullanıcıların görmesi için içerik üreten kişi","Web sunucusu işleten firma","Alan adı veren kuruluş"],ans:2,exp:"İçerik sağlayıcı = içerik üreten kişi (blog yazarı, haber sitesi vb.). Yer sağlayıcı ise bu içeriği barındıran hosting firması. Erişim sağlayıcı ise internet bağlantısı veren ISP."},
+  {id:54,year:2023,unit:8,text:"Kişisel Verilerin Korunması Kanununun amacı nedir?",opts:["Yalnız devlet kurumlarını bağlar","Kişilik haklarını mutlak şekilde korur","Kişisel verilerin işlenmesinde kişilik haklarını ve temel özgürlükleri korumak","Yalnız ticari verileri kapsar","İnternet suçlarını düzenler"],ans:2,exp:"KVKK'nın amacı: Kişisel verilerin işlenmesinde temel hak ve özgürlükleri, kişilik haklarını korumak. Kamu ve özel sektör her ikisini de bağlar."},
+  {id:55,year:2022,unit:7,text:"Başka bir sitenin içeriğini kendi web sayfanızda bölümler halinde göstermeye ne denir?",opts:["Cybersquatting","Frame","Surface link","Deeplink","SCMS"],ans:1,exp:"Frame = çerçeveleme. Kendi sayfanızın içinde başka bir sitenin içeriğini (sanki bir pencere açmış gibi) gösterme. Frame hukuki sorun yaratabilir çünkü ziyaretçi hangi sitede olduğunu anlayamaz."},
+  {id:56,year:2022,unit:8,text:"Kişisel verilerin korunması hakkını ayrı maddeyle düzenleyen belge AB Temel Haklar Şartı'dır. Bu hakkın ayrı düzenlenmesi ne anlama gelir?",opts:["Bu hak AİHS'te de ayrı madde ile düzenlenmiştir","Bu hak yalnız AB vatandaşlarını korur","Kişisel veri koruması özel hayata saygıdan bağımsız, ayrı bir hak olarak tanınmıştır","Bu hak yalnız devlet kurumlarına karşı ileri sürülebilir","Bu hak birinci kuşak hak olarak tanınmıştır"],ans:2,exp:"AB Temel Haklar Şartı m.8, kişisel veri korumasını m.7'deki (özel hayata saygı) ayrı, bağımsız bir hak olarak düzenledi. Bu önemli: artık özel hayatın içinde değil, kendi başına bir hak."},
+  {id:57,year:2024,unit:6,text:"Türkiye'nin ilk internet bağlantısı hangi protokolle gerçekleştirildi?",opts:["HTTP","TCP/IP","FTP","SMTP","HTML"],ans:1,exp:"İnternet TCP/IP protokolü üzerine kuruludur. ODTÜ'nün 1993'teki bağlantısı da TCP/IP ile gerçekleştirildi. HTTP ise web için kullanılan protokol."},
+  {id:58,year:2024,unit:7,text:"Siparişten sonra satıcı taahhüt ettiği sürede teslim yapamazsa tüketici ne yapabilir?",opts:["Sadece şikâyet edebilir","Sözleşmeden cayabilir","Cezai şikâyette bulunabilir","Malı kendisi alabileceği bir merkez talep edebilir","Hiçbir şey yapamaz"],ans:1,exp:"Teslimat gerçekleşmezse tüketici sözleşmeden dönebilir (cayma hakkı) veya tazminat talep edebilir. TKHK tüketiciyi koruma amaçlı."},
+  {id:59,year:2022,unit:6,text:"5651 sayılı Kanuna göre Yer Sağlayıcı ne yapmakla yükümlüdür?",opts:["İçerikleri denetlemek","Trafik bilgilerini 6 ay saklamak","Erişim engellerine uymak","İçerik sağlayıcı kimliğini açıklamak","Tüm kullanıcı şifrelerini tutmak"],ans:1,exp:"Yer sağlayıcı (hosting) trafik bilgilerini asgari 6 ay saklamakla yükümlü. İçerikleri denetleme yükümlülüğü yok ama ihbar üzerine kaldırma yükümlülüğü var."},
+  {id:60,year:2025,unit:7,text:"Elektronik haberleşme hizmetlerine ilişkin kişisel veri işleme rıza kayıtları ne kadar süre saklanır?",opts:["5 yıl","3 yıl","2 yıl","Abonelik bitiminden itibaren 4 yıl","Abonelik süresince"],ans:4,exp:"Elektronik Haberleşme Kanununa göre rıza kayıtları abonelik süresi boyunca saklanır. Abonelik bittikten sonra saklama yükümlülüğü de sona erer."},
+];
+
+const TAHMINI_QUESTIONS = [
+  {id:'t1',unit:5,text:"Aşağıdaki bilişim suçu türlerinden hangisi 'sistemin işlemcisine anlamsız komutlar göndererek onu çökertiyor' şeklinde tanımlanır?",opts:["Hacking","Truva Atı","Salam Tekniği","Tavşanlar","Bukalemunlar"],ans:3,exp:"Tavşanlar: sistemin işlemcisini hızla dolduran anlamsız komutlar. Tavşan gibi ürer. Salam tekniği ise küçük miktarları yavaş yavaş çalmaktır."},
+  {id:'t2',unit:8,text:"Kişisel veri koruma alanında 'veri minimizasyonu' ilkesi ne anlama gelir?",opts:["Veriyi en uzun süre saklamak","Yalnızca amaç için gerekli miktarda veri toplamak","Tüm verileri şifrelemek","Verileri yurt dışına aktarmamak","Yalnızca resmi kurumlardan veri toplamak"],ans:1,exp:"Veri minimizasyonu: amaca ulaşmak için gerektiğinden fazla veri toplamamak. KVKK'nın temel ilkelerinden biri."},
+  {id:'t3',unit:5,text:"TCK m.244'e göre bilişim sistemini engelleme veya bozma suçunun kamu kurumuna karşı işlenmesi halinde ceza nasıl etkilenir?",opts:["Değişmez","Yarı oranında artırılır","İki katına çıkarılır","1/3 oranında artırılır","Ceza verilmez"],ans:2,exp:"TCK 244: kamu kurumuna karşı işlenirse ceza iki katına çıkarılır. Devlet kurumlarına yönelik bilişim saldırıları daha ağır cezalandırılır."},
+  {id:'t4',unit:6,text:"Bir web sitesinin içeriği başka bir web sitesinin çerçevesi içinde gösterildiğinde hangi hukuki sorun ortaya çıkabilir?",opts:["Yalnızca teknik sorun","Deeplink sorunları","Frame kullanımına bağlı telif hakkı ve ticari itibar sorunları","KVKK ihlali","Erişim engeli"],ans:2,exp:"Frame kullanımı: sitenin içeriğini başka çerçevede göstermek hem telif hakkını hem ticari itibarı zedeler. Ziyaretçi hangi sitede olduğunu anlayamaz."},
+  {id:'t5',unit:7,text:"Elektronik imza ile bono düzenlenebilir mi?",opts:["Evet, her türlü bono için","Evet, ama sadece ticari bonolar için","Evet, güvenli e-imza yeterliyse","Hayır, kambiyo senetleri e-imza ile düzenlenemez","Evet, noter onaylıysa"],ans:3,exp:"Bono, poliçe, çek = kambiyo senedi. Elektronik imza ile şekil şartı tamamlanamaz. Bu bir istisnai düzenlemedir ve kesin bir kuraldır."},
+  {id:'t6',unit:8,text:"Hangisi kişisel veri sayılmaz?",opts:["Ad-soyad","IP adresi","Plaka numarası","Anonim istatistiksel veri","Fotoğraf"],ans:3,exp:"Anonim hale getirilmiş veri (kimseye atfedilemeyen) kişisel veri değildir. IP, plaka, fotoğraf kişisel veri sayılır çünkü kişiyi tanımlamaya yarar."},
+  {id:'t7',unit:5,text:"Başkasının kredi kartını sahte belgelerle ele geçirerek kullanan kişi hangi suçu işler?",opts:["Bilişim sistemine girme suçu","Dolandırıcılık suçu","Banka veya kredi kartlarının kötüye kullanılması suçu","Hırsızlık suçu","Zimmet suçu"],ans:2,exp:"TCK 245: Banka veya kredi kartlarının kötüye kullanılması. Bu suç bilişim ortamında işlenirse nitelikli hal oluşur."},
+  {id:'t8',unit:6,text:"Bir içerik sağlayıcının yayını kişilik haklarını ihlal ediyorsa mağdur kişi önce nereye başvurmalıdır?",opts:["Doğrudan mahkemeye","Önce içerik/yer sağlayıcıya, yanıt alınmazsa mahkemeye","BTK'ya","KVKK Kuruluna","Cumhuriyet Savcılığına"],ans:1,exp:"5651 m.9: İçerik sağlayıcıya veya yer sağlayıcıya başvurulur. Cevap alınmazsa veya içerik kaldırılmazsa mahkemeye gidilir. İki aşamalı prosedür."},
+  {id:'t9',unit:7,text:"E-ticaret sitesinde 'sepete ekle ve satın al' sürecinin tamamlanmasıyla sözleşme ne zaman kurulur?",opts:["Sepete eklendiğinde","Ödeme yapıldığında","Sipariş onaylandığında","Ürün teslim edildiğinde","Fatura kesildiğinde"],ans:2,exp:"Sipariş onayı = icabın kabulü. Satıcının sipariş onay mesajını göndermesiyle sözleşme kurulur. Sözleşme hukuku: icap (müşteri) + kabul (satıcı onayı) = sözleşme."},
+  {id:'t10',unit:8,text:"Türkiye'de Kişisel Verilerin Korunması Kanunu hangi yılda yürürlüğe girdi?",opts:["2012","2014","2016","2018","2020"],ans:2,exp:"KVKK (6698 sayılı) 7 Nisan 2016'da yürürlüğe girdi. AB GDPR'dan iki yıl önce. Türkiye'nin veri koruma alanındaki temel yasal çerçevesi."},
+  {id:'t11',unit:6,text:"Hangi kavram 'başkasının marka veya ticari adıyla özdeşleşmiş alan adlarını kötü niyetle tescil ettirmeyi' ifade eder?",opts:["Meta-tag","Frame","Deeplink","Cybersquatting","Surface link"],ans:3,exp:"Cybersquatting = alan adı stoklama. Ünlü markaların alan adlarını ele geçirip yüksek bedele satmak. WIPO bu uyuşmazlıkları UDRP prosedürüyle çözer."},
+  {id:'t12',unit:5,text:"Bir kişi 100 bin müşterinin kişisel verilerini veri tabanından çekip rakip firmaya satarsa hangi madde uygulanır?",opts:["TCK 135","TCK 136","TCK 244","TCK 243","TCK 245"],ans:1,exp:"Kişisel verileri bir başkasına VERME = TCK 136. Ceza: 2-4 yıl hapis. Sadece kaydetmek m.135 (1-3 yıl) iken verme/yayma daha ağır — m.136."},
+];
+
+const FLASHCARDS = [
+  {q:"Backbone nedir?",a:"İnternet üzerindeki ANA iletişim hatları. Omurga hattı."},
+  {q:"Warren ve Brandeis ne geliştirdi?",a:"'Yalnız bırakılma hakkı' (Right to be let alone) — 1890"},
+  {q:"RIR sayısı kaçtır?",a:"5 adet: ARIN, RIPE NCC, APNIC, LACNIC, AFRINIC"},
+  {q:"TCK 135 cezası nedir?",a:"1-3 yıl hapis (kişisel veri KAYDETME)"},
+  {q:"TCK 136 cezası nedir?",a:"2-4 yıl hapis (veri VERME/YAYMA/ELE GEÇİRME)"},
+  {q:"Mesafeli satışta azami teslimat süresi?",a:"30 gün"},
+  {q:"Cayma hakkı süresi?",a:"14 gün (bilgilendirme yoksa +1 yıl)"},
+  {q:"Toplu kullanım sağlayıcı kimdir?",a:"Belli bir yerde ve süre internet imkânı sağlayan kişi (internet kafe)"},
+  {q:"Deeplink nedir?",a:"Başka sitenin giriş sayfasını kullanmaksızın iç sayfasına erişim"},
+  {q:"Frame nedir?",a:"Tek web sayfasında birden fazla bağımsız doküman görüntüleme"},
+  {q:"Karel Vasak kim?",a:"'Üç kuşak haklar' teorisinin kurucusu"},
+  {q:"Unutulma hakkı kaçıncı kuşak?",a:"4. kuşak (dijital haklar — kişisel veri ve internet erişimiyle birlikte)"},
+  {q:"İnternete erişim hakkı kaçıncı kuşak?",a:"4. kuşak (dijital haklar)"},
+  {q:"Kişisel veri koruması kaçıncı kuşak?",a:"4. kuşak (dijital haklar)"},
+  {q:"5651 m.9 — Hâkim karar süresi?",a:"24 saat (duruşma yapmaksızın)"},
+  {q:"Savcının erişim engeli kararını hâkime sunma süresi?",a:"24 saat"},
+  {q:"nic.tr ne?",a:"Türkiye'de alan adı tahsisini ODTÜ'den devralan kuruluş"},
+  {q:"Dialer program nedir?",a:"İnternet bağlantısını keserek pahalı hatta aktaran yazılım"},
+  {q:"Meta-tag nedir?",a:"Rakip marka adını HTML'ye gömmek — arama motorunda çıkmak için"},
+  {q:"Bono elektronik imzayla imzalanabilir mi?",a:"HAYIR — kambiyo senetleri e-imza ile düzenlenemez"},
+];
+
+let quizMode = 'all', currentQuestions = [], currentQIdx = 0, quizScore = {correct:0, wrong:0};
+let examQuestions = [], examIdx = 0, examAnswers = [], examTimer = null, examTimeLeft = 2400;
+let fcIdx = 0, fcCards = [...FLASHCARDS], fcStatus = new Array(FLASHCARDS.length).fill('');
+let stats = {correct:0, wrong:0, exams:0, byUnit:{5:{c:0,w:0},6:{c:0,w:0},7:{c:0,w:0},8:{c:0,w:0}}};
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const pg = document.getElementById('page-'+id);
+  if(pg) pg.classList.add('active');
+  const nav = document.querySelector(`[onclick="showPage('${id}')"]`);
+  if(nav) nav.classList.add('active');
+  if(id === 'analiz') renderAnaliz();
+  if(id === 'gelisim') renderGelisim();
+  if(id === 'tahmini') renderTahmini();
+  if(id === 'flashcard') renderFlashcard();
+  document.getElementById('overlay').classList.remove('show');
+  document.getElementById('sidebar').classList.remove('open');
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+
+function toggleTheme() {
+  document.body.classList.toggle('light');
+}
+
+function selectQuizMode(mode) {
+  quizMode = mode;
+  document.querySelectorAll('.tabs .tab').forEach((t,i) => t.classList.toggle('active', i === (['all',5,6,7,8].indexOf(mode))));
+}
+
+function showQuizByUnit(unit) {
+  selectQuizMode(unit);
+  showPage('quiz');
+  startQuiz('cikmis');
+}
+
+function startQuiz(type) {
+  let pool = type === 'tahmini' ? TAHMINI_QUESTIONS : QUESTIONS;
+  if(quizMode !== 'all') pool = pool.filter(q => q.unit === quizMode);
+  currentQuestions = shuffle([...pool]);
+  currentQIdx = 0;
+  quizScore = {correct:0, wrong:0};
+  document.getElementById('quiz-start-screen').style.display = 'none';
+  document.getElementById('quiz-area').style.display = 'block';
+  renderQuestion();
+}
+
+function resetQuiz() {
+  document.getElementById('quiz-start-screen').style.display = 'block';
+  document.getElementById('quiz-area').style.display = 'none';
+}
+
+function renderQuestion() {
+  if(currentQIdx >= currentQuestions.length) {
+    document.getElementById('question-container').innerHTML = `
+      <div class="card" style="text-align:center;padding:40px;">
+        <div style="font-size:48px;margin-bottom:16px;">🎉</div>
+        <div style="font-size:20px;font-weight:700;margin-bottom:8px;">Tamamlandı!</div>
+        <div style="font-size:14px;color:var(--text2);margin-bottom:20px;">
+          Doğru: <span style="color:var(--green);font-weight:700;">${quizScore.correct}</span> &nbsp; 
+          Yanlış: <span style="color:var(--red);font-weight:700;">${quizScore.wrong}</span>
+        </div>
+        <button class="btn btn-primary" onclick="resetQuiz()">Yeni Set Başlat</button>
+      </div>`;
+    document.getElementById('btn-next').style.display = 'none';
+    updateStatCards();
+    return;
+  }
+  const q = currentQuestions[currentQIdx];
+  const pct = Math.round((currentQIdx / currentQuestions.length) * 100);
+  document.getElementById('q-progress-text').textContent = `Soru ${currentQIdx+1} / ${currentQuestions.length}`;
+  document.getElementById('q-score-display').textContent = `✓ ${quizScore.correct}   ✗ ${quizScore.wrong}`;
+  document.getElementById('q-progress-fill').style.width = pct + '%';
+  const letters = ['A','B','C','D','E'];
+  const opts = q.opts.map((o,i) => `
+    <div class="q-option" id="opt-${i}" onclick="selectOpt(${i})">
+      <span class="opt-letter">${letters[i]}</span>${o}
+    </div>`).join('');
+  document.getElementById('question-container').innerHTML = `
+    <div class="question-box">
+      <div class="q-num">Soru ${currentQIdx+1} · Ünite ${q.unit} · ${q.year || ''}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="q-options">${opts}</div>
+      <div id="explanation" style="display:none;"></div>
+    </div>`;
+  document.getElementById('btn-next').style.display = 'none';
+}
+
+function selectOpt(idx) {
+  const q = currentQuestions[currentQIdx];
+  if(document.getElementById('explanation').style.display !== 'none') return;
+  const opts = document.querySelectorAll('.q-option');
+  opts.forEach(o => o.onclick = null);
+  opts[idx].classList.add('selected');
+  const isCorrect = idx === q.ans;
+  if(isCorrect) {
+    opts[idx].classList.add('correct');
+    quizScore.correct++;
+    stats.correct++;
+    stats.byUnit[q.unit].c++;
+  } else {
+    opts[idx].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+    quizScore.wrong++;
+    stats.wrong++;
+    stats.byUnit[q.unit].w++;
+  }
+  const expBox = document.getElementById('explanation');
+  expBox.className = 'explanation-box' + (isCorrect ? '' : ' wrong');
+  expBox.innerHTML = `<div class="exp-title${isCorrect ? '' : ' wrong'}">${isCorrect ? '✓ Doğru!' : '✗ Yanlış'}</div>${q.exp}`;
+  expBox.style.display = 'block';
+  document.getElementById('btn-next').style.display = 'inline-flex';
+  updateStatCards();
+}
+
+function nextQuestion() {
+  currentQIdx++;
+  renderQuestion();
+}
+
+function startExam() {
+  showPage('sinav');
+  const pool = shuffle([...QUESTIONS]).slice(0, 20);
+  examQuestions = pool;
+  examIdx = 0;
+  examAnswers = new Array(20).fill(-1);
+  examTimeLeft = 2400;
+  document.getElementById('exam-start').style.display = 'none';
+  document.getElementById('exam-area').style.display = 'block';
+  document.getElementById('exam-result').style.display = 'none';
+  if(examTimer) clearInterval(examTimer);
+  examTimer = setInterval(updateTimer, 1000);
+  renderExamQuestion();
+}
+
+function updateTimer() {
+  examTimeLeft--;
+  const m = Math.floor(examTimeLeft/60), s = examTimeLeft%60;
+  const el = document.getElementById('exam-timer');
+  if(!el) return;
+  el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  el.className = 'timer-display' + (examTimeLeft < 300 ? ' danger' : examTimeLeft < 600 ? ' warning' : '');
+  if(examTimeLeft <= 0) { clearInterval(examTimer); submitExam(); }
+}
+
+function renderExamQuestion() {
+  if(examIdx >= examQuestions.length) { submitExam(); return; }
+  const q = examQuestions[examIdx];
+  document.getElementById('exam-q-num').textContent = examIdx+1;
+  document.getElementById('exam-progress').style.width = ((examIdx+1)/20*100)+'%';
+  const letters = ['A','B','C','D','E'];
+  const prev = examAnswers[examIdx];
+  const opts = q.opts.map((o,i) => `
+    <div class="q-option${prev===i?' selected':''}" id="eopt-${i}" onclick="selectExamOpt(${i})">
+      <span class="opt-letter">${letters[i]}</span>${o}
+    </div>`).join('');
+  document.getElementById('exam-q-container').innerHTML = `
+    <div class="question-box">
+      <div class="q-num">Soru ${examIdx+1}/20 · Ünite ${q.unit}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="q-options">${opts}</div>
+    </div>`;
+}
+
+function selectExamOpt(i) {
+  examAnswers[examIdx] = i;
+  document.querySelectorAll('.q-option').forEach((o,idx) => {
+    o.classList.toggle('selected', idx===i);
+  });
+}
+
+function examNext() {
+  examIdx++;
+  if(examIdx >= examQuestions.length) submitExam();
+  else renderExamQuestion();
+}
+
+function submitExam() {
+  if(examTimer) clearInterval(examTimer);
+  let correct = 0, byUnit = {5:{c:0,w:0,t:0},6:{c:0,w:0,t:0},7:{c:0,w:0,t:0},8:{c:0,w:0,t:0}};
+  examQuestions.forEach((q,i) => {
+    byUnit[q.unit].t++;
+    if(examAnswers[i] === q.ans) { correct++; byUnit[q.unit].c++; }
+    else byUnit[q.unit].w++;
+  });
+  stats.exams++;
+  const pct = Math.round(correct/20*100);
+  const grade = pct>=90?'Mükemmel!':pct>=70?'Geçer Notu Aldınız':pct>=50?'Biraz Daha Çalışın':'Yoğunlaşmaya İhtiyaç Var';
+  const gradeColor = pct>=70?'var(--green)':pct>=50?'var(--amber)':'var(--red)';
+  const details = examQuestions.map((q,i) => {
+    const c = examAnswers[i] === q.ans;
+    return `<div class="result-item">
+      <span class="result-topic" style="font-size:12px;">Soru ${i+1}: ${q.text.substring(0,50)}...</span>
+      <span style="color:${c?'var(--green)':'var(--red)'};font-size:12px;">${c?'✓ Doğru':'✗ Yanlış'}</span>
+    </div>`;
+  }).join('');
+  const unitRows = [5,6,7,8].map(u => `
+    <div class="result-item">
+      <span class="result-topic">Ünite ${u}</span>
+      <div style="flex:1;margin:0 12px;"><div class="progress-bar"><div class="progress-fill" style="width:${byUnit[u].t>0?byUnit[u].c/byUnit[u].t*100:0}%;background:${byUnit[u].c/Math.max(byUnit[u].t,1)>.6?'var(--green)':'var(--red)'}"></div></div></div>
+      <span class="result-score-mini">${byUnit[u].c}/${byUnit[u].t}</span>
+    </div>`).join('');
+  document.getElementById('exam-area').style.display = 'none';
+  document.getElementById('exam-result').innerHTML = `
+    <div style="text-align:center;margin-bottom:32px;">
+      <div class="result-score" style="color:${gradeColor}">${correct}/20</div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div style="font-size:12px;color:var(--text3);margin-top:8px;">${pct}% başarı oranı</div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <div style="font-size:13px;font-weight:600;margin-bottom:12px;">Ünite Bazlı Analiz</div>
+        ${unitRows}
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:600;margin-bottom:12px;">Tüm Sorular</div>
+        <div style="max-height:300px;overflow-y:auto;">${details}</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn btn-primary" onclick="startExam()">Tekrar Dene</button>
+      <button class="btn btn-ghost" onclick="showPage('dashboard')">Ana Sayfa</button>
+    </div>`;
+  document.getElementById('exam-result').style.display = 'block';
+  updateStatCards();
+}
+
+function renderFlashcard() {
+  showFlashcard();
+  renderFCDots();
+}
+
+function showFlashcard() {
+  const card = fcCards[fcIdx];
+  document.getElementById('fc-question').textContent = card.q;
+  document.getElementById('fc-answer').textContent = card.a;
+  document.getElementById('fc-progress').textContent = `${fcIdx+1} / ${fcCards.length}`;
+  document.getElementById('current-fc').classList.remove('flipped');
+}
+
+function flipCard() {
+  document.getElementById('current-fc').classList.toggle('flipped');
+}
+
+function fcNext() { fcIdx = (fcIdx+1) % fcCards.length; showFlashcard(); }
+function fcPrev() { fcIdx = (fcIdx-1+fcCards.length) % fcCards.length; showFlashcard(); }
+function shuffleFC() { fcCards = shuffle([...FLASHCARDS]); fcIdx = 0; showFlashcard(); }
+
+function fcMark(status) {
+  fcStatus[fcIdx] = status;
+  renderFCDots();
+  fcNext();
+}
+
+function renderFCDots() {
+  const container = document.getElementById('fc-dots');
+  container.innerHTML = fcCards.map((c,i) => `
+    <div onclick="fcIdx=${i};showFlashcard();" style="width:12px;height:12px;border-radius:50%;cursor:pointer;background:${fcStatus[i]==='ok'?'var(--green)':fcStatus[i]==='no'?'var(--red)':i===fcIdx?'var(--accent)':'var(--bg3)'};border:1px solid var(--border);"></div>
+  `).join('');
+}
+
+function renderAnaliz() {
+  const topicFreq = [
+    {label:'Unutulma Hakkı / Kuşaklar',count:9,color:'var(--red)'},
+    {label:'Backbone / İnternet Yapısı',count:7,color:'var(--amber)'},
+    {label:'TCK 135-136 Kişisel Veri',count:6,color:'var(--amber)'},
+    {label:'5651 Kanun Aktörleri',count:5,color:'var(--accent)'},
+    {label:'Link Türleri (Deeplink/Frame)',count:4,color:'var(--accent)'},
+    {label:'Mesafeli Sözleşme',count:3,color:'var(--purple)'},
+    {label:'Warren & Brandeis',count:3,color:'var(--teal)'},
+    {label:'Karel Vasak / Üç Kuşak',count:3,color:'var(--teal)'},
+    {label:'Banka Kartı Şahsi Cezasızlık',count:2,color:'var(--green)'},
+    {label:'Erişim Engeli (Kimler Karar Verir)',count:2,color:'var(--green)'},
+  ];
+  document.getElementById('analiz-list').innerHTML = topicFreq.map(t => `
+    <div class="heat-item">
+      <span style="font-size:12px;color:var(--text2);min-width:200px;">${t.label}</span>
+      <div class="heat-bar"><div class="heat-fill" style="width:${t.count/9*100}%;background:${t.color};"></div></div>
+      <span class="heat-count">${t.count}x</span>
+    </div>`).join('');
+  
+  const tipFreq = [
+    {label:'Tanım / Kavram',count:18,color:'var(--accent)'},
+    {label:'Boşluk Doldurma',count:12,color:'var(--amber)'},
+    {label:'Hangisi doğru/yanlış (I,II,III)',count:9,color:'var(--purple)'},
+    {label:'Ceza miktarı',count:6,color:'var(--red)'},
+    {label:'Kim yapabilir / yapamaz',count:5,color:'var(--green)'},
+  ];
+  document.getElementById('tip-list').innerHTML = tipFreq.map(t => `
+    <div class="heat-item">
+      <span style="font-size:12px;color:var(--text2);min-width:180px;">${t.label}</span>
+      <div class="heat-bar"><div class="heat-fill" style="width:${t.count/18*100}%;background:${t.color};"></div></div>
+      <span class="heat-count">${t.count}</span>
+    </div>`).join('');
+  
+  const uniteFreq = [{u:5,label:'Ünite 5 — Suç',count:14},{u:6,label:'Ünite 6 — İnternet',count:18},{u:7,label:'Ünite 7 — E-Ticaret',count:14},{u:8,label:'Ünite 8 — Haklar',count:14}];
+  document.getElementById('unite-dist').innerHTML = uniteFreq.map(u => `
+    <div class="heat-item">
+      <span style="font-size:12px;color:var(--text2);min-width:160px;">${u.label}</span>
+      <div class="heat-bar"><div class="heat-fill" style="width:${u.count/18*100}%;background:var(--accent);"></div></div>
+      <span class="heat-count">${u.count}</span>
+    </div>`).join('');
+}
+
+function renderTahmini() {
+  const letters = ['A','B','C','D','E'];
+  document.getElementById('tahmini-container').innerHTML = TAHMINI_QUESTIONS.map((q,qi) => `
+    <div class="question-box" style="margin-bottom:16px;">
+      <div class="q-num">Tahmini Soru ${qi+1} · Ünite ${q.unit} <span class="badge badge-amber" style="margin-left:8px;">TAHMİNİ</span></div>
+      <div class="q-text">${q.text}</div>
+      <div class="q-options">
+        ${q.opts.map((o,i) => `<div class="q-option" id="topt-${qi}-${i}" onclick="selectTahmini(${qi},${i})">`+`<span class="opt-letter">${letters[i]}</span>${o}</div>`).join('')}
+      </div>
+      <div id="texp-${qi}" style="display:none;" class="explanation-box"></div>
+    </div>`).join('');
+}
+
+function selectTahmini(qi, idx) {
+  const q = TAHMINI_QUESTIONS[qi];
+  const exp = document.getElementById('texp-'+qi);
+  if(exp.style.display !== 'none') return;
+  for(let i=0;i<5;i++) {
+    const el = document.getElementById(`topt-${qi}-${i}`);
+    if(!el) continue;
+    el.onclick = null;
+    if(i === q.ans) el.classList.add('correct');
+    else if(i === idx) el.classList.add('wrong');
+  }
+  const isCorrect = idx === q.ans;
+  exp.className = 'explanation-box' + (isCorrect ? '' : ' wrong');
+  exp.innerHTML = `<div class="exp-title${isCorrect?'':' wrong'}">${isCorrect?'✓ Doğru!':'✗ Yanlış'}</div>${q.exp}`;
+  exp.style.display = 'block';
+}
+
+function renderGelisim() {
+  const total = stats.correct + stats.wrong;
+  const oran = total > 0 ? Math.round(stats.correct/total*100) : 0;
+  const unitData = [5,6,7,8].map(u => ({
+    u, c: stats.byUnit[u].c, w: stats.byUnit[u].w,
+    total: stats.byUnit[u].c + stats.byUnit[u].w,
+    oran: stats.byUnit[u].c + stats.byUnit[u].w > 0 ? Math.round(stats.byUnit[u].c/(stats.byUnit[u].c+stats.byUnit[u].w)*100) : 0
+  }));
+  document.getElementById('gelisim-container').innerHTML = `
+    <div class="grid g4" style="margin-bottom:24px;">
+      <div class="stat"><div class="stat-val" style="color:var(--accent);">${total}</div><div class="stat-label">Çözülen</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--green);">${stats.correct}</div><div class="stat-label">Doğru</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--red);">${stats.wrong}</div><div class="stat-label">Yanlış</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--amber);">${oran}%</div><div class="stat-label">Başarı</div></div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <div style="font-size:13px;font-weight:600;margin-bottom:16px;">Ünite Başarı Oranları</div>
+        ${unitData.map(u => `
+          <div style="margin-bottom:12px;">
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;">
+              <span style="color:var(--text2);">Ünite ${u.u}</span>
+              <span style="font-family:var(--mono);color:${u.oran>=70?'var(--green)':u.oran>=50?'var(--amber)':'var(--red)'};">${u.oran}% (${u.c}/${u.total})</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill ${u.oran>=70?'green':u.oran>=50?'':''}" style="width:${u.oran}%;background:${u.oran>=70?'var(--green)':u.oran>=50?'var(--amber)':'var(--red)'}"></div></div>
+          </div>`).join('')}
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:600;margin-bottom:16px;">Zayıf Konular Analizi</div>
+        ${unitData.filter(u=>u.w>0).sort((a,b)=>b.w-a.w).map(u => `
+          <div class="heat-item">
+            <span style="font-size:12px;color:var(--text2);min-width:80px;">Ünite ${u.u}</span>
+            <div class="heat-bar"><div class="heat-fill" style="width:${u.w>0?100:0}%;background:var(--red);opacity:0.6;"></div></div>
+            <span class="heat-count" style="color:var(--red);">${u.w} hata</span>
+          </div>`).join('') || '<div style="color:var(--text3);font-size:13px;">Henüz yeterli veri yok. Soru çözmeye başla!</div>'}
+        <hr class="divider">
+        <div style="font-size:12px;color:var(--text3);">
+          ${stats.exams > 0 ? `${stats.exams} sınav tamamlandı.` : 'Henüz sınav modu tamamlanmadı.'}
+        </div>
+      </div>
+    </div>`;
+}
+
+function updateStatCards() {
+  document.getElementById('stat-dogru').textContent = stats.correct;
+  document.getElementById('stat-yanlis').textContent = stats.wrong;
+  document.getElementById('stat-sinav').textContent = stats.exams;
+  const t = stats.correct + stats.wrong;
+  document.getElementById('stat-dogru-oran').textContent = t > 0 ? `%${Math.round(stats.correct/t*100)} başarı` : '—';
+  document.getElementById('stat-yanlis-oran').textContent = t > 0 ? `${t} toplam` : '—';
+}
+
+function shuffle(arr) {
+  for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+  return arr;
+}
+
+// Init
+updateStatCards();
+</script>
+</body>
+</html>
