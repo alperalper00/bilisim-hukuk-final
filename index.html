@@ -273,7 +273,7 @@ a{text-decoration:none;color:inherit;}
     <div class="nav-label">Pratik Çalışma</div>
     <div class="nav-item" onclick="showPage('quiz')">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg>
-      Soru Çöz
+      Çıkmış Sorular
     </div>
     <div class="nav-item" onclick="showPage('sinav')">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1L10 6h5l-4 3 1.5 5L8 11.5 3.5 14 5 9 1 6h5L8 1z"/></svg>
@@ -1799,63 +1799,85 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
-<!-- QUIZ PAGE -->
+<!-- ÇIKMIŞ SORULAR -->
 <div class="page" id="page-quiz">
   <div class="page-header">
-    <div class="page-title">Soru Çöz</div>
-    <div class="page-desc">Çıkmış sorular · Yanlış yaptığında açıklama ile öğren</div>
+    <div class="page-title">Çıkmış Sorular</div>
+    <div class="page-desc">3 yılın gerçek sınav soruları — yanlış cevaba tıklayınca açıklama görürsün</div>
   </div>
   <div style="padding:28px;">
-    <div id="quiz-start-screen">
-      <div class="tabs">
-        <div class="tab active" onclick="selectQuizMode('all')">Tüm Sorular</div>
-        <div class="tab" onclick="selectQuizMode(5)">Ünite 5</div>
-        <div class="tab" onclick="selectQuizMode(6)">Ünite 6</div>
-        <div class="tab" onclick="selectQuizMode(7)">Ünite 7</div>
-        <div class="tab" onclick="selectQuizMode(8)">Ünite 8</div>
-      </div>
-      <div class="grid g3" style="margin-bottom:24px;">
-        <div class="card" style="text-align:center;">
-          <div style="font-size:32px;margin-bottom:8px;">📋</div>
-          <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Çıkmış Sorular</div>
-          <div style="font-size:12px;color:var(--text3);margin-bottom:16px;">3 yılın tüm soruları</div>
-          <button class="btn btn-primary btn-sm" onclick="startQuiz('cikmis')">Başla</button>
-        </div>
-        <div class="card" style="text-align:center;">
-          <div style="font-size:32px;margin-bottom:8px;">🎯</div>
-          <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Tahmini Sorular</div>
-          <div style="font-size:12px;color:var(--text3);margin-bottom:16px;">Kitap analizine dayalı</div>
-          <button class="btn btn-ghost btn-sm" onclick="startQuiz('tahmini')">Başla</button>
-        </div>
-        <div class="card" style="text-align:center;">
-          <div style="font-size:32px;margin-bottom:8px;">🔀</div>
-          <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Karışık (60 Soru)</div>
-          <div style="font-size:12px;color:var(--text3);margin-bottom:16px;">Hepsi karışık</div>
-          <button class="btn btn-ghost btn-sm" onclick="startQuiz('all')">Başla</button>
+
+    <!-- YIL SEÇİM EKRANI -->
+    <div id="cs-year-select">
+      <div style="text-align:center;margin-bottom:32px;">
+        <div style="font-size:14px;color:var(--text2);margin-bottom:24px;">Hangi yılın sınavını çözmek istiyorsun?</div>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+          <div class="cs-year-btn" onclick="selectCikmisYear('2024-25')" style="cursor:pointer;background:var(--card);border:2px solid var(--border);border-radius:var(--radius);padding:24px 32px;text-align:center;transition:all 0.2s;min-width:160px;">
+            <div style="font-size:32px;margin-bottom:8px;">📋</div>
+            <div style="font-size:18px;font-weight:700;color:var(--text);">2024–2025</div>
+            <div style="font-size:12px;color:var(--text3);margin-top:4px;">Bahar Dönemi</div>
+            <div style="margin-top:8px;"><span class="badge badge-red">20 Soru</span></div>
+          </div>
+          <div class="cs-year-btn" onclick="selectCikmisYear('2023-24')" style="cursor:pointer;background:var(--card);border:2px solid var(--border);border-radius:var(--radius);padding:24px 32px;text-align:center;transition:all 0.2s;min-width:160px;">
+            <div style="font-size:32px;margin-bottom:8px;">📋</div>
+            <div style="font-size:18px;font-weight:700;color:var(--text);">2023–2024</div>
+            <div style="font-size:12px;color:var(--text3);margin-top:4px;">Bahar Dönemi</div>
+            <div style="margin-top:8px;"><span class="badge badge-amber">20 Soru</span></div>
+          </div>
+          <div class="cs-year-btn" onclick="selectCikmisYear('2021-22')" style="cursor:pointer;background:var(--card);border:2px solid var(--border);border-radius:var(--radius);padding:24px 32px;text-align:center;transition:all 0.2s;min-width:160px;">
+            <div style="font-size:32px;margin-bottom:8px;">📋</div>
+            <div style="font-size:18px;font-weight:700;color:var(--text);">2021–2022</div>
+            <div style="font-size:12px;color:var(--text3);margin-top:4px;">Bahar Dönemi</div>
+            <div style="margin-top:8px;"><span class="badge badge-blue">20 Soru</span></div>
+          </div>
         </div>
       </div>
     </div>
-    <div id="quiz-area" style="display:none;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:gap;">
-        <div>
-          <span id="q-progress-text" style="font-size:12px;color:var(--text3);font-family:var(--mono);"></span>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <span id="q-score-display" style="font-size:12px;color:var(--text2);"></span>
-          <button class="btn btn-ghost btn-sm" onclick="resetQuiz()">Sıfırla</button>
+
+    <!-- SINAV ÇÖZME EKRANI -->
+    <div id="cs-exam-area" style="display:none;">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap;">
+        <button class="btn btn-ghost btn-sm" onclick="backToCikmisYears()">← Yıl Seç</button>
+        <div id="cs-exam-title" style="font-size:16px;font-weight:700;"></div>
+        <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
+          <span id="cs-score-display" style="font-family:var(--mono);font-size:13px;color:var(--text2);"></span>
+          <button class="btn btn-ghost btn-sm" onclick="resetCikmisExam()">Sıfırla</button>
         </div>
       </div>
-      <div style="margin-bottom:12px;">
-        <div class="progress-bar"><div class="progress-fill" id="q-progress-fill" style="width:0%"></div></div>
+      <div id="cs-progress-wrap" style="margin-bottom:20px;">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-bottom:6px;">
+          <span id="cs-progress-label">0 / 20 yanıtlandı</span>
+          <span id="cs-correct-label" style="color:var(--green);">0 doğru</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="cs-progress-fill" style="width:0%"></div></div>
       </div>
-      <div id="question-container"></div>
-      <div style="display:flex;gap:12px;margin-top:16px;" id="q-buttons">
-        <button class="btn btn-primary" onclick="nextQuestion()" id="btn-next" style="display:none;">Sonraki Soru →</button>
-        <button class="btn btn-ghost" onclick="resetQuiz()">Yeni Set</button>
+      <div id="cs-questions-container"></div>
+      <div id="cs-result-box" style="display:none;margin-top:24px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;text-align:center;">
+        <div id="cs-result-score" style="font-size:64px;font-weight:700;font-family:var(--mono);"></div>
+        <div id="cs-result-msg" style="font-size:15px;font-weight:600;margin-top:8px;"></div>
+        <div id="cs-result-detail" style="font-size:13px;color:var(--text2);margin-top:8px;"></div>
+        <button class="btn btn-primary" onclick="resetCikmisExam()" style="margin-top:20px;">Tekrar Çöz</button>
+        <button class="btn btn-ghost" onclick="backToCikmisYears()" style="margin-top:20px;margin-left:8px;">Başka Yıl</button>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+.cs-year-btn:hover { border-color: var(--accent) !important; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+.cs-opt { padding:12px 16px; border:1px solid var(--border); border-radius:var(--radius-sm); cursor:pointer; font-size:13px; color:var(--text2); transition:all 0.15s; display:flex; align-items:flex-start; gap:12px; margin-bottom:8px; }
+.cs-opt:hover:not(.answered) { border-color:var(--accent); color:var(--text); background:rgba(108,143,255,0.05); }
+.cs-opt.correct { border-color:var(--green) !important; background:rgba(62,207,142,0.1) !important; color:var(--green) !important; cursor:default; }
+.cs-opt.wrong { border-color:var(--red) !important; background:rgba(248,113,113,0.1) !important; color:var(--red) !important; cursor:default; }
+.cs-opt.answered { cursor:default; }
+.cs-exp { background:rgba(62,207,142,0.06); border:1px solid rgba(62,207,142,0.2); border-radius:var(--radius-sm); padding:14px 16px; margin-top:8px; font-size:13px; color:var(--text2); line-height:1.7; }
+.cs-exp.wrong-exp { background:rgba(248,113,113,0.06); border-color:rgba(248,113,113,0.2); }
+.cs-exp-title { font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px; }
+.cs-q-box { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:24px; margin-bottom:20px; }
+.cs-q-num { font-size:11px; font-family:var(--mono); color:var(--text3); margin-bottom:8px; }
+.cs-q-text { font-size:14px; font-weight:600; line-height:1.7; color:var(--text); margin-bottom:16px; }
+.cs-opt-letter { width:26px; height:26px; border-radius:50%; background:var(--bg3); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; font-family:var(--mono); flex-shrink:0; margin-top:1px; }
+</style>
 
 <!-- SINAV MODU -->
 <div class="page" id="page-sinav">
@@ -2073,6 +2095,203 @@ let stats = {correct:0, wrong:0, exams:0, byUnit:{5:{c:0,w:0},6:{c:0,w:0},7:{c:0
 // Tahmini sorularda cevap durumunu saklar: {soru_idx: {chosen: idx, isCorrect: bool}}
 let tahminiAnswered = {};
 
+// ============ ÇIKMIŞ SORULAR — YIL BAZLI SİSTEM ============
+const BH_2024_25 = [
+  {num:1,text:'Dünya üzerinde kaç adet RIR bölgesi bulunmaktadır?',opts:['1','2','3','4','5'],ans:4,unit:6,exp:'RIR (Regional Internet Registry) bölgesi 5 adettir: ARIN (Kuzey Amerika), RIPE NCC (Avrupa), APNIC (Asya-Pasifik), LACNIC (Latin Amerika), AFRINIC (Afrika). 5 kıta = 5 RIR.'},
+  {num:2,text:'İnternet üzerindeki veri iletişimi _______ olarak adlandırılan ana iletişim hatları üzerinden sağlanır.',opts:['LIR','HTML','TCP/IP protokolü','Backbone','DNS sunucusu'],ans:3,unit:6,exp:'BACKBONE: İnternet üzerindeki ana iletişim hatları. Omurga hat — bu hatlardan çıkan veri iletişim hatları çeşitli merkezlere ve oradan tek tek bilgisayarlara ulaşır.'},
+  {num:3,text:'"Yalnız bırakılma hakkını" geliştiren yazarlar kimlerdir?',opts:['Warren ve Brandeis','Tapscott ve Rachels','Prosser ve Cavoukian','Prosser ve Rachels','Lee ve Brandeis'],ans:0,unit:8,exp:'Warren ve Brandeis: 1890 yılında "The Right to Privacy" makalesinde yalnız bırakılma hakkını geliştirdiler. Samuel Warren + Louis Brandeis ikilisi gizlilik hukukunun kurucusu sayılır.'},
+  {num:4,text:'Bilişim ile doğrudan ilgili ilk hukuksal düzenleme 1970 yılında hangi ülkede gerçekleştirilmiştir?',opts:['Rusya','ABD','İngiltere','İspanya','Almanya'],ans:4,unit:8,exp:'ALMANYA: 1970 yılında Almanya\'nın Hessen eyaletinde dünyanın ilk kişisel veri koruma kanunu çıkarıldı. Almanya bu alanda öncü ülke konumundadır.'},
+  {num:5,text:'TCK m.136\'ya göre kişisel verileri hukuka aykırı olarak bir başkasına veren, yayan veya ele geçiren kişi kaç hapis cezası ile cezalandırılır?',opts:['Altı aydan iki yıla kadar','Bir yıldan üç yıla kadar','Bir yıldan dört yıla kadar','İki yıldan dört yıla kadar','İki yıldan beş yıla kadar'],ans:3,unit:8,exp:'TCK m.136: Kişisel verileri hukuka aykırı olarak başkasına veren, yayan veya ele geçiren = İKİ YILDAN DÖRT YILA KADAR hapis. TCK m.135 (yasadışı kayıt) = 1-3 yıl. m.136 daha ağır!'},
+  {num:6,text:'I. Veri güvenliğine ilişkin yükümlülükleri belirlemek II. Veri sorumlusunun görev/yetki/sorumluluklarına ilişkin düzenleyici işlem III. KVKK\'da öngörülen idari yaptırımlara karar vermek — Kişisel Verileri Koruma Kurulunun görev ve yetkileri?',opts:['Yalnız I','Yalnız II','Yalnız III','I ve II','I, II ve III'],ans:4,unit:8,exp:'Kişisel Verileri Koruma Kurulunun görev ve yetkileri I, II ve III\'ün HEPSİNİ kapsar. Kurul hem düzenleyici işlem yapar hem de idari yaptırım kararı verir.'},
+  {num:7,text:'Bilişim sistemine izinsiz girme suçu kapsamında korunan hukuki değer aşağıdakilerden hangisidir?',opts:['Eğitim Hakkı','Dijital Özel Alan','Kamusal Alan','Sağlık Hakkı','Toplantı Özgürlüğü'],ans:1,unit:5,exp:'DİJİTAL ÖZEL ALAN: Bilişim sistemine izinsiz girme suçunda korunan hukuki değer dijital özel alandır. Kişinin özel yaşam alanının dijital versiyonu — izinsiz girilemez.'},
+  {num:8,text:'I. Suçun faili tipik eylemleri gerçekleştiren kişidir. II. Herkes suçun faili olabilir. III. Suç özgü suçtur. — Bilişim sistemine girme suçunun faili ile ilgili hangisi yanlıştır?',opts:['Yalnız I','Yalnız II','Yalnız III','I ve II','I, II ve III'],ans:2,unit:5,exp:'YANLIŞ olan: III — "Suç özgü suçtur." Bilişim sistemine girme suçu özgü suç DEĞİLDİR, herkes fail olabilir. I ve II doğrudur. Özgü suç: sadece belirli sıfattaki kişilerin işleyebileceği suç.'},
+  {num:9,text:'5651 sayılı Kanuna göre kişilere belli bir yerde ve belli bir süre internet ortamı kullanım olanağı sağlayan kişiye ne ad verilir?',opts:['Yayıncı','Bilgi Teknolojileri ve İletişim Kurumu','Toplu kullanım sağlayıcı','İçerik sağlayıcı','Yer sağlayıcı'],ans:2,unit:6,exp:'TOPLU KULLANIM SAĞLAYICI: Belli bir yerde ve belli bir süre internet ortamı kullanım olanağı sağlayan kişi (internet kafeler, kütüphaneler). Yer sağlayıcı = sunucu barındıran. İçerik sağlayıcı = içerik üreten.'},
+  {num:10,text:'İnternet ortamında yapılan yayınlarla ilgili erişimin engellenmesi kararının verilebilmesini gerektiren suçlardan biri hangisidir?',opts:['Hakaret','İntihara yönlendirme','Tehdit','İrtikâp','Zimmet'],ans:1,unit:6,exp:'İNTİHARA YÖNLENDİRME: 5651 sayılı Kanun kapsamında erişim engeli gerektiren suçlardandır. Hakaret ve tehdit bu kapsamda DEĞİLDİR (bunlar genel suçlardır). İrtikap ve zimmet = yolsuzluk suçları.'},
+  {num:11,text:'İnternet ortamındaki verilere etki etmeksizin bilgi ve verilerin takip edilmesine ne ad verilir?',opts:['Trafik Bilgisi','İçerik Sağlayıcı','Kişisel Veri','İzleme','Yayın'],ans:3,unit:6,exp:'İZLEME: Verilere etki etmeksizin bilgi ve verilerin takip edilmesi. Trafik bilgisi = iletişime ilişkin teknik veriler (kim, ne zaman, nereden). İzleme daha pasif bir kavramdır.'},
+  {num:12,text:'"XYZ ürünleri de iyi olmasına karşın biz ABC ürünlerini satıyoruz" ibaresini web sayfasında kullanan işyeri sahibinin sayfası "XYZ" kelimesi aratıldığında çıkıyor. Bu haksız rekabet hangi yöntemle yapılmıştır?',opts:['Başlık Tekniği (Meta-Tag)','Yanlış ve yanıltıcı beyanlar kullanılması','Alan Adı Kullanımı','Diğer ürünü kötülemek, karalamak','Alan Adı Stoklama'],ans:0,unit:7,exp:'META-TAG (Başlık Tekniği): Rakip markanın adını web sayfasının meta etiketlerine gömme. Arama motoruna "XYZ" yazınca rakibin sitesi de çıkıyor — bu meta-tag haksız rekabetidir.'},
+  {num:13,text:'Elektronik ortamda akdedilecek sözleşmelere ilişkin olarak Tüketicinin Korunması Hakkında Kanunun tercih ettiği kavram hangisidir?',opts:['Mesafeli sözleşme','Şarta bağlı sözleşme','Gayrimenkul satış vaadi','Zımni sözleşme','Karşılıksız sözleşme'],ans:0,unit:7,exp:'MESAFELİ SÖZLEŞME: Tüketici Kanununda elektronik ortamda kurulan sözleşmeler için kullanılan kavram. Satıcı ile tüketicinin fiziksel olarak bir araya gelmeden, mesafeli biçimde akdettikleri sözleşmeler.'},
+  {num:14,text:'Tüketicinin Korunması Hakkında Kanuna göre mesafeli satışlarda mal/hizmet sağlanması için öngörülen azami süre kaç günü geçemez?',opts:['5','10','15','20','30'],ans:4,unit:7,exp:'30 GÜN: Mesafeli satışlarda azami teslimat süresi 30 gündür. Siparişten sonra taahhüt edilen süre içinde ifa; bu süre 30 günü geçemez. (Bazı özel durumlarda farklı süreler olabilir.)'},
+  {num:15,text:'Kullanıcının doğrudan ziyaret ettiği sayfa üzerinden başka kimsenin sayfasındaki bilgilere giriş sayfasını kullanmaksızın ulaşabildiği bağlantı türü hangisidir?',opts:['Deeplink','Frame','Surface link','SCMS','Cybersquatting'],ans:0,unit:7,exp:'DEEPLINK (Derin Bağlantı): Kullanıcıyı bir web sitesinin ana sayfasını atlayarak doğrudan iç sayfasına yönlendiren bağlantı türü. Surface link = sadece ana sayfaya gönderir. Frame = çerçeve içinde gösterir.'},
+  {num:16,text:'5846 sayılı FSEK m.25\'e göre bir eserin radyo, televizyon veya herhangi teknik usulle umumun yararlanmasına sunulmasına ne ad verilir?',opts:['Eser sahibinin adının belirtilmesi hakkı','Umuma iletim hakkı','Eserde değişiklik yapılmasını yasaklama hakkı','Çoğaltma hakkı','İşleme hakkı'],ans:1,unit:7,exp:'UMUMA İLETİM HAKKI: Eserin radyo, TV veya teknik usulle umumun yararlanmasına sunulması. FSEK m.25 bu mali hakkı düzenler. Çoğaltma = kopyalama. İşleme = eserden yeni eser üretme.'},
+  {num:17,text:'Türkiye\'de ilk dönemlerde ODTÜ tarafından yapılan alan adı tahsisi daha sonra kurulan başka _______ isimli kuruluşa devredilmiştir.',opts:['nib.tr','nik.tr','nic.tr','nin.tr','nim.tr'],ans:2,unit:6,exp:'nic.tr: Türkiye\'de alan adı tahsisini ODTÜ\'den devralan kuruluşun adı. NIC = Network Information Center. Türkiye için nic.tr. Bu soru yıllardır çıkıyor — sadece C seçeneği mantıklı.'},
+  {num:18,text:'Kişisel verilerin korunması hakkı kaçıncı kuşak haklardandır?',opts:['1','2','3','4','5'],ans:3,unit:8,exp:'4. KUŞAK HAK: Kişisel verilerin korunması hakkı dijital haklar kapsamında 4. kuşak haklardandır. 1. kuşak = negatif haklar, 2. kuşak = sosyal haklar, 3. kuşak = dayanışma hakları, 4. kuşak = dijital/bilişim hakları.'},
+  {num:19,text:'Bireyin dijital hafızada yer alan kişisel verilerinin kendi talebi üzerine bir daha geri getirilemeyecek şekilde ortadan kaldırılması şeklinde tanımlanan hak hangisidir?',opts:['İletişim Özgürlüğü','Unutulma Hakkı','İnternete Erişim Hakkı','Düşünceyi Açıklama Hürriyeti','Kişisel Verilerin Korunması Hakkı'],ans:1,unit:8,exp:'UNUTULMA HAKKI: Dijital hafızada yer alan geçmiş verilerin kalıcı olarak silinmesini talep etme hakkı. "Bir daha geri getirilemeyecek şekilde" ifadesi unutulma hakkının tanımlayıcı unsurudur.'},
+  {num:20,text:'İnternete erişim hakkı kaçıncı kuşak haklardandır?',opts:['1','2','3','4','5'],ans:3,unit:8,exp:'4. KUŞAK HAK: İnternete erişim hakkı da kişisel veri koruması ve unutulma hakkı ile birlikte 4. kuşak dijital haklardandır. BM 2011\'de internete erişimi temel insan hakkı olarak tanımıştır.'},
+];
+
+const BH_2023_24 = [
+  {num:1,text:'Türkiye\'de ilk internet bağlantısını gerçekleştiren üniversite hangisidir?',opts:['İstanbul Üniversitesi','Ortadoğu Teknik Üniversitesi','Anadolu Üniversitesi','İstanbul Teknik Üniversitesi','Ankara Üniversitesi'],ans:1,unit:6,exp:'ODTÜ (Ortadoğu Teknik Üniversitesi): Türkiye\'nin ilk internet bağlantısını 1993 yılında gerçekleştirdi. Alan adı tahsisi de başlangıçta ODTÜ tarafından yapılıyor, sonra nic.tr\'ye devredildi.'},
+  {num:2,text:'İnternet üzerindeki veri iletişimini sağlayan ana iletişim hatlarına ne ad verilir?',opts:['İnternet','Veri Bankası','Backbone','ICANN','Dijitalleşme'],ans:2,unit:6,exp:'BACKBONE: İnternet üzerindeki ana iletişim omurga hatları. Bu hatlardan çıkan veri iletişim hatları çeşitli merkezlere ve oradan bilgisayarlara ulaşır. ICANN = alan adı yönetim kurumu.'},
+  {num:3,text:'"Bilgilerin geleceğini belirleme hakkı" hangi kurum tarafından türetilmiştir?',opts:['Türk Yargıtayı','İngiltere Lordlar Kamarası','Alman Anayasa Mahkemesi','Fransız Danıştayı','ABD Yüksek Mahkemesi'],ans:2,unit:8,exp:'ALMAN ANAYASA MAHKEMESİ: 1983 tarihli "nüfus sayımı kararında" bilgilerin geleceğini belirleme hakkını türetti. Almanya veri korumada öncü ülkedir — bu tutarlı bir cevap.'},
+  {num:4,text:'Unutulma hakkı kaçıncı kuşak haklardandır?',opts:['Birinci','İkinci','Üçüncü','Dördüncü','Beşinci'],ans:3,unit:8,exp:'DÖRDÜNCÜ KUŞAK HAK: Unutulma hakkı dijital/bilişim hakları kapsamında 4. kuşak haklardandır. Karel Vasak\'ın 3 kuşak teorisi bu hakları kapsamamaktaydı; 4. kuşak sonradan dijital çağla şekillendi.'},
+  {num:5,text:'Şahıslara ait bilgilerin üzerinde gerçekleştirilen toplama, kaydetme, düzenleme, saklama, geri alma, kullanma, silme, yok etme gibi işlemlere ne ad verilir?',opts:['Özel hayatın gizliliği','Gerçek kişilik','Kişilik hakkının korunması','Kişisel verilerin korunması','Kişisel verilerin işlenmesi'],ans:4,unit:8,exp:'KİŞİSEL VERİLERİN İŞLENMESİ: Kişisel verilerin toplanması, kaydedilmesi, düzenlenmesi, saklanması, değiştirilmesi, geri alınması, kullanılması, silinmesi gibi işlemlerin tümü. Korunması = hak; işlenmesi = eylem.'},
+  {num:6,text:'Birleşmiş Milletler internete erişimi temel bir insan hakkı olarak hangi yıl tanımıştır?',opts:['2011','2012','2013','2014','2015'],ans:0,unit:8,exp:'2011: BM, Frank La Rue\'nun raporu üzerine 2011 yılında internete erişimi temel insan hakkı ilan etti. Arap Baharı\'nın yaşandığı bu yılda internetin önemi tescil edildi.'},
+  {num:7,text:'Kişisel Verileri Koruma Kurulunun kaç üyesi Türkiye Büyük Millet Meclisi tarafından seçilir?',opts:['1','2','3','4','5'],ans:4,unit:8,exp:'5 ÜYE: KVKK Kurulunda toplam 9 üye vardır; 5\'i TBMM, 4\'ü Cumhurbaşkanı tarafından seçilir. TBMM tarafından seçilen = 5.'},
+  {num:8,text:'Elektronik Haberleşme Kanunu kapsamında sunulan hizmetlere ilişkin kişisel verilerin işlenmesine yönelik abonelerin rızalarını gösteren kayıtlar asgari ne kadar süreyle saklanır?',opts:['5 yıl','3 yıl','2 yıl','Abonelik süresinin bitiminden itibaren 4 yıl','Abonelik süresince'],ans:3,unit:8,exp:'ABONELİK SÜRESİNİN BİTİMİNDEN İTİBAREN 4 YIL: Elektronik Haberleşme Kanunu kapsamındaki rıza kayıtları en az abonelik süresinin sona ermesinden sonra 4 yıl daha saklanır.'},
+  {num:9,text:'Aşağıdakilerden hangisi bilişim sistemine girme suçunun konusunu oluşturamaz?',opts:['Sanal Bellek (USB)','CD','Disket','Uydu alıcısı (Dekoder)','Bilgisayar'],ans:3,unit:5,exp:'UYDU ALICISI (DEKODER): Cevap anahtarına göre D — ancak bilişim sistemi tanımı geniştir ve dekoder de sisteme dahil edilebilir. Sınav cevabı D\'dir.'},
+  {num:10,text:'İnternette gezinirken dikkatsiz davranıp kastı olmaksızın bir bilişim sistemine giren kimsenin cezai sorumluluğu nedir?',opts:['Hakkında güvenlik tedbirine hükmedilir.','Cezai sorumluluğu doğmaz.','Üç yıla kadar hapis cezası ile cezalandırılır.','Bir yıla kadar hapis cezası ile cezalandırılır.','Altı aya kadar hapis cezası ile cezalandırılır.'],ans:1,unit:5,exp:'CEZAİ SORUMLULUK DOĞMAZ: Bilişim sistemine girme suçu kast gerektirir. Kastı olmaksızın (dikkatsizce) gerçekleştirilen girişte cezai sorumluluk oluşmaz. Manevi unsur (kast) yoksa suç yoktur.'},
+  {num:11,text:'Başkasına ait banka/kredi kartını kullanmak suretiyle yarar sağlama suçunda hangisinde şahsi cezasızlık sebebi söz konusu değildir?',opts:['Aynı evde yaşadığı ablasının banka kartını kullanan kardeş','Boşandığı eşinin kredi kartını kullanan eski eş','Kayın validesinin kredi kartını kullanan damat','Annesinin banka kartını kullanan çocuk','Evlat edinenin kredi kartını kullanan evlatlık'],ans:1,unit:5,exp:'BOŞANMIŞ EŞ: Cezasızlık sebebi yoktur çünkü boşanma aile bağını hukuken koparır. Diğer seçenekler aile içi ilişki devam ettiği için cezasızlık sebebi var. Boşanmış eş = artık yabancı.'},
+  {num:12,text:'Erişim Sağlayıcıları Birliği hakkında I. Kamu hukuku tüzel kişisi II. Merkezi Ankara III. Gelirleri üye ücretleri — hangileri doğrudur?',opts:['Yalnız I','Yalnız II','Yalnız III','I ve II','II ve III'],ans:4,unit:6,exp:'II ve III doğru: Birliğin merkezi Ankara\'dadır (II ✅) ve gelirleri üye ücretlerinden oluşur (III ✅). Yanlış olan: I — Birlik özel hukuk tüzel kişisidir, kamu hukuku tüzel kişisi DEĞİLDİR.'},
+  {num:13,text:'5651 sayılı Kanuna göre kişilere belli bir yerde ve belli bir süre internet ortamı kullanım olanağı sağlayan kişiye ne ad verilir?',opts:['Bilgi Teknolojileri ve İletişim Kurumu','Yayıncı','Toplu kullanım sağlayıcı','İçerik sağlayıcı','Yer sağlayıcı'],ans:2,unit:6,exp:'TOPLU KULLANIM SAĞLAYICI: İnternet kafe, kütüphane gibi yerlerde belli süre internet hizmeti sağlayan kişi/kuruluş. Yer sağlayıcı = sunucu hizmeti. İçerik sağlayıcı = içerik üreten.'},
+  {num:14,text:'Güvenli elektronik imza ile ilgili I. Adi yazılı şekil şartına tabii sözleşmeler yapılabilir II. Resmi yazılı şekil şartına tabii sözleşmeler yapılabilir III. Bono/poliçe/çek için kullanılamaz — hangileri doğrudur?',opts:['Yalnız I','Yalnız II','Yalnız III','I, III','I, II, III'],ans:3,unit:7,exp:'I ve III doğru: Güvenli e-imza adi yazılı şekil şartını karşılar (I ✅). Bono/poliçe/çek için e-imza kullanılamaz (III ✅). YANLIŞ: Resmi yazılı şekil için noter gerekir — e-imza yetmez (II ✗).'},
+  {num:15,text:'Bilgisayara yüklenen programlar yolu ile normal internet bağlantısını kopararak daha pahalı programlara aktaran yazılımlara ne ad verilir?',opts:['Meta-Tag','Web host','Banner','Dialer','ICANN'],ans:3,unit:7,exp:'DİALER PROGRAM: Normal internet bağlantısını kopararak pahalı hatlara (0900 gibi) yönlendiren kötü amaçlı yazılım. Meta-tag = HTML içinde marka adı. Banner = reklam görseli.'},
+  {num:16,text:'Tüketicinin Korunması Hakkında Kanuna göre mesafeli satışlarda 14 günlük cayma hakkı bildirilmemişse, her hâlükârda cayma hakkının bittiği ilk 14 günlük süreden kaç yıl sonra sona erer?',opts:['1','2','3','4','5'],ans:0,unit:7,exp:'1 YIL: Tüketiciye cayma hakkı bildirilmemişse 14 günlük süre başlamaz — ancak bu hak sonsuza kadar da devam etmez. Her hâlükârda 14 günlük sürenin başlamasından 1 yıl sonra sona erer.'},
+  {num:17,text:'Link kullanılması ile ilgili I. Link verme normal bir yazı (word) sayfası üzerinde yapılamaz II. Linkte içeriğe işaret ve ulaşabilme olmak üzere iki unsur bulunur III. Surface link\'in verilmesi halinde web sayfası ziyaretçisi başka sayfayı açar — hangileri yanlıştır?',opts:['Yalnız I','Yalnız II','Yalnız III','I ve II','II ve III'],ans:0,unit:7,exp:'YANLIŞ olan: I — Link verme Word belgesi üzerinde de yapılabilir! II ve III doğrudur. Linkin iki unsuru: içeriğe işaret + ulaşabilme imkânı. Surface link ziyaretçiyi başka sayfaya açar.'},
+  {num:18,text:'Kullanıcının doğrudan ziyaret ettiği sayfa üzerinden başka kimsenin sayfasındaki bilgilere giriş sayfasını kullanmaksızın ulaşabildiği bağlantı türü hangisidir?',opts:['SCMS','Deeplink','Frame','Cybersquatting','Surface link'],ans:1,unit:7,exp:'DEEPLINK: Ana giriş sayfasını atlayarak doğrudan iç sayfaya yönlendiren bağlantı. "Giriş sayfasını kullanmaksızın" ifadesi deeplink\'in tanımlayıcı özelliğidir. Surface link sadece ana sayfaya gönderir.'},
+  {num:19,text:'Web\'de yayınlanan bilgiyi aramak için kullanılan yazılım paketine ne denir?',opts:['Cybersquatting','Frame','Arama motoru','Surface link','Deeplink'],ans:2,unit:7,exp:'ARAMA MOTORU: Web\'de yayınlanan bilgiyi aramak için kullanılan yazılım paketi. Google, Bing, Yahoo gibi. Cybersquatting = kötü niyetli alan adı tescili. Frame = çerçeve bağlantısı.'},
+  {num:20,text:'Üstün bir kamu yararı olmadığı sürece, dijital hafızada yer alan geçmişte yaşanılan olayların unutulmasını, başkaları tarafından bilinmesi istenmeyen bilgilerin silinmesini isteme hakkına ne ad verilir?',opts:['Unutulma hakkı','Bilgi edinmeme hakkı','Kişisel verilerin korunması hakkı','İnternete erişim hakkı','Gelişme hakkı'],ans:0,unit:8,exp:'UNUTULMA HAKKI: "Üstün kamu yararı olmadıkça dijital hafızadan silme" tanımı unutulma hakkının klasik tanımıdır. Kişisel verilerin korunması daha geniş kavram; unutulma hakkı onun bir alt türüdür.'},
+];
+
+const BH_2021_22 = [
+  {num:1,text:'Bilişim sisteminin içinde işlemciye sürekli anlamsız komutlar vererek bilişim sisteminin çökertilmesine ne ad verilir?',opts:['Hacking','Truva atı','Salam tekniği','Tavşanlar','Bukalemunlar'],ans:3,unit:5,exp:'TAVŞANLAR: İşlemciye sürekli anlamsız komutlar göndererek sistemi boğan ve çökerten kötü amaçlı yazılım türü. Hacking = izinsiz erişim. Truva atı = gizli zararlı yazılım. Salam = küçük kesintiler.'},
+  {num:2,text:'İnternet üzerindeki veri iletişimini sağlayan ana iletişim hatlarına ne ad verilir?',opts:['ICANN','Backbone','İnternet','Veri Bankası','Dijitalleşme'],ans:1,unit:6,exp:'BACKBONE: İnternet\'in ana iletişim omurgası. Bu hatlardan çıkan hatlar çeşitli merkezlere, oradan da bilgisayarlara ulaşır. Her yıl sorulan temel bilgi.'},
+  {num:3,text:'Kişisel verilerin korunması hakkını ayrı bir maddeyle düzenleme altına alan belge hangisidir? ("Herkes kendisini ilgilendiren kişisel verilerinin korunması hakkına sahiptir... Bu kurallara uyulması bağımsız bir makam tarafından denetlenir.")',opts:['Avrupa Birliği Temel Haklar Şartı','BM Bireysel ve Siyasal Haklara İlişkin Uluslararası Sözleşmesi','Türkiye Cumhuriyeti 1982 Anayasası','Avrupa İnsan Hakları Sözleşmesi','Almanya Anayasası'],ans:0,unit:8,exp:'AVRUPA BİRLİĞİ TEMEL HAKLAR ŞARTI: Bu metnin özellikleri (3 fıkralı yapı, bağımsız denetim, erişim ve düzelttirme hakları) AB Temel Haklar Şartı m.8\'e aittir. AİHS ve TC Anayasası bu kadar ayrıntılı düzenlemez.'},
+  {num:4,text:'"Yalnız bırakılma hakkını" geliştiren yazarlar kimlerdir?',opts:['Tapscott ve Rachels','Prosser ve Rachels','Lee ve Brandeis','Prosser ve Cavoukian','Warren ve Brandeis'],ans:4,unit:8,exp:'WARREN VE BRANDEİS: 1890 tarihli "The Right to Privacy" makalesi ile yalnız bırakılma hakkını geliştirdiler. Diğerleri yanıltıcı: Tapscott = dijital nesil, Prosser = farklı bir hukukçu.'},
+  {num:5,text:'1982 Anayasasının 20. maddesinin son fıkrası (kişisel verilerin korunması) hangi yıl Anayasaya eklenmiştir?',opts:['2002','2008','2010','2017','2019'],ans:2,unit:8,exp:'2010: TC Anayasası m.20\'ye kişisel verilerin korunması hakkı 2010 anayasa referandumuyla eklendi. Bu değişiklik Türkiye\'nin AB uyum süreci kapsamında gerçekleştirildi.'},
+  {num:6,text:'TCK m.135 uyarınca kişisel verileri hukuka aykırı olarak kaydeden kimseye kaç hapis cezası verilmesi öngörülmüştür?',opts:['Altı aydan iki yıla kadar','Altı aydan üç yıla kadar','Bir yıldan üç yıla kadar','Bir yıldan beş yıla kadar','İki yıldan beş yıla kadar'],ans:2,unit:8,exp:'TCK m.135 (yasadışı kayıt): BİR YILDAN ÜÇ YILA KADAR hapis. TCK m.136 (başkasına verme/yayma) = 2-4 yıl (daha ağır). m.135 ile m.136\'yı karıştırmayın!'},
+  {num:7,text:'TCK m.243/2\'ye göre bilişim sistemine girme suçunun bedeli karşılığı yararlanılabilen sistemler hakkında işlenmesi hâlinde verilecek ceza hangi oranda indirilir?',opts:['Yarı oranına kadar','1/3 oranına kadar','1/4 oranına kadar','1/5 oranına kadar','1/6 oranına kadar'],ans:0,unit:5,exp:'YARI ORANINA KADAR (1/2): TCK m.243/2 — bedeli karşılığında yararlanılabilen sistemlere (ücretli TV, internet aboneliği vb.) girilmesi halinde ceza yarı oranına kadar indirilebilir.'},
+  {num:8,text:'Bir seri bilginin sistemin belli bir yönde çalışmasını sağlamak için bir araya gelmiş şekline ne ad verilir?',opts:['Çerez','İleti','Program','Ağ','Veri'],ans:2,unit:5,exp:'PROGRAM: "Bir seri bilginin sistemin belli bir yönde çalışmasını sağlamak için bir araya gelmiş şekli." Veri = ham bilgi. Program = sistemi çalıştıran kodlar bütünü.'},
+  {num:9,text:'Hâkim, 5651 sayılı Kanunun 9. Maddesi kapsamında yapılan başvuruyu en geç kaç saat içinde duruşma yapmaksızın karara bağlar?',opts:['12','18','24','36','48'],ans:2,unit:6,exp:'24 SAAT: 5651 sayılı Kanun m.9 kapsamındaki başvurularda hâkim en geç 24 saat içinde duruşma yapmaksızın karar bağlar. Savcı da kararını 24 saat içinde hâkime sunar.'},
+  {num:10,text:'Kanunda belirli hallerde erişimin engellenmesi tedbirinin BTK Başkanının kararıyla uygulanmasına imkân tanınmıştır. Hangisinde başkan tarafından karar verilir?',opts:['Kumar oynanması için yer ve imkân sağlama','Atatürk aleyhine işlenen suçlar','İntihara yönlendirme','Müstehcenlik','Uyuşturucu veya uyarıcı madde kullanılmasını kolaylaştırma'],ans:3,unit:6,exp:'MÜSTEHCENLİK: BTK Başkanı\'nın resen erişim engelleyebileceği suç müstehcenliktir. Diğerleri (kumar, uyuşturucu vb.) mahkeme kararı gerektirir. Atatürk aleyhine işlenen suçlar da başkan yetkisi kapsamındadır — ancak cevap anahtarı D.'},
+  {num:11,text:'Soruşturma evresinde gecikmesinde sakınca bulunan hallerde Cumhuriyet savcısı tarafından erişim engellenebilir. Savcı kararını kaç saat içinde hâkimin onayına sunmalıdır?',opts:['24 saat','48 saat','3 gün','1 hafta','Süre aranmaz'],ans:0,unit:6,exp:'24 SAAT: Cumhuriyet Savcısı resen erişim engeli kararı verirse bu kararı 24 saat içinde hâkimin onayına sunmak zorundadır. Hâkim onaylamazsa karar kendiliğinden kalkar.'},
+  {num:12,text:'Reklam yasağına tabi olan meslek gruplarından biri değildir?',opts:['Eczacılar','Avukatlar','Mali müşavirler','Doktorlar','Öğretmenler'],ans:4,unit:7,exp:'ÖĞRETMENLER reklam yasağına tabi değildir. Reklam yasağı kapsamında olanlar: Avukatlar, Eczacılar, Doktorlar, Mali müşavirler, Noterleri, Veterinerler. Öğretmenlik serbest meslek değil.'},
+  {num:13,text:'Reklam ve tanıtım amaçlı, web sitelerinde ve gazetelerde başlık/alt kısmında ya da afiş olarak tasarlanmış kurumsal iletişim öğesine ne ad verilir?',opts:['Gif','Adwords','Logo','Flash','Banner'],ans:4,unit:7,exp:'BANNER: Web sitelerinde ve gazetelerde başlık/alt kısımda ya da afiş olarak yer alan reklam ve tanıtım amaçlı kurumsal iletişim öğesi. Adwords = Google\'ın ücretli arama reklamları.'},
+  {num:14,text:'Bilgisayara yüklenen programlar yolu ile normal internet bağlantısını kopararak daha pahalı programlara aktaran yazılımlara ne ad verilir?',opts:['ICANN','Meta-Tag','Banner','Dialer program','Web host'],ans:3,unit:7,exp:'DİALER PROGRAM: İnternet bağlantısını keserek pahalı telefon hatlarına yönlendiren kötü amaçlı yazılım. Meta-tag = HTML etiket. Banner = reklam görseli. Bu kavram her yıl sorulmaktadır.'},
+  {num:15,text:'İnternet kullanıcılarının sürekli ziyaret ettikleri sayfaları tek tek aramaktan kurtaran programlara verilen genel ad nedir?',opts:['Müzik değişim programları','Widget Programları','Sıkıştırma programları','HTML kodları','Aktif Sunucu Sayfaları'],ans:1,unit:7,exp:'WİDGET PROGRAMLARI: Kullanıcıların sık ziyaret ettikleri sayfaları tek tek aramadan erişmelerini sağlayan programlar. Sıkıştırma = dosya boyutu azaltma. Aktif Sunucu Sayfaları = ASP.'},
+  {num:16,text:'Bir web sayfasında birbirinden bağımsız bölümlerde birden çok doküman görülmesine ne ad verilir?',opts:['Cybersquatting','Frame','Surface link','Deeplink','SCMS'],ans:1,unit:7,exp:'FRAME (Çerçeve): Bir web sayfasında birbirinden bağımsız bölümlerde birden çok dokümanın aynı anda görülmesi. Deeplink = iç sayfalara doğrudan bağlantı. Cybersquatting = kötü niyetli alan adı.'},
+  {num:17,text:'Alan adı etrafında ortaya çıkan hukuki sorunların çözümü için öneri sunan uluslararası kuruluşlardan biri hangisidir?',opts:['TLD','ASP','MOHUK','IFPI','WIPO'],ans:4,unit:6,exp:'WIPO (Dünya Fikri Mülkiyet Örgütü): Alan adı uyuşmazlıklarında da görev alır. ICANN\'in UDRP politikası kapsamında WIPO tahkim merkezi olarak çalışır. TLD = üst düzey alan adı (kavram, kuruluş değil).'},
+  {num:18,text:'"Üç kuşak haklar" teorisinin kurucusu kimdir?',opts:['Edward Snowden','Karel Vasak','Nelson Mandela','Costaja Gonzales','Georg Jellinek'],ans:1,unit:8,exp:'KAREL VASAK: Çek asıllı Fransız hukukçu Karel Vasak "üç kuşak haklar" teorisini geliştirdi. 1. kuşak = negatif (özgürlük), 2. kuşak = sosyal, 3. kuşak = dayanışma hakları. Snowden = NSA ifşaatçı.'},
+  {num:19,text:'Üstün bir kamu yararı olmadığı sürece, dijital hafızada yer alan geçmişte yaşanılan olayların unutulmasını, başkaları tarafından bilinmesi istenmeyen bilgilerin silinmesini isteme hakkına ne ad verilir?',opts:['Unutulma hakkı','Bilgi edinmeme hakkı','Kişisel verilerin korunması hakkı','Gelişme hakkı','İnternete erişim hakkı'],ans:0,unit:8,exp:'UNUTULMA HAKKI: Tanım her yıl soruluyor. "Üstün kamu yararı olmadıkça dijital hafızadan silme" = unutulma hakkı. Kişisel veri koruması daha geniş; unutulma hakkı spesifik bir alt haktır.'},
+  {num:20,text:'Unutulma hakkı kaçıncı kuşak haklardandır?',opts:['Birinci','İkinci','Üçüncü','Dördüncü','Beşinci'],ans:3,unit:8,exp:'DÖRDÜNCÜ KUŞAK: Unutulma hakkı, kişisel verilerin korunması ve internete erişim hakkı ile birlikte dijital/bilişim çağının getirdiği 4. kuşak haklardandır. Karel Vasak\'ın orijinal teorisinde yer almaz.'},
+];
+
+let csCurrentYear = null;
+let csAnswers = {};
+
+function selectCikmisYear(year) {
+  csCurrentYear = year;
+  if (!csAnswers[year]) csAnswers[year] = {};
+  document.getElementById('cs-year-select').style.display = 'none';
+  document.getElementById('cs-exam-area').style.display = 'block';
+  const titles = {'2024-25':'2024–2025 Bahar Dönemi','2023-24':'2023–2024 Bahar Dönemi','2021-22':'2021–2022 Bahar Dönemi'};
+  document.getElementById('cs-exam-title').textContent = titles[year];
+  renderCikmisExam(year);
+}
+
+function backToCikmisYears() {
+  csCurrentYear = null;
+  document.getElementById('cs-year-select').style.display = 'block';
+  document.getElementById('cs-exam-area').style.display = 'none';
+  document.getElementById('cs-result-box').style.display = 'none';
+}
+
+function resetCikmisExam() {
+  if (csCurrentYear) {
+    csAnswers[csCurrentYear] = {};
+    renderCikmisExam(csCurrentYear);
+    document.getElementById('cs-result-box').style.display = 'none';
+  }
+}
+
+function getCsQuestions(year) {
+  if (year === '2024-25') return BH_2024_25;
+  if (year === '2023-24') return BH_2023_24;
+  if (year === '2021-22') return BH_2021_22;
+  return [];
+}
+
+function renderCikmisExam(year) {
+  const letters = ['A','B','C','D','E'];
+  const questions = getCsQuestions(year);
+  const answered = csAnswers[year] || {};
+  let correctCount = 0, answeredCount = 0;
+  for (const k in answered) { answeredCount++; if (answered[k].correct) correctCount++; }
+  document.getElementById('cs-progress-label').textContent = answeredCount + ' / ' + questions.length + ' yanıtlandı';
+  document.getElementById('cs-correct-label').textContent = correctCount + ' doğru';
+  document.getElementById('cs-progress-fill').style.width = (answeredCount / questions.length * 100) + '%';
+  document.getElementById('cs-score-display').textContent = answeredCount > 0 ? `${correctCount}/${answeredCount} doğru` : '';
+
+  document.getElementById('cs-questions-container').innerHTML = questions.map((q) => {
+    const prev = answered[q.num];
+    const optsHtml = q.opts.map((o, i) => {
+      let cls = 'cs-opt';
+      if (prev !== undefined) {
+        cls += ' answered';
+        if (i === q.ans) cls += ' correct';
+        else if (i === prev.chosen) cls += ' wrong';
+      }
+      const clickAttr = prev !== undefined ? '' : `onclick="csAnswer('${year}',${q.num},${i})"`;
+      return `<div class="${cls}" id="csopt-${q.num}-${i}" ${clickAttr}><span class="cs-opt-letter">${letters[i]}</span><span>${o}</span></div>`;
+    }).join('');
+    let expHtml = '';
+    if (prev !== undefined) {
+      const isOk = prev.correct;
+      expHtml = `<div class="cs-exp${isOk ? '' : ' wrong-exp'}">
+        <div class="cs-exp-title" style="color:${isOk ? 'var(--green)' : 'var(--red)'}">${isOk ? '✓ Doğru!' : '✗ Yanlış — Doğru cevap: ' + letters[q.ans]}</div>
+        ${q.exp}
+      </div>`;
+    }
+    return `<div class="cs-q-box" id="csqbox-${q.num}">
+      <div class="cs-q-num">Soru ${q.num} · Ünite ${q.unit}</div>
+      <div class="cs-q-text">${q.text}</div>
+      <div>${optsHtml}</div>
+      ${expHtml}
+    </div>`;
+  }).join('');
+
+  if (answeredCount === questions.length) showCsResult(year);
+}
+
+function csAnswer(year, qnum, chosen) {
+  if (csAnswers[year][qnum] !== undefined) return;
+  const questions = getCsQuestions(year);
+  const q = questions.find(x => x.num === qnum);
+  const isCorrect = chosen === q.ans;
+  csAnswers[year][qnum] = { chosen, correct: isCorrect };
+  const letters = ['A','B','C','D','E'];
+  for (let i = 0; i < q.opts.length; i++) {
+    const el = document.getElementById(`csopt-${qnum}-${i}`);
+    if (!el) continue;
+    el.removeAttribute('onclick');
+    el.classList.add('answered');
+    if (i === q.ans) el.classList.add('correct');
+    else if (i === chosen) el.classList.add('wrong');
+  }
+  const box = document.getElementById(`csqbox-${qnum}`);
+  const expDiv = document.createElement('div');
+  expDiv.className = 'cs-exp' + (isCorrect ? '' : ' wrong-exp');
+  expDiv.innerHTML = `<div class="cs-exp-title" style="color:${isCorrect ? 'var(--green)' : 'var(--red)'}">${isCorrect ? '✓ Doğru!' : '✗ Yanlış — Doğru cevap: ' + letters[q.ans]}</div>${q.exp}`;
+  box.appendChild(expDiv);
+  if (isCorrect) { stats.correct++; if(stats.byUnit[q.unit]) stats.byUnit[q.unit].c++; }
+  else { stats.wrong++; if(stats.byUnit[q.unit]) stats.byUnit[q.unit].w++; }
+  const answered = csAnswers[year];
+  let correctCount = 0, answeredCount = 0;
+  for (const k in answered) { answeredCount++; if (answered[k].correct) correctCount++; }
+  const questions2 = getCsQuestions(year);
+  document.getElementById('cs-progress-label').textContent = answeredCount + ' / ' + questions2.length + ' yanıtlandı';
+  document.getElementById('cs-correct-label').textContent = correctCount + ' doğru';
+  document.getElementById('cs-progress-fill').style.width = (answeredCount / questions2.length * 100) + '%';
+  document.getElementById('cs-score-display').textContent = `${correctCount}/${answeredCount} doğru`;
+  if (answeredCount === questions2.length) showCsResult(year);
+}
+
+function showCsResult(year) {
+  const questions = getCsQuestions(year);
+  const answered = csAnswers[year] || {};
+  let correctCount = 0;
+  for (const k in answered) { if (answered[k].correct) correctCount++; }
+  const pct = Math.round(correctCount / questions.length * 100);
+  const grade = pct >= 90 ? '🏆 Mükemmel!' : pct >= 70 ? '🎉 Başarılı!' : pct >= 50 ? '📚 Geliştirilmeli' : '💪 Daha Fazla Çalış!';
+  const color = pct >= 70 ? 'var(--green)' : pct >= 50 ? 'var(--amber)' : 'var(--red)';
+  document.getElementById('cs-result-score').textContent = pct + '%';
+  document.getElementById('cs-result-score').style.color = color;
+  document.getElementById('cs-result-msg').textContent = grade;
+  document.getElementById('cs-result-detail').textContent = `${correctCount} doğru / ${questions.length - correctCount} yanlış`;
+  const box = document.getElementById('cs-result-box');
+  box.style.display = 'block';
+  box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -2103,9 +2322,7 @@ function selectQuizMode(mode) {
 }
 
 function showQuizByUnit(unit) {
-  selectQuizMode(unit);
   showPage('quiz');
-  startQuiz('cikmis');
 }
 
 function startQuiz(type) {
