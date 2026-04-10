@@ -2070,6 +2070,8 @@ let quizMode = 'all', currentQuestions = [], currentQIdx = 0, quizScore = {corre
 let examQuestions = [], examIdx = 0, examAnswers = [], examTimer = null, examTimeLeft = 2400;
 let fcIdx = 0, fcCards = [...FLASHCARDS], fcStatus = new Array(FLASHCARDS.length).fill('');
 let stats = {correct:0, wrong:0, exams:0, byUnit:{5:{c:0,w:0},6:{c:0,w:0},7:{c:0,w:0},8:{c:0,w:0}}};
+// Tahmini sorularda cevap durumunu saklar: {soru_idx: {chosen: idx, isCorrect: bool}}
+let tahminiAnswered = {};
 
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -2376,32 +2378,54 @@ function renderAnaliz() {
 
 function renderTahmini() {
   const letters = ['A','B','C','D','E'];
-  document.getElementById('tahmini-container').innerHTML = TAHMINI_QUESTIONS.map((q,qi) => `
+  document.getElementById('tahmini-container').innerHTML = TAHMINI_QUESTIONS.map((q,qi) => {
+    const prev = tahminiAnswered[qi];
+    const optsHtml = q.opts.map((o,i) => {
+      let cls = 'q-option';
+      if (prev !== undefined) {
+        if (i === q.ans) cls += ' correct';
+        else if (i === prev.chosen) cls += ' wrong';
+      }
+      const clickAttr = prev !== undefined ? '' : `onclick="selectTahmini(${qi},${i})"`;
+      return `<div class="${cls}" id="topt-${qi}-${i}" ${clickAttr}><span class="opt-letter">${letters[i]}</span>${o}</div>`;
+    }).join('');
+    const expDisplay = prev !== undefined ? 'block' : 'none';
+    const expCls = prev !== undefined ? ('explanation-box' + (prev.isCorrect ? '' : ' wrong')) : 'explanation-box';
+    const expHtml = prev !== undefined
+      ? `<div class="exp-title${prev.isCorrect ? '' : ' wrong'}">${prev.isCorrect ? '✓ Doğru!' : '✗ Yanlış'}</div>${q.exp}`
+      : '';
+    return `
     <div class="question-box" style="margin-bottom:16px;">
       <div class="q-num">Tahmini Soru ${qi+1} · Ünite ${q.unit} <span class="badge badge-amber" style="margin-left:8px;">TAHMİNİ</span></div>
       <div class="q-text">${q.text}</div>
-      <div class="q-options">
-        ${q.opts.map((o,i) => `<div class="q-option" id="topt-${qi}-${i}" onclick="selectTahmini(${qi},${i})">`+`<span class="opt-letter">${letters[i]}</span>${o}</div>`).join('')}
-      </div>
-      <div id="texp-${qi}" style="display:none;" class="explanation-box"></div>
-    </div>`).join('');
+      <div class="q-options">${optsHtml}</div>
+      <div id="texp-${qi}" style="display:${expDisplay};" class="${expCls}">${expHtml}</div>
+    </div>`;
+  }).join('');
 }
 
 function selectTahmini(qi, idx) {
+  // Zaten cevaplandıysa tekrar işlem yapma
+  if (tahminiAnswered[qi] !== undefined) return;
   const q = TAHMINI_QUESTIONS[qi];
-  const exp = document.getElementById('texp-'+qi);
-  if(exp.style.display !== 'none') return;
-  for(let i=0;i<5;i++) {
-    const el = document.getElementById(`topt-${qi}-${i}`);
-    if(!el) continue;
-    el.onclick = null;
-    if(i === q.ans) el.classList.add('correct');
-    else if(i === idx) el.classList.add('wrong');
-  }
   const isCorrect = idx === q.ans;
+  // Cevabı kaydet
+  tahminiAnswered[qi] = { chosen: idx, isCorrect: isCorrect };
+  // DOM'u güncelle
+  for (let i = 0; i < q.opts.length; i++) {
+    const el = document.getElementById(`topt-${qi}-${i}`);
+    if (!el) continue;
+    el.removeAttribute('onclick');
+    if (i === q.ans) el.classList.add('correct');
+    else if (i === idx) el.classList.add('wrong');
+  }
+  const exp = document.getElementById('texp-' + qi);
   exp.className = 'explanation-box' + (isCorrect ? '' : ' wrong');
-  exp.innerHTML = `<div class="exp-title${isCorrect?'':' wrong'}">${isCorrect?'✓ Doğru!':'✗ Yanlış'}</div>${q.exp}`;
+  exp.innerHTML = `<div class="exp-title${isCorrect ? '' : ' wrong'}">${isCorrect ? '✓ Doğru!' : '✗ Yanlış'}</div>${q.exp}`;
   exp.style.display = 'block';
+  if (isCorrect) { stats.correct++; stats.byUnit[q.unit] && stats.byUnit[q.unit].c++; }
+  else { stats.wrong++; stats.byUnit[q.unit] && stats.byUnit[q.unit].w++; }
+  updateStatCards();
 }
 
 function renderGelisim() {
